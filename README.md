@@ -8,8 +8,8 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
     body { background: #0a0a0a; color: #fff; line-height: 1.6; padding: 20px; }
-    header { text-align: center; padding: 50px 20px; background: linear-gradient(145deg, #1c1c1c, #2b2b2b); border-radius: 16px; animation: fadeIn 1.2s ease-out; }
-    header h1 { font-size: 2.8rem; margin-bottom: 10px; color: #c084fc; }
+    head background: linear-gradient(145deg, #1c1c1c, #2b2b2b); border-radius: 16px; animation: fadeIn 1.2s ease-out; }
+    headeer { text-align: center; padding: 50px 20px;r h1 { font-size: 2.8rem; margin-bottom: 10px; color: #c084fc; }
     header p { font-size: 1.2rem; color: #ccc; }
 
     section { max-width: 900px; margin: 60px auto; padding: 20px; animation: fadeInUp 1s ease-out; }
@@ -48,7 +48,7 @@
 
   <section>
     <h2>About Me</h2>
-    <p>I'm Wish, a versatile creator with years of experience in 3D modeling, game asset development, animation, and teaching. I work with tools like Blender, Roblox Studio, and more to bring ideas to life and help others learn.</p>
+    <p>I'm Wish, a versatile creator with years of experience in 3D modeling, game asset development, animation, and teaching. My work blends technical skill with artistic creativity, allowing me to build immersive assets for Roblox, Minecraft, and other platforms. I specialize in creating optimized, game-ready models and animations that elevate player experiences. Beyond content creation, I’m passionate about sharing knowledge through one-on-one teaching, tutorials, and mentorship—helping others grow in the world of game development and design. Whether it's a freelance commission or a collaborative project, I strive to deliver professional, polished results that exceed expectations.</p>
   </section>
 
   <section>
@@ -90,7 +90,22 @@
   </section>
 
   <section>
-    <h2>Contact</h2>
+    <h2>Testimonials & Client Vouches</h2>
+    <div class="portfolio-grid">
+      <div class="card">
+        <h3>⭐ DevRex</h3>
+        <p>"Wish delivered high-quality assets way ahead of schedule. Communication was smooth and the results exceeded expectations. Highly recommend for any serious game dev project."</p>
+      </div>
+      <div class="card">
+        <h3>⭐ PixelForge Studios</h3>
+        <p>"Incredible modeling skills and attention to detail. Our game world looks amazing thanks to Wish’s custom models. Professional, fast, and creative."</p>
+      </div>
+      <div class="card">
+        <h3>⭐ CodeCove</h3>
+        <p>"Wish not only built us an animation pack that runs smoothly in Roblox Studio, but also taught our junior devs how to animate better. A true mentor."</p>
+      </div>
+    </div>
+  $1
     <p>Email: <a href="mailto:your@email.com">your@email.com</a></p>
     <p>Discord: YourDiscordTag</p>
     <p>Twitter: <a href="https://twitter.com/yourhandle" target="_blank">@yourhandle</a></p>
