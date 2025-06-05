@@ -6,6 +6,24 @@
   <title>Wish | Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
   <style>
+    /* Reset & base styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      scroll-behavior: smooth;
+    }
+    body, html {
+      height: 100%;
+      background: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
     :root {
       --bg-color: #0a0a0a;
       --text-color: #fff;
@@ -28,19 +46,133 @@
       --error-color: #e55353;
       --success-color: #3cb371;
     }
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Inter', sans-serif;
-    }
-    html, body {
-      height: 100%;
+
+    /* Splash screen */
+    #splash {
+      position: fixed;
+      inset: 0;
       background: var(--bg-color);
-      color: var(--text-color);
-      transition: background 0.3s, color 0.3s;
-      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      flex-direction: column;
+      color: var(--accent-color);
+      font-weight: 800;
+      font-size: 3rem;
+      letter-spacing: 3px;
+      animation: splashFadeOut 3.5s forwards;
     }
+    @keyframes splashFadeOut {
+      0%, 85% { opacity: 1; }
+      100% { opacity: 0; visibility: hidden; }
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(145deg, #1c1c1c, #2b2b2b);
+      border-radius: 16px;
+      text-align: center;
+      padding: 50px 20px;
+      margin-bottom: 60px;
+      box-shadow: 0 0 20px var(--card-shadow);
+      user-select: none;
+    }
+    header h1 {
+      font-size: 3rem;
+      color: var(--accent-color);
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 1.2rem;
+      color: var(--text-color);
+      opacity: 0.8;
+    }
+
+    /* Main layout */
+    main {
+      max-width: 900px;
+      margin: 0 auto 80px;
+    }
+    section {
+      margin-bottom: 60px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      border-bottom: 2px solid var(--accent-color);
+      padding-bottom: 10px;
+      color: var(--accent-color);
+    }
+
+    /* Lists */
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    li {
+      margin-bottom: 10px;
+      position: relative;
+      padding-left: 24px;
+      font-size: 1.1rem;
+    }
+    li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--accent-color);
+      font-size: 1.4rem;
+      line-height: 1;
+      top: 2px;
+    }
+
+    /* Portfolio grid */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: var(--card-bg);
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px var(--card-shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+    }
+    .card:hover,
+    .card:focus-visible {
+      transform: translateY(-6px);
+      box-shadow: 0 0 30px var(--accent-color);
+      outline: none;
+    }
+    .card img {
+      width: 100%;
+      border-radius: 8px;
+      display: block;
+      margin-bottom: 10px;
+      user-select: none;
+    }
+    .card h3 {
+      color: var(--text-color);
+      font-size: 1.2rem;
+      margin-bottom: 6px;
+    }
+    .card p {
+      font-size: 0.95rem;
+      color: var(--text-color);
+      opacity: 0.8;
+      user-select: text;
+    }
+
+    /* Theme toggle button */
     #theme-toggle {
       position: fixed;
       top: 20px;
@@ -49,38 +181,349 @@
       border: none;
       padding: 10px 18px;
       border-radius: 12px;
-      color: var(--accent-color);
-      font-weight: 600;
       cursor: pointer;
+      font-weight: 600;
+      color: var(--accent-color);
+      box-shadow: 0 0 10px var(--card-shadow);
+      transition: background-color 0.3s ease, color 0.3s ease;
+      user-select: none;
       z-index: 1000;
     }
-    #theme-toggle:hover {
+    #theme-toggle:hover,
+    #theme-toggle:focus-visible {
       background: var(--accent-color);
       color: var(--bg-color);
+      outline: none;
+    }
+
+    /* Contact form */
+    form {
+      background: var(--card-bg);
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 0 20px var(--card-shadow);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: var(--accent-color);
+    }
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1.5px solid var(--input-border);
+      background: var(--input-bg);
+      color: var(--text-color);
+      font-size: 1rem;
+      margin-bottom: 12px;
+      transition: border-color 0.3s ease;
+      resize: vertical;
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--accent-color);
+    }
+    .error {
+      color: var(--error-color);
+      font-size: 0.85rem;
+      margin-top: -8px;
+      margin-bottom: 12px;
+      min-height: 18px;
+    }
+    button[type="submit"] {
+      background: var(--accent-color);
+      color: var(--bg-color);
+      border: none;
+      padding: 12px 20px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+      width: 100%;
+    }
+    button[type="submit"]:hover,
+    button[type="submit"]:focus-visible {
+      background: #9b4dff;
+      outline: none;
+    }
+    .success-msg {
+      margin-top: 12px;
+      font-weight: 600;
+      color: var(--success-color);
+      min-height: 20px;
+      user-select: none;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      color: var(--text-color);
+      opacity: 0.6;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+      user-select: none;
+    }
+
+    /* Accessibility focus */
+    :focus-visible {
+      outline: 3px solid var(--accent-color);
+      outline-offset: 3px;
+    }
+
+    /* Animated background canvas */
+    #background-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      user-select: none;
     }
   </style>
 </head>
 <body>
-  <button id="theme-toggle" aria-label="Toggle theme">Light Mode</button>
-  <h1>Welcome to Wish's Portfolio</h1>
-  <p>This is a simplified example to demonstrate fixed theme switching.</p>
+
+  <!-- Splash screen -->
+  <div id="splash" aria-label="Loading screen" role="alert" aria-live="assertive">
+    Wish
+  </div>
+
+  <!-- Theme toggle button -->
+  <button id="theme-toggle" aria-pressed="false" aria-label="Toggle light or dark theme">Light Mode</button>
+
+  <header role="banner">
+    <h1>Wish</h1>
+    <p>3D Modeling • Game Assets • Freelancing • Animation • Teaching</p>
+  </header>
+
+  <main>
+    <section id="about" tabindex="0" aria-labelledby="about-heading">
+      <h2 id="about-heading">About Me</h2>
+      <p>I'm Wish, a 3D modeler, game asset creator, animator, and freelancer. I specialize in Roblox Studio and Blender, delivering professional quality models and scripts with competitive pricing and great client communication.</p>
+    </section>
+
+    <section id="skills" tabindex="0" aria-labelledby="skills-heading">
+      <h2 id="skills-heading">Skills & Services</h2>
+      <ul>
+        <li>Roblox Studio scripting and combat system development</li>
+        <li>Blender 3D modeling and animation</li>
+        <li>Custom game asset creation</li>
+        <li>Freelance project management</li>
+        <li>Teaching and explaining complex concepts</li>
+      </ul>
+    </section>
+
+    <section id="portfolio" tabindex="0" aria-labelledby="portfolio-heading">
+      <h2 id="portfolio-heading">Portfolio</h2>
+      <div class="portfolio-grid" role="list" aria-label="Portfolio projects">
+        <article class="card" role="listitem" tabindex="0">
+          <img src="https://i.imgur.com/8fXheH3.png" alt="3D Roblox sword model" loading="lazy" />
+          <h3>Roblox Sword Model</h3>
+          <p>High-poly sword modeled and textured in Blender, optimized for Roblox.</p>
+        </article>
+        <article class="card" role="listitem" tabindex="0">
+          <img src="https://i.imgur.com/W77nD3j.png" alt="Roblox combat system script" loading="lazy" />
+          <h3>Combat System Script</h3>
+          <p>Fast-paced melee combat system with ragdoll and cooldown mechanics.</p>
+        </article>
+        <article class="card" role="listitem" tabindex="0">
+          <img src="https://i.imgur.com/dByelmn.png" alt="Animated Minecraft custom mob model" loading="lazy" />
+          <h3>Custom Minecraft Mobs</h3>
+          <p>Custom models and animations for Minecraft MythicMobs plugin.</p>
+        </article>
+        <article class="card" role="listitem" tabindex="0">
+          <img src="https://i.imgur.com/z1G56fX.png" alt="Roblox weapon particle effects" loading="lazy" />
+          <h3>Weapon Particle Effects</h3>
+          <p>Custom particles and animations to enhance weapon visuals in Roblox.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" tabindex="0" aria-labelledby="contact-heading">
+      <h2 id="contact-heading">Contact Me</h2>
+      <form id="contact-form" novalidate aria-live="polite" aria-relevant="additions">
+        <label for="name">Name <span aria-hidden="true">*</span></label>
+        <input type="text" id="name" name="name" required aria-required="true" aria-describedby="name-error" />
+        <div id="name-error" class="error" aria-live="assertive"></div>
+
+        <label for="email">Email <span aria-hidden="true">*</span></label>
+        <input type="email" id="email" name="email" required aria-required="true" aria-describedby="email-error" />
+        <div id="email-error" class="error" aria-live="assertive"></div>
+
+        <label for="message">Message <span aria-hidden="true">*</span></label>
+        <textarea id="message" name="message" rows="5" required aria-required="true" aria-describedby="message-error"></textarea>
+        <div id="message-error" class="error" aria-live="assertive"></div>
+
+        <button type="submit">Send Message</button>
+        <div id="success-msg" class="success-msg" role="alert" aria-live="polite"></div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Wish. All rights reserved.
+  </footer>
+
+  <!-- Animated background canvas -->
+  <canvas id="background-canvas" aria-hidden="true"></canvas>
+
   <script>
-    const toggleBtn = document.getElementById('theme-toggle');
-    const root = document.documentElement;
-    
-    function setTheme(theme) {
-      root.setAttribute('data-theme', theme);
-      localStorage.setItem('theme', theme);
-      toggleBtn.textContent = theme === 'dark' ? 'Light Mode' : 'Dark Mode';
+    // Splash screen removal after animation
+    window.addEventListener('load', () => {
+      const splash = document.getElementById('splash');
+      setTimeout(() => {
+        splash.style.display = 'none';
+        // Reveal sections one by one
+        document.querySelectorAll('main section').forEach((section, i) => {
+          setTimeout(() => section.classList.add('visible'), i * 200);
+        });
+      }, 3200);
+    });
+
+    // Dark/Light theme toggle
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    // Initial theme setup
+    let currentTheme = localStorage.getItem('theme');
+    if (!currentTheme) {
+      currentTheme = prefersDark ? 'dark' : 'light';
+    }
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    themeToggleBtn.textContent = currentTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
+    themeToggleBtn.setAttribute('aria-pressed', currentTheme === 'dark');
+
+    themeToggleBtn.addEventListener('click', () => {
+      currentTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', currentTheme);
+      localStorage.setItem('theme', currentTheme);
+      themeToggleBtn.textContent = currentTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
+      themeToggleBtn.setAttribute('aria-pressed', currentTheme === 'dark');
+    });
+
+    // Contact form validation & mailto
+    const form = document.getElementById('contact-form');
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const messageInput = document.getElementById('message');
+
+    const nameError = document.getElementById('name-error');
+    const emailError = document.getElementById('email-error');
+    const messageError = document.getElementById('message-error');
+    const successMsg = document.getElementById('success-msg');
+
+    function validateEmail(email) {
+      // Simple regex for email validation
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     }
 
-    let savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    setTheme(savedTheme);
+    form.addEventListener('submit', e => {
+      e.preventDefault();
 
-    toggleBtn.addEventListener('click', () => {
-      const newTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      setTheme(newTheme);
+      // Clear previous errors and success message
+      nameError.textContent = '';
+      emailError.textContent = '';
+      messageError.textContent = '';
+      successMsg.textContent = '';
+
+      let valid = true;
+
+      if (!nameInput.value.trim()) {
+        nameError.textContent = 'Please enter your name.';
+        valid = false;
+      }
+      if (!emailInput.value.trim()) {
+        emailError.textContent = 'Please enter your email.';
+        valid = false;
+      } else if (!validateEmail(emailInput.value.trim())) {
+        emailError.textContent = 'Please enter a valid email address.';
+        valid = false;
+      }
+      if (!messageInput.value.trim()) {
+        messageError.textContent = 'Please enter a message.';
+        valid = false;
+      }
+
+      if (!valid) return;
+
+      // Compose mailto link
+      const subject = encodeURIComponent(`Portfolio Contact from ${nameInput.value.trim()}`);
+      const body = encodeURIComponent(`Name: ${nameInput.value.trim()}\nEmail: ${emailInput.value.trim()}\n\nMessage:\n${messageInput.value.trim()}`);
+
+      const mailtoLink = `mailto:your.email@example.com?subject=${subject}&body=${body}`;
+
+      // Open mail client
+      window.location.href = mailtoLink;
+
+      successMsg.textContent = 'Opening your email client...';
+
+      // Optionally reset form
+      form.reset();
     });
+
+    // Animated background (simple floating circles)
+    const canvas = document.getElementById('background-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let circles = [];
+
+    function Circle() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.radius = Math.random() * 3 + 1;
+      this.speedX = (Math.random() - 0.5) * 0.3;
+      this.speedY = (Math.random() - 0.5) * 0.3;
+      this.opacity = Math.random() * 0.4 + 0.1;
+    }
+
+    Circle.prototype.draw = function () {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(192, 132, 252, ${this.opacity})`;
+      ctx.fill();
+    };
+
+    Circle.prototype.update = function () {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      if (this.x < 0 || this.x > width) this.speedX = -this.speedX;
+      if (this.y < 0 || this.y > height) this.speedY = -this.speedY;
+    };
+
+    function init() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+      circles = [];
+      for (let i = 0; i < 80; i++) {
+        circles.push(new Circle());
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      circles.forEach(c => {
+        c.update();
+        c.draw();
+      });
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', init);
+
+    init();
+    animate();
   </script>
+
 </body>
 </html>
