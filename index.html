@@ -3,88 +3,123 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Wish | Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <title>Wish upon a Star</title>
+  <style>
+    body[data-theme="dark"] {
+      background: #111;
+      color: white;
+    }
+    section {
+      opacity: 0;
+      transition: opacity 1s ease;
+      padding: 20px;
+      margin: 30px 0;
+      border: 1px solid #ccc;
+    }
+    section.visible {
+      opacity: 1;
+    }
+    #splash {
+      position: fixed;
+      background: #222;
+      color: #fff;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2em;
+      z-index: 9999;
+      transition: opacity 1s ease;
+    }
+  </style>
 </head>
-<body>
-  <div id="splash" role="presentation" aria-hidden="true">Wish upon a Star</div>
+<body data-theme="light">
 
-  <button id="theme-toggle" aria-pressed="false" aria-label="Toggle light and dark mode">
-    Light Mode
-  </button>
+  <div id="splash">Welcome to Wish upon a Star</div>
 
-  <header>
-    <h1>Wish</h1>
-    <p>Roblox Developer & 3D Artist — Custom Models & Combat Systems</p>
-  </header>
+  <button id="theme-toggle" aria-pressed="true">Dark Mode</button>
 
   <main>
-    <section id="about" tabindex="-1" aria-labelledby="about-title" class="visible">
-      <h2 id="about-title">About Me</h2>
-      <p>I'm Wish, a 3D modeler, game asset creator, animator, and instructor with a few years of experience. My work embodies technical proficiency blended with artistic expression, enabling me to create compelling assets. I specialize in the creation of optimized, game-ready models and animations that enhance gameplay experiences. In addition to content creation, I possess a keen interest in imparting knowledge through one-on-one instruction, tutorials, and mentorship, thereby assisting others in progressing in the realm of game development and design. Be it a freelance project or a collaborative work, I make every attempt to produce professional and quality outputs above expectations.</p>
+    <section id="about">
+      <h2>About</h2>
+      <p>This section fades in on scroll.</p>
     </section>
 
-    <section id="portfolio" tabindex="-1" aria-labelledby="portfolio-title">
-      <h2 id="portfolio-title">Portfolio</h2>
-      <div class="portfolio-grid" role="list">
-        <article class="card" role="listitem" tabindex="0">
-          <img src="https://i.imgur.com/2mPf0Wy.png" alt="Skeleton King Custom Model" loading="lazy" />
-          <h3>Skeleton King Model</h3>
-          <p>Custom MythicMobs skeleton king with crown, animated and textured.</p>
-        </article>
-        <article class="card" role="listitem" tabindex="0">
-          <img src="https://i.imgur.com/3Yk7rSZ.png" alt="Roblox Combat System" loading="lazy" />
-          <h3>Roblox Combat System</h3>
-          <p>Advanced melee combat with ragdoll physics, blocking, and animations.</p>
-        </article>
-        <article class="card" role="listitem" tabindex="0">
-          <img src="https://i.imgur.com/UtA3E2P.png" alt="Portfolio Website Design" loading="lazy" />
-          <h3>Portfolio Website</h3>
-          <p>Responsive personal site with theme toggle and splash screen animations.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="contact" tabindex="-1" aria-labelledby="contact-title">
-      <h2 id="contact-title">Contact Me</h2>
-      <form id="contact-form" aria-describedby="form-msg" novalidate>
-        <label for="name">Name</label>
-        <input id="name" name="name" type="text" required aria-required="true" autocomplete="name" />
-        <div class="error" id="name-error" aria-live="polite"></div>
-
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email" required aria-required="true" autocomplete="email" />
-        <div class="error" id="email-error" aria-live="polite"></div>
-
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="5" required aria-required="true"></textarea>
-        <div class="error" id="message-error" aria-live="polite"></div>
-
+    <section id="contact">
+      <h2>Contact Me</h2>
+      <form id="contact-form">
+        <input type="text" name="name" placeholder="Name" /><br />
+        <input type="email" name="email" placeholder="Email" /><br />
+        <textarea name="message" placeholder="Message"></textarea><br />
         <button type="submit">Send</button>
-        <div class="success-msg" id="form-msg" aria-live="polite"></div>
       </form>
     </section>
 
-    <section id="login" tabindex="-1" aria-labelledby="login-title">
-      <h2 id="login-title">Admin Login</h2>
-      <form id="login-form" novalidate>
-        <label for="username">Username</label>
-        <input id="username" name="username" type="text" autocomplete="username" required />
-        <div class="error" id="username-error" aria-live="polite"></div>
-
-        <label for="password">Password</label>
-        <input id="password" name="password" type="password" autocomplete="current-password" required />
-        <div class="error" id="password-error" aria-live="polite"></div>
-
+    <section id="login">
+      <h2>Login</h2>
+      <form id="login-form">
+        <input type="text" name="username" placeholder="Username" /><br />
+        <input type="password" name="password" placeholder="Password" /><br />
         <button type="submit">Login</button>
-        <div class="success-msg" id="login-msg" aria-live="polite"></div>
       </form>
     </section>
   </main>
 
-  <footer>© 2025 Wishes Laboratory. All rights reserved.</footer>
+  <script>
+    // Splash fade out
+    window.addEventListener('load', () => {
+      const splash = document.getElementById('splash');
+      splash.style.opacity = '0';
+      setTimeout(() => {
+        splash.style.display = 'none';
+      }, 1000);
+    });
 
-  <script src="scripts.js"></script>
+    // Fade in sections on scroll
+    const sections = document.querySelectorAll('main section');
+    function checkVisibility() {
+      const triggerBottom = window.innerHeight * 0.85;
+      sections.forEach(section => {
+        const top = section.getBoundingClientRect().top;
+        if (top < triggerBottom) {
+          section.classList.add('visible');
+        }
+      });
+    }
+    window.addEventListener('scroll', checkVisibility);
+    checkVisibility();
+
+    // Theme toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      if (currentTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        themeToggle.textContent = 'Dark Mode';
+        themeToggle.setAttribute('aria-pressed', 'true');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        themeToggle.textContent = 'Light Mode';
+        themeToggle.setAttribute('aria-pressed', 'false');
+      }
+    });
+
+    // Simple contact form alert (for testing)
+    const form = document.getElementById('contact-form');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Contact form submitted! (Replace this with your mailto logic)');
+      form.reset();
+    });
+
+    // Simple login form alert
+    const loginForm = document.getElementById('login-form');
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Login form submitted! (No backend yet)');
+      loginForm.reset();
+    });
+  </script>
 </body>
 </html>
