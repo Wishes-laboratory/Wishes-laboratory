@@ -1,125 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Wish upon a Star</title>
-  <style>
-    body[data-theme="dark"] {
-      background: #111;
-      color: white;
-    }
-    section {
-      opacity: 0;
-      transition: opacity 1s ease;
-      padding: 20px;
-      margin: 30px 0;
-      border: 1px solid #ccc;
-    }
-    section.visible {
-      opacity: 1;
-    }
-    #splash {
-      position: fixed;
-      background: #222;
-      color: #fff;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 2em;
-      z-index: 9999;
-      transition: opacity 1s ease;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dark Mode Toggle Test</title>
+<style>
+  /* Default light theme */
+  body {
+    background-color: white;
+    color: black;
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
+
+  /* Dark theme styles */
+  body[data-theme="dark"] {
+    background-color: #121212;
+    color: #eee;
+  }
+
+  button {
+    margin: 20px;
+    padding: 10px 20px;
+  }
+</style>
 </head>
-<body data-theme="light">
+<body>
 
-  <div id="splash">Welcome to Wish upon a Star</div>
+<button id="theme-toggle">Switch to Dark Mode</button>
 
-  <button id="theme-toggle" aria-pressed="true">Dark Mode</button>
+<script>
+  const toggleBtn = document.getElementById('theme-toggle');
 
-  <main>
-    <section id="about">
-      <h2>About</h2>
-      <p>This section fades in on scroll.</p>
-    </section>
-
-    <section id="contact">
-      <h2>Contact Me</h2>
-      <form id="contact-form">
-        <input type="text" name="name" placeholder="Name" /><br />
-        <input type="email" name="email" placeholder="Email" /><br />
-        <textarea name="message" placeholder="Message"></textarea><br />
-        <button type="submit">Send</button>
-      </form>
-    </section>
-
-    <section id="login">
-      <h2>Login</h2>
-      <form id="login-form">
-        <input type="text" name="username" placeholder="Username" /><br />
-        <input type="password" name="password" placeholder="Password" /><br />
-        <button type="submit">Login</button>
-      </form>
-    </section>
-  </main>
-
-  <script>
-    // Splash fade out
-    window.addEventListener('load', () => {
-      const splash = document.getElementById('splash');
-      splash.style.opacity = '0';
-      setTimeout(() => {
-        splash.style.display = 'none';
-      }, 1000);
-    });
-
-    // Fade in sections on scroll
-    const sections = document.querySelectorAll('main section');
-    function checkVisibility() {
-      const triggerBottom = window.innerHeight * 0.85;
-      sections.forEach(section => {
-        const top = section.getBoundingClientRect().top;
-        if (top < triggerBottom) {
-          section.classList.add('visible');
-        }
-      });
+  toggleBtn.addEventListener('click', () => {
+    const currentTheme = document.body.getAttribute('data-theme');
+    if (currentTheme === 'dark') {
+      document.body.removeAttribute('data-theme'); // back to light
+      toggleBtn.textContent = 'Switch to Dark Mode';
+    } else {
+      document.body.setAttribute('data-theme', 'dark');
+      toggleBtn.textContent = 'Switch to Light Mode';
     }
-    window.addEventListener('scroll', checkVisibility);
-    checkVisibility();
+  });
+</script>
 
-    // Theme toggle
-    const themeToggle = document.getElementById('theme-toggle');
-    themeToggle.addEventListener('click', () => {
-      const currentTheme = document.documentElement.getAttribute('data-theme');
-      if (currentTheme === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'light');
-        themeToggle.textContent = 'Dark Mode';
-        themeToggle.setAttribute('aria-pressed', 'true');
-      } else {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        themeToggle.textContent = 'Light Mode';
-        themeToggle.setAttribute('aria-pressed', 'false');
-      }
-    });
-
-    // Simple contact form alert (for testing)
-    const form = document.getElementById('contact-form');
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      alert('Contact form submitted! (Replace this with your mailto logic)');
-      form.reset();
-    });
-
-    // Simple login form alert
-    const loginForm = document.getElementById('login-form');
-    loginForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      alert('Login form submitted! (No backend yet)');
-      loginForm.reset();
-    });
-  </script>
 </body>
 </html>
