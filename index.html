@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Admin Panel</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Review System</title>
   <style>
     :root {
       --primary: #8b5cf6;
       --background: #ffffff;
       --text: #1f1f1f;
-      --card: #f0f0f5;
+      --card: #f4f4f5;
     }
     .dark {
       --background: #1a1a1f;
@@ -16,117 +18,176 @@
     }
 
     body {
-      font-family: sans-serif;
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
       background: var(--background);
       color: var(--text);
-      padding: 2rem;
-      transition: background 0.3s, color 0.3s;
-    }
-
-    button {
-      padding: 8px 14px;
-      background: var(--primary);
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    input {
-      padding: 8px;
-      width: 200px;
-      margin: 4px;
-    }
-
-    .review-box {
-      background: var(--card);
-      padding: 1rem;
-      border-radius: 8px;
-      margin: 1rem 0;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    .hidden {
-      display: none;
+      transition: background 0.4s, color 0.4s;
     }
 
     header {
+      padding: 1rem;
       display: flex;
       justify-content: space-between;
-      margin-bottom: 1rem;
+      align-items: center;
+    }
+
+    .toggle-btn {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .review-layout {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      padding: 1rem;
+    }
+
+    form, #reviews-display {
+      flex: 1 1 300px;
+      max-width: 500px;
+    }
+
+    input, select, textarea, button {
+      width: 100%;
+      padding: 0.6rem;
+      margin-top: 0.3rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    .review {
+      background: var(--card);
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInSlide 0.5s forwards;
+    }
+
+    @keyframes fadeInSlide {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .rating {
+      color: gold;
+    }
+
+    .success-msg {
+      color: green;
+      margin-top: 0.5rem;
     }
   </style>
 </head>
 <body>
   <header>
-    <h2>Admin Review Approvals</h2>
-    <button onclick="toggleTheme()">Toggle Theme</button>
+    <h2>Reviews</h2>
+    <button class="toggle-btn" onclick="toggleTheme()">Toggle Theme</button>
   </header>
 
-  <div id="login-form">
-    <input type="text" id="admin-email" placeholder="Admin Email" />
-    <input type="password" id="admin-password" placeholder="Password" />
-    <button onclick="login()">Login</button>
-    <div id="login-error" style="color: red;"></div>
-  </div>
+  <section class="review-layout">
+    <!-- Review Form -->
+    <form id="review-form">
+      <h3>Leave a Review</h3>
+      <label>Your Name *</label>
+      <input type="text" id="reviewer-name" required />
+      <label>Rating *</label>
+      <select id="review-rating" required>
+        <option value="" disabled selected>Select</option>
+        <option value="5">★★★★★</option>
+        <option value="4">★★★★☆</option>
+        <option value="3">★★★☆☆</option>
+        <option value="2">★★☆☆☆</option>
+        <option value="1">★☆☆☆☆</option>
+      </select>
+      <label>Your Review *</label>
+      <textarea id="review-message" rows="4" required></textarea>
+      <button type="submit">Submit Review</button>
+      <div id="success-msg" class="success-msg"></div>
+    </form>
 
-  <div id="admin-panel" class="hidden">
-    <button onclick="logout()">Logout</button>
-    <h3>Pending Reviews</h3>
-    <div id="pending-reviews"></div>
-  </div>
+    <!-- Display Reviews -->
+    <div id="reviews-display">
+      <h3>What People Are Saying</h3>
+      <label>Filter by Rating:</label>
+      <select id="filter">
+        <option value="all">All</option>
+        <option value="5">5 Stars</option>
+        <option value="4">4 Stars</option>
+        <option value="3">3 Stars</option>
+        <option value="2">2 Stars</option>
+        <option value="1">1 Star</option>
+      </select>
+      <div id="review-list"></div>
+    </div>
+  </section>
 
   <script>
+    // Toggle Theme
     function toggleTheme() {
       document.body.classList.toggle("dark");
     }
 
-    const ADMIN_EMAIL = "admin@example.com";
-    const ADMIN_PASS = "admin123";
+    // LocalStorage fallback for reviews
+    const STORAGE_KEY = 'custom-reviews';
 
-    function login() {
-      const email = document.getElementById("admin-email").value;
-      const pass = document.getElementById("admin-password").value;
-      if (email === ADMIN_EMAIL && pass === ADMIN_PASS) {
-        document.getElementById("login-form").classList.add("hidden");
-        document.getElementById("admin-panel").classList.remove("hidden");
-        loadPendingReviews();
-      } else {
-        document.getElementById("login-error").textContent = "Invalid credentials.";
-      }
+    const form = document.getElementById("review-form");
+    const reviewList = document.getElementById("review-list");
+    const filter = document.getElementById("filter");
+
+    function getReviews() {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
     }
 
-    function logout() {
-      document.getElementById("login-form").classList.remove("hidden");
-      document.getElementById("admin-panel").classList.add("hidden");
-    }
-
-    const STORAGE_KEY = "custom-reviews";
-
-    function loadPendingReviews() {
-      const container = document.getElementById("pending-reviews");
-      container.innerHTML = "";
-      const reviews = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-      reviews.forEach((r, i) => {
-        if (!r.approved) {
-          const div = document.createElement("div");
-          div.className = "review-box";
-          div.innerHTML = `
-            <strong>${r.name}</strong> (${r.rating}★)
-            <p>${r.message}</p>
-            <button onclick="approveReview(${i})">Approve</button>
-          `;
-          container.appendChild(div);
-        }
-      });
-    }
-
-    function approveReview(index) {
-      const reviews = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-      reviews[index].approved = true;
+    function saveReview(review) {
+      const reviews = getReviews();
+      reviews.push(review);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(reviews));
-      loadPendingReviews();
     }
+
+    function renderReviews() {
+      const reviews = getReviews();
+      const filterVal = filter.value;
+      reviewList.innerHTML = '';
+      reviews.filter(r => r.approved && (filterVal === "all" || String(r.rating) === filterVal))
+        .forEach((r, i) => {
+          const div = document.createElement("div");
+          div.className = "review";
+          div.style.animationDelay = `${i * 0.1}s`;
+          div.innerHTML = `
+            <strong>${r.name}</strong>
+            <div class="rating">${"★".repeat(r.rating)}${"☆".repeat(5 - r.rating)}</div>
+            <p>${r.message}</p>
+          `;
+          reviewList.appendChild(div);
+        });
+    }
+
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      const name = document.getElementById("reviewer-name").value;
+      const rating = parseInt(document.getElementById("review-rating").value);
+      const message = document.getElementById("review-message").value;
+
+      saveReview({ name, rating, message, approved: false, timestamp: Date.now() });
+
+      document.getElementById("success-msg").textContent = "Review submitted! Awaiting approval.";
+      form.reset();
+    });
+
+    filter.addEventListener("change", renderReviews);
+    renderReviews();
   </script>
 </body>
 </html>
