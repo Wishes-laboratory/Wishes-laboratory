@@ -27,12 +27,16 @@
 
     header {
       padding: 2rem;
-      background: linear-gradient(135deg, #5a4ade, #a782ec);
+      background: linear-gradient(135deg, #4f9efc, #007bff);
       color: white;
       text-align: center;
       font-size: 2rem;
       font-weight: 600;
       position: relative;
+    }
+
+    .dark header {
+      background: linear-gradient(135deg, #5a4ade, #2c2c3a);
     }
 
     .controls {
@@ -47,16 +51,24 @@
       padding: 0.6rem 1.2rem;
       border: none;
       border-radius: 25px;
-      background: #5a4ade;
+      background: #4f9efc;
       color: white;
       cursor: pointer;
       font-weight: bold;
       transition: background 0.3s, transform 0.3s;
     }
 
+    .dark button {
+      background: #a782ec;
+    }
+
     button:hover {
-      background: #3d32a4;
+      background: #006ae1;
       transform: scale(1.05);
+    }
+
+    .dark button:hover {
+      background: #8a6df1;
     }
 
     section {
@@ -108,7 +120,7 @@
     }
 
     .dark .modal-content {
-      background: #222;
+      background: #2a2a2a;
       color: #eee;
     }
 
@@ -143,11 +155,8 @@
       padding: 1rem;
       border-radius: 10px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
-    }
-
-    .portfolio-item:hover {
-      transform: translateY(-10px);
+      text-align: center;
+      font-weight: bold;
     }
 
     .dark .portfolio-item {
@@ -167,19 +176,27 @@
   <section>
     <h2>About Me</h2>
     <p>
-      I'm Wish, a 3D modeler, game asset creator, animator, and instructor with several years of experience. My work stands as a testament to the marriage of technical proficiency and artistic sense, allowing me to generate engaging assets. I specialize in developing optimized, game-ready models and animations to heighten gaming experiences. Aside from content creation, I have a keen interest in sharing knowledge through one-on-one tutorials, instruction, and mentorship, thereby enabling others to move forward with game development and design areas. Whether I am working on a freelance project or collaborating with others, I strive to deliver professional and high-quality output that consistently exceeds expectations.
+      I'm <strong>Wish</strong>, a creative professional specializing in:
     </p>
-    <ul style="margin-top: 1rem; line-height: 1.8rem;">
-      <li>🧊 3D Modeling & Game Asset Creation</li>
-      <li>🎥 Animator</li>
-      <li>💼 Freelancing & Asset Selling</li>
-      <li>🎓 Teaching / Explaining Complex Topics</li>
+    <ul>
+      <li>🧊 <strong>3D Modeling & Game Asset Creation</strong> – Crafting optimized, game-ready assets tailored for immersive and visually compelling experiences.</li>
+      <li>🎥 <strong>Animation</strong> – Designing expressive, fluid animations that enhance gameplay dynamics and storytelling.</li>
+      <li>💼 <strong>Freelancing & Asset Selling</strong> – Delivering high-quality, custom assets to clients, with a focus on professionalism, efficiency, and exceeding expectations.</li>
+      <li>🎓 <strong>Teaching & Explaining Complex Topics</strong> – Passionate about mentorship, I simplify technical workflows through one-on-one guidance and tutorials.</li>
     </ul>
+    <p>
+      With several years of hands-on experience, I blend <strong>technical precision</strong> with <strong>artistic creativity</strong>, making each project both functional and visually appealing. Whether collaborating on team projects or taking on freelance commissions, I am committed to delivering assets that elevate the gaming and development experience.
+    </p>
   </section>
 
   <section>
-    <h2>Portfolio</h2>
-    <p>Coming Soon...</p>
+    <h2>Coming Soon</h2>
+    <div class="portfolio-grid">
+      <div class="portfolio-item">Coming Soon</div>
+      <div class="portfolio-item">Coming Soon</div>
+      <div class="portfolio-item">Coming Soon</div>
+      <div class="portfolio-item">Coming Soon</div>
+    </div>
   </section>
 
   <section>
