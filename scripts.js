@@ -6,7 +6,7 @@ window.addEventListener('load', () => {
   }, 3500);
 });
 
-// Animate sections on scroll
+// Animate sections on scroll (fade in)
 const sections = document.querySelectorAll('main section');
 function checkVisibility() {
   const triggerBottom = window.innerHeight * 0.85;
@@ -97,5 +97,36 @@ form.addEventListener('submit', (e) => {
     window.location.href = `mailto:wishes@example.com?subject=${subject}&body=${body}`;
     formMsg.textContent = 'Opening your email client...';
     form.reset();
+  }
+});
+
+// Simple login form validation stub
+const loginForm = document.getElementById('login-form');
+const usernameInput = loginForm.elements['username'];
+const passwordInput = loginForm.elements['password'];
+
+const usernameError = document.getElementById('username-error');
+const passwordError = document.getElementById('password-error');
+const loginMsg = document.getElementById('login-msg');
+
+loginForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  usernameError.textContent = '';
+  passwordError.textContent = '';
+  loginMsg.textContent = '';
+
+  let valid = true;
+  if (!usernameInput.value.trim()) {
+    usernameError.textContent = 'Please enter your username.';
+    valid = false;
+  }
+  if (!passwordInput.value.trim()) {
+    passwordError.textContent = 'Please enter your password.';
+    valid = false;
+  }
+
+  if (valid) {
+    // Placeholder for real auth logic
+    loginMsg.textContent = 'Login feature not implemented yet.';
   }
 });
