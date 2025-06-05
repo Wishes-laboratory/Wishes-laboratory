@@ -40,6 +40,7 @@ body, html {
 }
 
 /* Splash screen */
+/* Splash screen */
 #splash {
   position: fixed;
   inset: 0;
@@ -53,12 +54,90 @@ body, html {
   font-weight: 800;
   font-size: 3rem;
   letter-spacing: 3px;
-  animation: splashFadeOut 3.5s forwards;
+  animation: splashFade 3.5s forwards;
   user-select: none;
 }
-@keyframes splashFadeOut {
-  0%, 85% { opacity: 1; }
+@keyframes splashFade {
+  0% { opacity: 1; }
+  80% { opacity: 1; }
   100% { opacity: 0; visibility: hidden; }
+}
+
+/* Make sure contact and login sections are visible when active */
+section {
+  margin-bottom: 60px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  pointer-events: none;
+}
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Same styling as contact form for login form */
+#login-form {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 0 20px var(--card-shadow);
+  max-width: 600px;
+  margin: 0 auto;
+}
+#login-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: var(--accent-color);
+}
+#login-form input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1.5px solid var(--input-border);
+  background: var(--input-bg);
+  color: var(--text-color);
+  font-size: 1rem;
+  margin-bottom: 12px;
+  transition: border-color 0.3s ease;
+}
+#login-form input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+#login-form .error {
+  color: var(--error-color);
+  font-size: 0.85rem;
+  margin-top: -8px;
+  margin-bottom: 12px;
+  min-height: 18px;
+}
+#login-form button {
+  background: var(--accent-color);
+  color: var(--bg-color);
+  border: none;
+  padding: 12px 20px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  user-select: none;
+  width: 100%;
+}
+#login-form button:hover,
+#login-form button:focus-visible {
+  background: #9b4dff;
+  outline: none;
+}
+#login-msg {
+  margin-top: 12px;
+  font-weight: 600;
+  color: var(--success-color);
+  min-height: 20px;
+  user-select: none;
 }
 
 /* Header */
