@@ -1,44 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Admin Review Approvals</title>
+  <title>Admin Panel</title>
   <style>
-    body { font-family: sans-serif; padding: 20px; background: #f4f4f4; }
-    .hidden { display: none; }
-    .review-box {
-      background: white;
-      border-left: 5px solid #2196F3;
-      padding: 15px;
-      margin: 10px 0;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    :root {
+      --primary: #8b5cf6;
+      --background: #ffffff;
+      --text: #1f1f1f;
+      --card: #f0f0f5;
     }
-    .review-box strong { font-size: 1.1em; }
+    .dark {
+      --background: #1a1a1f;
+      --text: #ffffff;
+      --card: #262626;
+    }
+
+    body {
+      font-family: sans-serif;
+      background: var(--background);
+      color: var(--text);
+      padding: 2rem;
+      transition: background 0.3s, color 0.3s;
+    }
+
     button {
-      padding: 8px 12px;
-      margin-top: 10px;
-      background: #2196F3;
-      color: white;
+      padding: 8px 14px;
+      background: var(--primary);
+      color: #fff;
       border: none;
-      border-radius: 4px;
+      border-radius: 6px;
       cursor: pointer;
     }
+
     input {
-      display: block;
-      margin: 10px 0;
       padding: 8px;
-      width: 250px;
+      width: 200px;
+      margin: 4px;
+    }
+
+    .review-box {
+      background: var(--card);
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
     }
   </style>
 </head>
 <body>
-
-  <h2>Admin Panel</h2>
+  <header>
+    <h2>Admin Review Approvals</h2>
+    <button onclick="toggleTheme()">Toggle Theme</button>
+  </header>
 
   <div id="login-form">
-    <input type="email" id="admin-email" placeholder="Email" required />
-    <input type="password" id="admin-password" placeholder="Password" required />
+    <input type="text" id="admin-email" placeholder="Admin Email" />
+    <input type="password" id="admin-password" placeholder="Password" />
     <button onclick="login()">Login</button>
     <div id="login-error" style="color: red;"></div>
   </div>
@@ -50,65 +77,55 @@
   </div>
 
   <script>
-    // Hardcoded credentials for local testing
-    const ADMIN_CREDENTIALS = {
-      email: "admin@example.com",
-      password: "securepassword123"
-    };
+    function toggleTheme() {
+      document.body.classList.toggle("dark");
+    }
 
-    // Simulated database (you can replace this with a backend API call)
-    let reviews = [
-      { id: "1", name: "Alice", rating: 5, message: "Amazing work!", approved: false },
-      { id: "2", name: "Bob", rating: 4, message: "Great service.", approved: false },
-      { id: "3", name: "Charlie", rating: 3, message: "Good but could improve.", approved: true }
-    ];
+    const ADMIN_EMAIL = "admin@example.com";
+    const ADMIN_PASS = "admin123";
 
     function login() {
-      const email = document.getElementById('admin-email').value;
-      const password = document.getElementById('admin-password').value;
-      const errorBox = document.getElementById('login-error');
-
-      if (email === ADMIN_CREDENTIALS.email && password === ADMIN_CREDENTIALS.password) {
-        document.getElementById('login-form').classList.add('hidden');
-        document.getElementById('admin-panel').classList.remove('hidden');
+      const email = document.getElementById("admin-email").value;
+      const pass = document.getElementById("admin-password").value;
+      if (email === ADMIN_EMAIL && pass === ADMIN_PASS) {
+        document.getElementById("login-form").classList.add("hidden");
+        document.getElementById("admin-panel").classList.remove("hidden");
         loadPendingReviews();
       } else {
-        errorBox.textContent = "Invalid credentials.";
+        document.getElementById("login-error").textContent = "Invalid credentials.";
       }
     }
 
     function logout() {
-      document.getElementById('admin-panel').classList.add('hidden');
-      document.getElementById('login-form').classList.remove('hidden');
-      document.getElementById('admin-email').value = '';
-      document.getElementById('admin-password').value = '';
-      document.getElementById('login-error').textContent = '';
+      document.getElementById("login-form").classList.remove("hidden");
+      document.getElementById("admin-panel").classList.add("hidden");
     }
 
+    const STORAGE_KEY = "custom-reviews";
+
     function loadPendingReviews() {
-      const container = document.getElementById('pending-reviews');
-      container.innerHTML = '';
-      reviews.forEach(review => {
-        if (!review.approved) {
+      const container = document.getElementById("pending-reviews");
+      container.innerHTML = "";
+      const reviews = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      reviews.forEach((r, i) => {
+        if (!r.approved) {
           const div = document.createElement("div");
           div.className = "review-box";
           div.innerHTML = `
-            <strong>${review.name}</strong> (${review.rating}★)
-            <p>${review.message}</p>
-            <button onclick="approveReview('${review.id}')">Approve</button>
+            <strong>${r.name}</strong> (${r.rating}★)
+            <p>${r.message}</p>
+            <button onclick="approveReview(${i})">Approve</button>
           `;
           container.appendChild(div);
         }
       });
     }
 
-    function approveReview(id) {
-      const review = reviews.find(r => r.id === id);
-      if (review) {
-        review.approved = true;
-        loadPendingReviews();
-        alert(`Approved review by ${review.name}`);
-      }
+    function approveReview(index) {
+      const reviews = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      reviews[index].approved = true;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(reviews));
+      loadPendingReviews();
     }
   </script>
 </body>
