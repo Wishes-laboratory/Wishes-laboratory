@@ -21,8 +21,8 @@
     }
 
     body.dark {
-      background-color: #1e1e2f;
-      color: #f0f0f0;
+      background-color: #1c1c1c;
+      color: #e0e0e0;
     }
 
     header {
@@ -132,6 +132,12 @@
       margin-bottom: 1rem;
     }
 
+    .specializations {
+      margin-top: 1rem;
+      line-height: 1.8;
+      font-size: 1.1rem;
+    }
+
     .portfolio-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -151,11 +157,36 @@
     }
 
     .dark .portfolio-item {
-      background: #2c2c3e;
+      background: #1e1e1e;
+    }
+
+    #splash-screen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: linear-gradient(135deg, #5a4ade, #a782ec);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      color: white;
+      font-size: 2rem;
+      font-weight: bold;
+      animation: fadeOut 2s forwards;
+      animation-delay: 1.5s;
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
     }
   </style>
 </head>
 <body>
+  <div id="splash-screen">Welcome to Wish upon a Star</div>
   <header>
     Wish upon a Star
     <div class="controls">
@@ -167,24 +198,19 @@
   <section>
     <h2>About Me</h2>
     <p>
-      I'm Wish, a 3D modeler, game asset creator, animator, and instructor with several years of experience. My work stands as a testament to the marriage of technical proficiency and artistic sense, allowing me to generate engaging assets. 
+      I'm Wish, a 3D modeler, game asset creator, animator, and instructor with several years of experience. My work stands as a testament to the marriage of technical proficiency and artistic sense, allowing me to generate engaging assets. I specialize in developing optimized, game-ready models and animations to heighten gaming experiences. Aside from content creation, I have a keen interest in sharing knowledge through one-on-one tutorials, instruction, and mentorship, thereby enabling others to move forward with game development and design areas. Whether I am working on a freelance project or collaborating with others, I strive to deliver professional and high-quality output that consistently exceeds expectations.
     </p>
-    <p>
-      I specialize in developing optimized, game-ready models and animations to heighten gaming experiences. Aside from content creation, I have a keen interest in sharing knowledge through one-on-one tutorials, instruction, and mentorship, thereby enabling others to move forward with game development and design areas. Whether I am working on a freelance project or collaborating with others, I strive to deliver professional and high-quality output that consistently exceeds expectations.
-    </p>
-    <ul>
-      <li>🌈 3D Modeling & Game Asset Creation</li>
-      <li>🎥 Animator</li>
-      <li>💼 Freelancing & Asset Selling</li>
-      <li>🎓 Teaching / Explaining Complex Topics</li>
-    </ul>
+    <div class="specializations">
+      <p>🧊 3D Modeling & Game Asset Creation</p>
+      <p>🎥 Animator</p>
+      <p>💼 Freelancing & Asset Selling</p>
+      <p>🎓 Teaching / Explaining Complex Topics</p>
+    </div>
   </section>
 
   <section>
     <h2>Portfolio</h2>
-    <div class="portfolio-grid">
-      <div class="portfolio-item">Coming Soon</div>
-    </div>
+    <p>Coming Soon...</p>
   </section>
 
   <section>
@@ -221,6 +247,11 @@
     function hideLogin() {
       document.getElementById('loginModal').classList.remove('show');
     }
+
+    window.addEventListener('load', () => {
+      const splash = document.getElementById('splash-screen');
+      setTimeout(() => splash.style.display = 'none', 3500);
+    });
   </script>
 </body>
 </html>
