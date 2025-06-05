@@ -6,573 +6,580 @@
   <title>Wish | Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
   <style>
-    /* --- General Styles --- */
-    * {
+    /* Reset & base */
+    *, *::before, *::after {
       box-sizing: border-box;
+    }
+    body, h1, h2, h3, p, ul, li, button, input, textarea {
       margin: 0;
       padding: 0;
       font-family: 'Inter', sans-serif;
-      scroll-behavior: smooth;
+      color: var(--text-color);
+      background-color: var(--bg-color);
+    }
+    ul {
+      list-style: none;
+    }
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+    }
+    a:hover,
+    a:focus {
+      text-decoration: underline;
+      outline: none;
+    }
+    img {
+      max-width: 100%;
+      display: block;
+      border-radius: 8px;
+      user-select: none;
+    }
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      background-color: var(--accent-color);
+      color: var(--button-text);
+      border: none;
+      padding: 0.5rem 1.2rem;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+    button:hover,
+    button:focus {
+      background-color: var(--accent-hover);
+      outline: none;
+    }
+    input, textarea {
+      font-family: inherit;
+      font-size: 1rem;
+      padding: 0.6rem 1rem;
+      border: 1.5px solid var(--accent-color);
+      border-radius: 8px;
+      background: var(--section-bg);
+      color: var(--text-color);
+      transition: border-color 0.3s ease;
+      width: 100%;
+      resize: vertical;
+      margin-top: 0.4rem;
+      margin-bottom: 1rem;
+    }
+    input:focus, textarea:focus {
+      border-color: var(--accent-hover);
+      outline: none;
     }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      padding: 20px;
-      transition: background 0.3s ease, color 0.3s ease;
-    }
-
+    /* CSS Variables for themes */
     :root {
-      --bg: #0a0a0a;
-      --text: #fff;
-      --card-bg: #1a1a1a;
-      --accent: #c084fc;
+      --bg-color: #0a0a0a;
+      --text-color: #f5f5f5;
+      --accent-color: #c084fc;
+      --accent-hover: #a05de8;
+      --section-bg: #1a1a1a;
       --card-shadow: rgba(192, 132, 252, 0.3);
+      --button-text: #fff;
+      --input-bg: #1a1a1a;
     }
-
-    body.light {
-      --bg: #f9f9f9;
-      --text: #111;
-      --card-bg: #fff;
-      --accent: #7c3aed;
+    [data-theme="light"] {
+      --bg-color: #fefefe;
+      --text-color: #222;
+      --accent-color: #7c3aed;
+      --accent-hover: #5a28b0;
+      --section-bg: #ffffff;
       --card-shadow: rgba(124, 58, 237, 0.3);
+      --button-text: #fff;
+      --input-bg: #fff;
     }
 
+    /* Layout */
+    body {
+      line-height: 1.6;
+      padding: 1.25rem 1rem 3rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background-color 0.4s ease, color 0.4s ease;
+      position: relative;
+      overflow-x: hidden;
+    }
+    main {
+      max-width: 900px;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
     header {
-      background: linear-gradient(145deg, #1c1c1c, #2b2b2b);
+      background: linear-gradient(145deg, var(--section-bg), #2b2b2b);
       border-radius: 16px;
-      animation: fadeIn 1.2s ease-out;
+      padding: 3rem 1.5rem;
       text-align: center;
-      padding: 50px 20px;
-      color: var(--accent);
+      box-shadow: 0 0 20px var(--card-shadow);
+      margin-bottom: 3rem;
+      animation: fadeIn 1.2s ease-out;
+      user-select: none;
     }
-
-    header.light {
-      background: linear-gradient(145deg, #dcd6f7, #c7b9f7);
-      color: var(--accent);
-    }
-
     header h1 {
-      font-size: 2.8rem;
-      margin-bottom: 10px;
-      user-select: none;
+      font-weight: 800;
+      font-size: 3rem;
+      color: var(--accent-color);
+      margin-bottom: 0.25rem;
     }
-
     header p {
-      font-size: 1.2rem;
-      color: var(--text);
-      user-select: none;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-color);
     }
 
     section {
-      max-width: 900px;
-      margin: 60px auto;
-      padding: 20px;
+      background: var(--section-bg);
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 0 15px var(--card-shadow);
       opacity: 0;
       transform: translateY(30px);
-      transition: all 0.8s ease;
+      transition: opacity 0.8s ease, transform 0.8s ease;
     }
-
     section.visible {
       opacity: 1;
       transform: translateY(0);
     }
-
-    h2 {
+    section h2 {
       font-size: 2rem;
-      margin-bottom: 20px;
-      border-bottom: 2px solid var(--accent);
-      padding-bottom: 10px;
-      color: var(--accent);
+      margin-bottom: 1rem;
+      border-bottom: 3px solid var(--accent-color);
+      padding-bottom: 0.3rem;
+      color: var(--accent-color);
       user-select: none;
     }
 
-    ul {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    li {
-      margin-bottom: 10px;
+    /* Lists */
+    ul li {
+      padding-left: 1.5rem;
+      margin-bottom: 0.6rem;
       position: relative;
-      padding-left: 24px;
+      font-weight: 600;
     }
-
-    li::before {
+    ul li::before {
       content: '•';
       position: absolute;
       left: 0;
-      color: var(--accent);
-      user-select: none;
+      top: 0;
+      color: var(--accent-color);
+      font-size: 1.25rem;
+      line-height: 1;
     }
 
+    /* Portfolio grid */
     .portfolio-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
     }
-
     .card {
-      background: var(--card-bg);
-      padding: 15px;
+      background: var(--bg-color);
       border-radius: 12px;
+      padding: 1rem;
       box-shadow: 0 0 15px var(--card-shadow);
       transition: transform 0.3s ease;
-      word-wrap: break-word;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
-
-    .card:hover {
+    .card:hover,
+    .card:focus-within {
       transform: translateY(-5px);
+      outline: none;
     }
-
-    .card img {
-      width: 100%;
-      border-radius: 8px;
-      object-fit: contain;
-      max-height: 180px;
-      margin-bottom: 10px;
-      user-select: none;
-    }
-
     .card h3 {
-      margin-top: 5px;
-      color: var(--text);
+      margin: 1rem 0 0.75rem;
+      color: var(--accent-color);
+      font-weight: 700;
       user-select: none;
     }
-
-    a {
-      color: var(--accent);
-      text-decoration: none;
-      user-select: text;
+    .card p {
+      font-weight: 400;
+      line-height: 1.3;
+      color: var(--text-color);
+      flex-grow: 1;
     }
 
-    a:hover {
-      text-decoration: underline;
-    }
-
+    /* Footer */
     footer {
       text-align: center;
-      margin: 80px 0 20px;
-      color: #777;
+      margin-top: auto;
+      padding-top: 1.5rem;
       font-size: 0.9rem;
+      color: #777;
       user-select: none;
+      position: relative;
+      z-index: 2;
     }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-
-    /* --- Review Form Styles --- */
-    #review-form {
-      max-width: 600px;
-      margin: 40px auto 60px;
-      background: var(--card-bg);
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 0 15px var(--card-shadow);
-    }
-
-    #review-form h2 {
-      margin-bottom: 20px;
-      color: var(--accent);
-      user-select: none;
-    }
-
-    #review-form label {
-      display: block;
-      margin-bottom: 6px;
-      color: var(--text);
-      font-weight: 600;
-      user-select: none;
-    }
-
-    #review-form input[type="text"],
-    #review-form textarea {
-      width: 100%;
-      padding: 8px 12px;
-      margin-bottom: 16px;
-      border-radius: 6px;
-      border: 1.5px solid #555;
-      background: var(--bg);
-      color: var(--text);
-      font-size: 1rem;
-      resize: vertical;
-      transition: border-color 0.3s ease;
-    }
-
-    #review-form input[type="text"]:focus,
-    #review-form textarea:focus {
-      outline: none;
-      border-color: var(--accent);
-    }
-
-    #review-form input[type="file"] {
-      margin-bottom: 16px;
-      color: var(--text);
-    }
-
-    #review-form button {
-      background: var(--accent);
-      color: var(--bg);
-      border: none;
-      padding: 12px 24px;
-      font-size: 1.1rem;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-      user-select: none;
-    }
-
-    #review-form button:hover {
-      background: #a258f5;
-    }
-
-    /* --- Light/Dark Toggle Button --- */
+    /* Theme toggle */
     #theme-toggle {
       position: fixed;
-      top: 15px;
-      right: 20px;
-      background: var(--card-bg);
-      border-radius: 24px;
-      border: 1.5px solid var(--accent);
-      padding: 8px 16px;
-      color: var(--accent);
-      font-weight: 700;
-      cursor: pointer;
-      z-index: 10001;
-      user-select: none;
-      transition: background 0.3s ease, color 0.3s ease;
+      top: 1rem;
+      right: 1rem;
+      background: var(--accent-color);
+      border: none;
+      color: var(--button-text);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-weight: 600;
+      z-index: 1000;
+      box-shadow: 0 0 10px var(--card-shadow);
+      transition: background-color 0.3s ease;
+    }
+    #theme-toggle:hover,
+    #theme-toggle:focus {
+      background-color: var(--accent-hover);
+      outline: none;
     }
 
-    #theme-toggle:hover {
-      background: var(--accent);
-      color: var(--bg);
-    }
-
-    /* --- Intro Splash Screen --- */
-    #intro-splash {
+    /* Splash screen */
+    #splash {
       position: fixed;
       inset: 0;
-      background: var(--bg);
+      background-color: var(--bg-color);
       display: flex;
-      align-items: center;
-      justify-content: center;
       flex-direction: column;
-      z-index: 10000;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
       user-select: none;
-      animation: splashFadeOut 1.5s ease forwards;
-      animation-delay: 2.8s;
+      animation: fadeOutSplash 0.7s ease forwards;
+      animation-delay: 3s;
+    }
+    #splash h1 {
+      font-size: 4rem;
+      font-weight: 900;
+      color: var(--accent-color);
+      text-shadow: 0 0 12px var(--accent-color);
+      animation: glow 2s ease-in-out infinite alternate;
+      margin-bottom: 0.3rem;
+    }
+    #splash p {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-color);
+      opacity: 0.8;
     }
 
-    #intro-splash.hidden {
-      display: none;
+    /* Contact form */
+    form {
+      max-width: 600px;
+      margin: 0 auto;
     }
-
-    #intro-splash h1 {
-      font-size: 3rem;
-      color: var(--accent);
-      margin-bottom: 10px;
-      animation: glow 2.5s ease-in-out infinite alternate;
+    label {
+      font-weight: 600;
+      display: block;
+      margin-top: 1rem;
+      user-select: none;
+    }
+    .error {
+      color: #e74c3c;
+      font-size: 0.9rem;
+      margin-top: 0.2rem;
+      user-select: none;
+    }
+    .success-msg {
+      text-align: center;
+      color: #4caf50;
+      font-weight: 600;
+      margin-top: 1rem;
       user-select: none;
     }
 
-    #intro-splash p {
-      font-size: 1.2rem;
-      color: var(--text);
-      user-select: none;
+    /* Animated background - floating circles */
+    #background-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      pointer-events: none;
     }
 
-    @keyframes glow {
-      from {
-        text-shadow:
-          0 0 5px var(--accent),
-          0 0 10px var(--accent),
-          0 0 20px var(--accent);
-      }
-      to {
-        text-shadow:
-          0 0 10px var(--accent),
-          0 0 25px var(--accent),
-          0 0 40px var(--accent);
-      }
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
-
-    @keyframes splashFadeOut {
+    @keyframes fadeOutSplash {
       to {
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
       }
     }
-
-    /* --- Responsive --- */
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 2.2rem;
+    @keyframes glow {
+      0% {
+        text-shadow:
+          0 0 6px var(--accent-color),
+          0 0 12px var(--accent-color),
+          0 0 24px var(--accent-color);
       }
-      #intro-splash h1 {
-        font-size: 2.2rem;
-      }
-      section {
-        margin: 40px 15px;
+      100% {
+        text-shadow:
+          0 0 18px var(--accent-color),
+          0 0 36px var(--accent-color),
+          0 0 54px var(--accent-color);
       }
     }
 
+    /* Responsive typography */
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 2.5rem;
+      }
+      #splash h1 {
+        font-size: 3rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <!-- Intro Splash -->
-  <div id="intro-splash">
-    <h1>Wish</h1>
-    <p>3D Modeling • Game Assets • Animation • Teaching</p>
-  </div>
 
-  <!-- Theme Toggle -->
-  <button id="theme-toggle" aria-label="Toggle light/dark mode">🌙 Dark Mode</button>
+  <!-- Animated background canvas -->
+  <canvas id="background-canvas" aria-hidden="true"></canvas>
 
-  <header id="main-header">
+  <!-- Splash intro -->
+  <div id="splash" role="banner" aria-label="Welcome Splash Screen">
     <h1>Wish</h1>
     <p>3D Modeling • Game Assets • Freelancing • Animation • Teaching</p>
-  </header>
+  </div>
 
-  <section id="about">
-    <h2>About Me</h2>
-    <p>I'm Wish, a 3D modeler, game asset creator, animator, and instructor with a few years of experience. My work embodies technical proficiency blended with artistic expression, enabling me to create compelling assets. I specialize in the creation of optimized, game-ready models and animations that enhance gameplay experiences. In addition to content creation, I possess a keen interest in imparting knowledge through one-on-one instruction, tutorials, and mentorship. Whether freelance or collaborative, I strive to deliver above expectations.</p>
-  </section>
+  <!-- Theme toggle -->
+  <button id="theme-toggle" aria-label="Toggle light or dark theme">Toggle Theme</button>
 
-  <section id="skills">
-    <h2>Skills</h2>
-    <ul>
-      <li>🧊 3D Modeling & Game Asset Creation</li>
-      <li>🎥 Animates Anything</li>
-      <li>💼 Freelancing & Asset Selling</li>
-      <li>🎓 Teaching / Explaining Complex Topics</li>
-    </ul>
-  </section>
+  <main role="main">
+    <header>
+      <h1>Wish</h1>
+      <p>3D Modeling • Game Assets • Freelancing • Animation • Teaching</p>
+    </header>
 
-  <section id="services">
-    <h2>Services</h2>
-    <ul>
-      <li>✔️ Custom 3D Game Assets for Roblox or Minecraft</li>
-      <li>✔️ Freelance Work for Developers & Studios</li>
-      <li>✔️ One-on-One Lessons in Animation or Roblox Scripting</li>
-      <li>✔️ Asset Packs for Sale (coming soon)</li>
-    </ul>
-  </section>
+    <section id="about" tabindex="0" aria-labelledby="about-heading">
+      <h2 id="about-heading">About Me</h2>
+      <p>
+        I'm Wish, a 3D modeler, game asset creator, animator, and instructor with several years of experience.
+        My work combines technical skill with artistic expression to create compelling, optimized, game-ready models and animations.
+        I enjoy teaching through one-on-one sessions, tutorials, and mentorship.
+        Whether freelance or collaborative, I aim to deliver above expectations.
+      </p>
+    </section>
 
-  <!-- Review Submission Form -->
-  <section id="review-form-section">
-    <form id="review-form" aria-label="Submit a review">
-      <h2>Leave a Review</h2>
-      <label for="reviewer-name">Your Name</label>
-      <input type="text" id="reviewer-name" name="reviewerName" placeholder="Your name" required maxlength="30" />
-      
-      <label for="review-text">Your Review</label>
-      <textarea id="review-text" name="reviewText" rows="4" placeholder="Write your review here..." required maxlength="500"></textarea>
-      
-      <label for="review-image">Upload an Image (optional)</label>
-      <input type="file" id="review-image" name="reviewImage" accept="image/*" />
-      
-      <button type="submit">Submit Review</button>
-    </form>
-  </section>
+    <section id="skills" tabindex="0" aria-labelledby="skills-heading">
+      <h2 id="skills-heading">Skills</h2>
+      <ul>
+        <li>🧊 3D Modeling & Game Asset Creation</li>
+        <li>🎥 Animation for Games</li>
+        <li>💼 Freelancing & Asset Selling</li>
+        <li>🎓 Teaching / Explaining Complex Topics</li>
+      </ul>
+    </section>
 
-  <section id="testimonials">
-    <h2>Testimonials & Client Vouches</h2>
-    <div class="portfolio-grid" id="reviews-container">
-      <!-- Reviews from Firebase will be inserted here -->
-    </div>
-  </section>
+    <section id="services" tabindex="0" aria-labelledby="services-heading">
+      <h2 id="services-heading">Services</h2>
+      <ul>
+        <li>✔️ Custom 3D Game Assets for Roblox or Minecraft</li>
+        <li>✔️ Freelance Work for Developers & Studios</li>
+        <li>✔️ One-on-One Lessons in Animation or Roblox Scripting</li>
+        <li>✔️ Asset Packs for Sale (coming soon)</li>
+      </ul>
+    </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:therealuponastarwish@gmail.com">therealuponastarwish@gmail.com</a></p>
-    <p>Discord: no_nameiscool1_45977</p>
-    <p>Twitter: <a href="https://x.com/3d_modeler_Wish" target="_blank" rel="noopener noreferrer">Wish's X</a></p>
-  </section>
+    <section id="portfolio" tabindex="0" aria-labelledby="portfolio-heading">
+      <h2 id="portfolio-heading">Portfolio</h2>
+      <div class="portfolio-grid" role="list">
+        <article class="card" role="listitem" tabindex="0">
+          <img src="https://i.imgur.com/2P7g9tx.png" alt="Custom Roblox sword model" />
+          <h3>Custom Roblox Sword</h3>
+          <p>Detailed low-poly sword with smooth animation, optimized for fast combat.</p>
+        </article>
+        <article class="card" role="listitem" tabindex="0">
+          <img src="https://i.imgur.com/nXpKp6z.png" alt="MythicMobs SkeletonKing model" />
+          <h3>SkeletonKing MythicMobs Model</h3>
+          <p>Buff skeleton king with crown, fully rigged and animated for Minecraft MythicMobs.</p>
+        </article>
+        <article class="card" role="listitem" tabindex="0">
+          <img src="https://i.imgur.com/A81GqEd.png" alt="Charged Sheep Minecraft model" />
+          <h3>Charged Sheep</h3>
+          <p>Minecraft sheep model with lightning effects and custom particles.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" tabindex="0" aria-labelledby="contact-heading">
+      <h2 id="contact-heading">Contact Me</h2>
+      <form id="contact-form" novalidate aria-describedby="form-status" aria-live="polite">
+        <label for="name">Name *</label>
+        <input type="text" id="name" name="name" placeholder="Your name" required aria-required="true" />
+        <div class="error" id="error-name" aria-live="assertive"></div>
+
+        <label for="email">Email *</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required aria-required="true" />
+        <div class="error" id="error-email" aria-live="assertive"></div>
+
+        <label for="message">Message *</label>
+        <textarea id="message" name="message" rows="5" placeholder="Write your message here..." required aria-required="true"></textarea>
+        <div class="error" id="error-message" aria-live="assertive"></div>
+
+        <button type="submit">Send</button>
+        <div id="form-status" role="alert" class="success-msg" aria-live="polite"></div>
+      </form>
+    </section>
+  </main>
 
   <footer>
-    <p>© 2025 Wish. All rights reserved.</p>
+    &copy; 2025 Wish. All rights reserved.
   </footer>
 
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
-
   <script>
-    // --- Firebase Configuration ---
-    const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_PROJECT_ID.appspot.com",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId: "YOUR_APP_ID"
-    };
-
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-    const storage = firebase.storage();
-
-    // --- DOM Elements ---
-    const reviewsContainer = document.getElementById('reviews-container');
-    const reviewForm = document.getElementById('review-form');
-    const themeToggle = document.getElementById('theme-toggle');
-    const body = document.body;
-    const header = document.getElementById('main-header');
-    const introSplash = document.getElementById('intro-splash');
-
-    // --- Show Sections on Scroll ---
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('section').forEach(section => observer.observe(section));
-
-    // --- Load Reviews from Firestore ---
-    async function loadReviews() {
-      reviewsContainer.innerHTML = '<p>Loading reviews...</p>';
-      try {
-        const snapshot = await db.collection('reviews').orderBy('timestamp', 'desc').get();
-        if (snapshot.empty) {
-          reviewsContainer.innerHTML = '<p>No reviews yet. Be the first!</p>';
-          return;
-        }
-
-        reviewsContainer.innerHTML = '';
-        snapshot.forEach(doc => {
-          const review = doc.data();
-          const card = document.createElement('div');
-          card.className = 'card';
-
-          let imgHtml = '';
-          if (review.imageUrl) {
-            imgHtml = `<img src="${review.imageUrl}" alt="Review image by ${review.name}" loading="lazy" />`;
-          }
-
-          card.innerHTML = `
-            ${imgHtml}
-            <h3>⭐ ${escapeHtml(review.name)}</h3>
-            <p>${escapeHtml(review.text)}</p>
-          `;
-          reviewsContainer.appendChild(card);
+    // Splash screen removal after animation
+    window.addEventListener('load', () => {
+      const splash = document.getElementById('splash');
+      setTimeout(() => {
+        splash.style.display = 'none';
+        document.querySelectorAll('section').forEach((section, i) => {
+          setTimeout(() => {
+            section.classList.add('visible');
+          }, 200 * i);
         });
-      } catch (error) {
-        reviewsContainer.innerHTML = '<p>Error loading reviews.</p>';
-        console.error('Error loading reviews:', error);
-      }
-    }
-
-    // --- Escape HTML utility ---
-    function escapeHtml(text) {
-      const map = {
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#039;'
-      };
-      return text.replace(/[&<>"']/g, function(m) { return map[m]; });
-    }
-
-    // --- Upload Image to Firebase Storage ---
-    async function uploadImage(file) {
-      const fileName = `reviews/${Date.now()}_${file.name}`;
-      const storageRef = storage.ref().child(fileName);
-      await storageRef.put(file);
-      return await storageRef.getDownloadURL();
-    }
-
-    // --- Handle Review Form Submit ---
-    reviewForm.addEventListener('submit', async e => {
-      e.preventDefault();
-
-      const name = reviewForm['reviewer-name'].value.trim();
-      const text = reviewForm['review-text'].value.trim();
-      const imageFile = reviewForm['review-image'].files[0];
-
-      if (!name || !text) {
-        alert('Please fill out your name and review.');
-        return;
-      }
-
-      reviewForm.querySelector('button').disabled = true;
-      reviewForm.querySelector('button').textContent = 'Submitting...';
-
-      try {
-        let imageUrl = null;
-        if (imageFile) {
-          imageUrl = await uploadImage(imageFile);
-        }
-
-        await db.collection('reviews').add({
-          name,
-          text,
-          imageUrl,
-          timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        });
-
-        alert('Review submitted! Thank you.');
-
-        // Clear form
-        reviewForm.reset();
-
-        // Reload reviews
-        loadReviews();
-
-      } catch (error) {
-        console.error('Error submitting review:', error);
-        alert('Failed to submit review. Please try again.');
-      } finally {
-        reviewForm.querySelector('button').disabled = false;
-        reviewForm.querySelector('button').textContent = 'Submit Review';
-      }
+      }, 3500);
     });
 
-    // --- Theme Toggle Logic ---
-    function setTheme(theme) {
-      if (theme === 'light') {
-        body.classList.add('light');
-        header.classList.add('light');
-        themeToggle.textContent = '🌙 Dark Mode';
-      } else {
-        body.classList.remove('light');
-        header.classList.remove('light');
-        themeToggle.textContent = '☀️ Light Mode';
-      }
-      localStorage.setItem('theme', theme);
-    }
+    // Theme toggle with persistence
+    const themeToggle = document.getElementById('theme-toggle');
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', currentTheme);
+
+    themeToggle.textContent = currentTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
 
     themeToggle.addEventListener('click', () => {
-      const currentTheme = localStorage.getItem('theme') || 'dark';
-      setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+      const theme = document.documentElement.getAttribute('data-theme');
+      const newTheme = theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      themeToggle.textContent = newTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
     });
 
-    // Initialize theme on load
-    (function () {
-      const savedTheme = localStorage.getItem('theme') || 'dark';
-      setTheme(savedTheme);
-    })();
+    // Contact form validation & mailto link
+    const form = document.getElementById('contact-form');
+    const nameInput = form.name;
+    const emailInput = form.email;
+    const messageInput = form.message;
 
-    // --- Intro Splash Logic ---
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        introSplash.classList.add('hidden');
-      }, 3500); // fade out after 3.5 seconds (including animation delay)
+    const errorName = document.getElementById('error-name');
+    const errorEmail = document.getElementById('error-email');
+    const errorMessage = document.getElementById('error-message');
+    const formStatus = document.getElementById('form-status');
+
+    function validateEmail(email) {
+      // Simple email regex
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      let valid = true;
+      errorName.textContent = '';
+      errorEmail.textContent = '';
+      errorMessage.textContent = '';
+      formStatus.textContent = '';
+
+      if (nameInput.value.trim().length < 2) {
+        errorName.textContent = 'Please enter your name (at least 2 characters).';
+        valid = false;
+      }
+      if (!validateEmail(emailInput.value.trim())) {
+        errorEmail.textContent = 'Please enter a valid email address.';
+        valid = false;
+      }
+      if (messageInput.value.trim().length < 5) {
+        errorMessage.textContent = 'Please enter a message (at least 5 characters).';
+        valid = false;
+      }
+
+      if (!valid) return;
+
+      // Compose mailto
+      const subject = encodeURIComponent(`Portfolio Inquiry from ${nameInput.value.trim()}`);
+      const body = encodeURIComponent(`Name: ${nameInput.value.trim()}\nEmail: ${emailInput.value.trim()}\n\nMessage:\n${messageInput.value.trim()}`);
+
+      const mailtoLink = `mailto:wishes@example.com?subject=${subject}&body=${body}`;
+      window.location.href = mailtoLink;
+
+      formStatus.textContent = 'Opening your email client...';
+      form.reset();
     });
 
-    // --- Initial load of reviews ---
-    loadReviews();
+    // Animated background (floating circles)
+    const canvas = document.getElementById('background-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let circles = [];
+
+    function Circle() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.radius = 8 + Math.random() * 15;
+      this.speed = 0.15 + Math.random() * 0.4;
+      this.direction = Math.random() * 2 * Math.PI;
+      this.alpha = 0.2 + Math.random() * 0.15;
+      this.color = `rgba(192, 132, 252, ${this.alpha})`;
+      this.dx = Math.cos(this.direction) * this.speed;
+      this.dy = Math.sin(this.direction) * this.speed;
+    }
+
+    Circle.prototype.move = function() {
+      this.x += this.dx;
+      this.y += this.dy;
+
+      if(this.x - this.radius > width) this.x = -this.radius;
+      if(this.x + this.radius < 0) this.x = width + this.radius;
+      if(this.y - this.radius > height) this.y = -this.radius;
+      if(this.y + this.radius < 0) this.y = height + this.radius;
+    };
+
+    Circle.prototype.draw = function() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
+      ctx.fillStyle = this.color;
+      ctx.shadowColor = this.color;
+      ctx.shadowBlur = 10;
+      ctx.fill();
+    };
+
+    function initCircles() {
+      circles = [];
+      for(let i = 0; i < 25; i++) {
+        circles.push(new Circle());
+      }
+    }
+
+    function resize() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+      initCircles();
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      circles.forEach(c => {
+        c.move();
+        c.draw();
+      });
+      requestAnimationFrame(animate);
+    }
+    animate();
 
   </script>
 </body>
