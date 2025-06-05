@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div id="splash" role="presentation" aria-hidden="true">WISHES LAB</div>
+  <div id="splash" role="presentation" aria-hidden="true">Wish upon a Star</div>
 
   <button id="theme-toggle" aria-pressed="false" aria-label="Toggle light and dark mode">
     Light Mode
@@ -22,9 +22,7 @@
   <main>
     <section id="about" tabindex="-1" aria-labelledby="about-title" class="visible">
       <h2 id="about-title">About Me</h2>
-      <p>
-        Experienced Roblox developer and 3D artist specializing in custom models, animations, and combat systems. Passionate about creating smooth, performant gameplay experiences.
-      </p>
+      <p>I'm Wish, a 3D modeler, game asset creator, animator, and instructor with a few years of experience. My work embodies technical proficiency blended with artistic expression, enabling me to create compelling assets. I specialize in the creation of optimized, game-ready models and animations that enhance gameplay experiences. In addition to content creation, I possess a keen interest in imparting knowledge through one-on-one instruction, tutorials, and mentorship, thereby assisting others in progressing in the realm of game development and design. Be it a freelance project or a collaborative work, I make every attempt to produce professional and quality outputs above expectations.</p>
     </section>
 
     <section id="portfolio" tabindex="-1" aria-labelledby="portfolio-title">
@@ -65,6 +63,22 @@
 
         <button type="submit">Send</button>
         <div class="success-msg" id="form-msg" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <section id="login" tabindex="-1" aria-labelledby="login-title">
+      <h2 id="login-title">Admin Login</h2>
+      <form id="login-form" novalidate>
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" autocomplete="username" required />
+        <div class="error" id="username-error" aria-live="polite"></div>
+
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required />
+        <div class="error" id="password-error" aria-live="polite"></div>
+
+        <button type="submit">Login</button>
+        <div class="success-msg" id="login-msg" aria-live="polite"></div>
       </form>
     </section>
   </main>
