@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Wish | Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
   <style>
+    /* --- General Styles --- */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -15,10 +16,27 @@
     }
 
     body {
-      background: #0a0a0a;
-      color: #fff;
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.6;
       padding: 20px;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    :root {
+      --bg: #0a0a0a;
+      --text: #fff;
+      --card-bg: #1a1a1a;
+      --accent: #c084fc;
+      --card-shadow: rgba(192, 132, 252, 0.3);
+    }
+
+    body.light {
+      --bg: #f9f9f9;
+      --text: #111;
+      --card-bg: #fff;
+      --accent: #7c3aed;
+      --card-shadow: rgba(124, 58, 237, 0.3);
     }
 
     header {
@@ -27,17 +45,24 @@
       animation: fadeIn 1.2s ease-out;
       text-align: center;
       padding: 50px 20px;
+      color: var(--accent);
+    }
+
+    header.light {
+      background: linear-gradient(145deg, #dcd6f7, #c7b9f7);
+      color: var(--accent);
     }
 
     header h1 {
       font-size: 2.8rem;
       margin-bottom: 10px;
-      color: #c084fc;
+      user-select: none;
     }
 
     header p {
       font-size: 1.2rem;
-      color: #ccc;
+      color: var(--text);
+      user-select: none;
     }
 
     section {
@@ -57,9 +82,10 @@
     h2 {
       font-size: 2rem;
       margin-bottom: 20px;
-      border-bottom: 2px solid #c084fc;
+      border-bottom: 2px solid var(--accent);
       padding-bottom: 10px;
-      color: #c084fc;
+      color: var(--accent);
+      user-select: none;
     }
 
     ul {
@@ -77,7 +103,8 @@
       content: '•';
       position: absolute;
       left: 0;
-      color: #c084fc;
+      color: var(--accent);
+      user-select: none;
     }
 
     .portfolio-grid {
@@ -87,11 +114,12 @@
     }
 
     .card {
-      background: #1a1a1a;
+      background: var(--card-bg);
       padding: 15px;
       border-radius: 12px;
-      box-shadow: 0 0 15px rgba(192, 132, 252, 0.3);
+      box-shadow: 0 0 15px var(--card-shadow);
       transition: transform 0.3s ease;
+      word-wrap: break-word;
     }
 
     .card:hover {
@@ -101,16 +129,22 @@
     .card img {
       width: 100%;
       border-radius: 8px;
+      object-fit: contain;
+      max-height: 180px;
+      margin-bottom: 10px;
+      user-select: none;
     }
 
     .card h3 {
-      margin-top: 10px;
-      color: #fff;
+      margin-top: 5px;
+      color: var(--text);
+      user-select: none;
     }
 
     a {
-      color: #c084fc;
+      color: var(--accent);
       text-decoration: none;
+      user-select: text;
     }
 
     a:hover {
@@ -122,6 +156,7 @@
       margin: 80px 0 20px;
       color: #777;
       font-size: 0.9rem;
+      user-select: none;
     }
 
     @keyframes fadeIn {
@@ -132,11 +167,176 @@
         opacity: 1;
       }
     }
+
+    /* --- Review Form Styles --- */
+    #review-form {
+      max-width: 600px;
+      margin: 40px auto 60px;
+      background: var(--card-bg);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px var(--card-shadow);
+    }
+
+    #review-form h2 {
+      margin-bottom: 20px;
+      color: var(--accent);
+      user-select: none;
+    }
+
+    #review-form label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--text);
+      font-weight: 600;
+      user-select: none;
+    }
+
+    #review-form input[type="text"],
+    #review-form textarea {
+      width: 100%;
+      padding: 8px 12px;
+      margin-bottom: 16px;
+      border-radius: 6px;
+      border: 1.5px solid #555;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 1rem;
+      resize: vertical;
+      transition: border-color 0.3s ease;
+    }
+
+    #review-form input[type="text"]:focus,
+    #review-form textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    #review-form input[type="file"] {
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    #review-form button {
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 12px 24px;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      user-select: none;
+    }
+
+    #review-form button:hover {
+      background: #a258f5;
+    }
+
+    /* --- Light/Dark Toggle Button --- */
+    #theme-toggle {
+      position: fixed;
+      top: 15px;
+      right: 20px;
+      background: var(--card-bg);
+      border-radius: 24px;
+      border: 1.5px solid var(--accent);
+      padding: 8px 16px;
+      color: var(--accent);
+      font-weight: 700;
+      cursor: pointer;
+      z-index: 10001;
+      user-select: none;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    #theme-toggle:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    /* --- Intro Splash Screen --- */
+    #intro-splash {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 10000;
+      user-select: none;
+      animation: splashFadeOut 1.5s ease forwards;
+      animation-delay: 2.8s;
+    }
+
+    #intro-splash.hidden {
+      display: none;
+    }
+
+    #intro-splash h1 {
+      font-size: 3rem;
+      color: var(--accent);
+      margin-bottom: 10px;
+      animation: glow 2.5s ease-in-out infinite alternate;
+      user-select: none;
+    }
+
+    #intro-splash p {
+      font-size: 1.2rem;
+      color: var(--text);
+      user-select: none;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow:
+          0 0 5px var(--accent),
+          0 0 10px var(--accent),
+          0 0 20px var(--accent);
+      }
+      to {
+        text-shadow:
+          0 0 10px var(--accent),
+          0 0 25px var(--accent),
+          0 0 40px var(--accent);
+      }
+    }
+
+    @keyframes splashFadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2.2rem;
+      }
+      #intro-splash h1 {
+        font-size: 2.2rem;
+      }
+      section {
+        margin: 40px 15px;
+      }
+    }
+
   </style>
 </head>
 <body>
+  <!-- Intro Splash -->
+  <div id="intro-splash">
+    <h1>Wish</h1>
+    <p>3D Modeling • Game Assets • Animation • Teaching</p>
+  </div>
 
-  <header>
+  <!-- Theme Toggle -->
+  <button id="theme-toggle" aria-label="Toggle light/dark mode">🌙 Dark Mode</button>
+
+  <header id="main-header">
     <h1>Wish</h1>
     <p>3D Modeling • Game Assets • Freelancing • Animation • Teaching</p>
   </header>
@@ -166,51 +366,214 @@
     </ul>
   </section>
 
+  <!-- Review Submission Form -->
+  <section id="review-form-section">
+    <form id="review-form" aria-label="Submit a review">
+      <h2>Leave a Review</h2>
+      <label for="reviewer-name">Your Name</label>
+      <input type="text" id="reviewer-name" name="reviewerName" placeholder="Your name" required maxlength="30" />
+      
+      <label for="review-text">Your Review</label>
+      <textarea id="review-text" name="reviewText" rows="4" placeholder="Write your review here..." required maxlength="500"></textarea>
+      
+      <label for="review-image">Upload an Image (optional)</label>
+      <input type="file" id="review-image" name="reviewImage" accept="image/*" />
+      
+      <button type="submit">Submit Review</button>
+    </form>
+  </section>
+
   <section id="testimonials">
     <h2>Testimonials & Client Vouches</h2>
-    <div class="portfolio-grid">
-      <div class="card">
-        <h3>⭐ DevRex</h3>
-        <p>"Wish delivered high-quality assets way ahead of schedule. Communication was smooth and the results exceeded expectations. Highly recommend for any serious game dev project."</p>
-      </div>
-      <div class="card">
-        <h3>⭐ Insecptor</h3>
-        <p>"Incredible modeling skills and attention to detail. Our game world looks amazing thanks to Wish’s custom models. Professional, fast, and creative."</p>
-      </div>
-      <div class="card">
-        <h3>⭐ CodeCove</h3>
-        <p>"Wish not only built us an animation pack that runs smoothly in Roblox Studio, but also taught our junior devs how to animate better. A true mentor."</p>
-      </div>
-      <div class="card">
-        <h3>By Wish</h3>
-        <p>"If you’d like to leave a comment, please DM us."</p>
-      </div>
+    <div class="portfolio-grid" id="reviews-container">
+      <!-- Reviews from Firebase will be inserted here -->
     </div>
+  </section>
 
-    <p>Email: <a href="mailto:therealuponastarwish@gmail.com">Wish's Email</a></p>
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:therealuponastarwish@gmail.com">therealuponastarwish@gmail.com</a></p>
     <p>Discord: no_nameiscool1_45977</p>
-    <p>Twitter: <a href="https://x.com/3d_modeler_Wish" target="_blank">Wish's X</a></p>
+    <p>Twitter: <a href="https://x.com/3d_modeler_Wish" target="_blank" rel="noopener noreferrer">Wish's X</a></p>
   </section>
 
   <footer>
     <p>© 2025 Wish. All rights reserved.</p>
   </footer>
 
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+
   <script>
-    // Fade-in on scroll
+    // --- Firebase Configuration ---
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const storage = firebase.storage();
+
+    // --- DOM Elements ---
+    const reviewsContainer = document.getElementById('reviews-container');
+    const reviewForm = document.getElementById('review-form');
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+    const header = document.getElementById('main-header');
+    const introSplash = document.getElementById('intro-splash');
+
+    // --- Show Sections on Scroll ---
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
         }
       });
-    }, {
-      threshold: 0.1
+    }, { threshold: 0.1 });
+    document.querySelectorAll('section').forEach(section => observer.observe(section));
+
+    // --- Load Reviews from Firestore ---
+    async function loadReviews() {
+      reviewsContainer.innerHTML = '<p>Loading reviews...</p>';
+      try {
+        const snapshot = await db.collection('reviews').orderBy('timestamp', 'desc').get();
+        if (snapshot.empty) {
+          reviewsContainer.innerHTML = '<p>No reviews yet. Be the first!</p>';
+          return;
+        }
+
+        reviewsContainer.innerHTML = '';
+        snapshot.forEach(doc => {
+          const review = doc.data();
+          const card = document.createElement('div');
+          card.className = 'card';
+
+          let imgHtml = '';
+          if (review.imageUrl) {
+            imgHtml = `<img src="${review.imageUrl}" alt="Review image by ${review.name}" loading="lazy" />`;
+          }
+
+          card.innerHTML = `
+            ${imgHtml}
+            <h3>⭐ ${escapeHtml(review.name)}</h3>
+            <p>${escapeHtml(review.text)}</p>
+          `;
+          reviewsContainer.appendChild(card);
+        });
+      } catch (error) {
+        reviewsContainer.innerHTML = '<p>Error loading reviews.</p>';
+        console.error('Error loading reviews:', error);
+      }
+    }
+
+    // --- Escape HTML utility ---
+    function escapeHtml(text) {
+      const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+      };
+      return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+    }
+
+    // --- Upload Image to Firebase Storage ---
+    async function uploadImage(file) {
+      const fileName = `reviews/${Date.now()}_${file.name}`;
+      const storageRef = storage.ref().child(fileName);
+      await storageRef.put(file);
+      return await storageRef.getDownloadURL();
+    }
+
+    // --- Handle Review Form Submit ---
+    reviewForm.addEventListener('submit', async e => {
+      e.preventDefault();
+
+      const name = reviewForm['reviewer-name'].value.trim();
+      const text = reviewForm['review-text'].value.trim();
+      const imageFile = reviewForm['review-image'].files[0];
+
+      if (!name || !text) {
+        alert('Please fill out your name and review.');
+        return;
+      }
+
+      reviewForm.querySelector('button').disabled = true;
+      reviewForm.querySelector('button').textContent = 'Submitting...';
+
+      try {
+        let imageUrl = null;
+        if (imageFile) {
+          imageUrl = await uploadImage(imageFile);
+        }
+
+        await db.collection('reviews').add({
+          name,
+          text,
+          imageUrl,
+          timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        alert('Review submitted! Thank you.');
+
+        // Clear form
+        reviewForm.reset();
+
+        // Reload reviews
+        loadReviews();
+
+      } catch (error) {
+        console.error('Error submitting review:', error);
+        alert('Failed to submit review. Please try again.');
+      } finally {
+        reviewForm.querySelector('button').disabled = false;
+        reviewForm.querySelector('button').textContent = 'Submit Review';
+      }
     });
 
-    document.querySelectorAll('section').forEach(section => {
-      observer.observe(section);
+    // --- Theme Toggle Logic ---
+    function setTheme(theme) {
+      if (theme === 'light') {
+        body.classList.add('light');
+        header.classList.add('light');
+        themeToggle.textContent = '🌙 Dark Mode';
+      } else {
+        body.classList.remove('light');
+        header.classList.remove('light');
+        themeToggle.textContent = '☀️ Light Mode';
+      }
+      localStorage.setItem('theme', theme);
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = localStorage.getItem('theme') || 'dark';
+      setTheme(currentTheme === 'dark' ? 'light' : 'dark');
     });
+
+    // Initialize theme on load
+    (function () {
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      setTheme(savedTheme);
+    })();
+
+    // --- Intro Splash Logic ---
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        introSplash.classList.add('hidden');
+      }, 3500); // fade out after 3.5 seconds (including animation delay)
+    });
+
+    // --- Initial load of reviews ---
+    loadReviews();
+
   </script>
 </body>
 </html>
