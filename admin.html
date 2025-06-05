@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Review Approvals</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    .hidden { display: none; }
+    .review-box { border: 1px solid #ccc; padding: 10px; margin: 10px 0; border-radius: 6px; }
+    button { padding: 6px 10px; margin-top: 5px; }
+  </style>
+</head>
+<body>
+  <h2>Admin Panel</h2>
+
+  <div id="login-form">
+    <input type="email" id="admin-email" placeholder="Email" required />
+    <input type="password" id="admin-password" placeholder="Password" required />
+    <button onclick="login()">Login</button>
+    <div id="login-error" style="color: red;"></div>
+  </div>
+
+  <div id="admin-panel" class="hidden">
+    <button onclick="logout()">Logout</button>
+    <h3>Pending Reviews</h3>
+    <div id="pending-reviews"></div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyB1MwdF_TSIKZly0TuJFP4jvIvZHU_v1uE",
+      authDomain: "wishuponastar-14b9e.firebaseapp.com",
+      databaseURL: "https://wishuponastar-14b9e-default-rtdb.firebaseio.com",
+      projectId: "wishuponastar-14b9e",
+      storageBucket: "wishuponastar-14b9e.firebasestorage.app",
+      messagingSenderId: "423284442077",
+      appId: "1:423284442077:web:503470dd95fa04d57cec34",
+      measurementId: "G-H7X80F1B11"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.database();
+
+    function login() {
+      const email = document.getElementById('admin-email').value;
+      const password = document.getElementById('admin-password').value;
+      auth.signInWithEmailAndPassword(email, password)
+        .catch(error => document.getElementById("login-error").textContent = error.message);
+    }
+
+    function logout() {
+      auth.signOut();
+    }
+
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        document.getElementById('login-form').classList.add('hidden');
+        document.getElementById('admin-panel').classList.remove('hidden');
+        loadPendingReviews();
+      } else {
+        document.getElementById('login-form').classList.remove('hidden');
+        document.getElementById('admin-panel').classList.add('hidden');
+      }
+    });
+
+    function loadPendingReviews() {
+      const container = document.getElementById('pending-reviews');
+      container.innerHTML = '';
+      db.ref("reviews").once("value").then(snapshot => {
+        snapshot.forEach(child => {
+          const review = child.val();
+          if (!review.approved) {
+            const div = document.createElement("div");
+            div.className = "review-box";
+            div.innerHTML = `
+              <strong>${review.name}</strong> (${review.rating}★)
+              <p>${review.message}</p>
+              <button onclick="approveReview('${child.key}')">Approve</button>
+            `;
+            container.appendChild(div);
+          }
+        });
+      });
+    }
+
+    function approveReview(id) {
+      db.ref("reviews/" + id).update({ approved: true }).then(loadPendingReviews);
+    }
+  </script>
+</body>
+</html>
