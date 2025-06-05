@@ -1,47 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Dark Mode Toggle Test</title>
-<style>
-  /* Default light theme */
-  body {
-    background-color: white;
-    color: black;
-    transition: background-color 0.5s ease, color 0.5s ease;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wish upon a Star Portfolio</title>
+  <style>
+    /* --- Base styles & fonts --- */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: white;
+      color: black;
+      opacity: 0;
+      transition: opacity 0.8s ease, background-color 0.5s ease, color 0.5s ease;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    body.visible {
+      opacity: 1;
+    }
+    header {
+      width: 100%;
+      background-color: #5a4ade;
+      color: white;
+      padding: 1rem 2rem;
+      box-sizing: border-box;
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: bold;
+      user-select: none;
+    }
+    main {
+      max-width: 900px;
+      width: 100%;
+      padding: 1rem 2rem;
+      box-sizing: border-box;
+      flex-grow: 1;
+    }
+    section {
+      margin-bottom: 2rem;
+    }
+    h2 {
+      margin-bottom: 0.5rem;
+      border-bottom: 2px solid #5a4ade;
+      padding-bottom: 0.3rem;
+    }
 
-  /* Dark theme styles */
-  body[data-theme="dark"] {
-    background-color: #121212;
-    color: #eee;
-  }
+    /* --- Contact Me Section --- */
+    #contact-me {
+      background: #f0f0f0;
+      padding: 1rem;
+      border-radius: 6px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      transition: background-color 0.5s ease;
+    }
+    body[data-theme="dark"] #contact-me {
+      background: #222;
+      box-shadow: 0 0 8px rgba(255,255,255,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: 600;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.3rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+    }
+    input:focus, textarea:focus {
+      border-color: #5a4ade;
+      outline: none;
+    }
+    button {
+      margin-top: 1rem;
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      background-color: #5a4ade;
+      border: none;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #3d32a4;
+    }
 
-  button {
-    margin: 20px;
-    padding: 10px 20px;
-  }
-</style>
+    /* --- Login Area --- */
+    #login-area {
+      background: #f9f9f9;
+      padding: 1rem;
+      border-radius: 6px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      max-width: 320px;
+      margin: 1rem auto;
+      transition: background-color 0.5s ease;
+    }
+    body[data-theme="dark"] #login-area {
+      background: #222;
+      box-shadow: 0 0 8px rgba(255,255,255,0.1);
+    }
+    #login-area input {
+      width: 100%;
+      margin: 0.5rem 0;
+    }
+    #login-area button {
+      width: 100%;
+    }
+
+    /* --- Theme Toggle Button --- */
+    #theme-toggle {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: #5a4ade;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+      z-index: 1000;
+    }
+    #theme-toggle:hover {
+      background: #3d32a4;
+    }
+
+    /* --- Dark Theme --- */
+    body[data-theme="dark"] {
+      background-color: #121212;
+      color: #eee;
+    }
+
+  </style>
 </head>
 <body>
+  <button id="theme-toggle">Switch to Dark Mode</button>
 
-<button id="theme-toggle">Switch to Dark Mode</button>
+  <header>
+    Wish upon a Star
+  </header>
 
-<script>
-  const toggleBtn = document.getElementById('theme-toggle');
+  <main>
+    <section id="contact-me">
+      <h2>Contact Me</h2>
+      <form id="contact-form">
+        <label for="name">Name</label>
+        <input id="name" name="name" required placeholder="Your name" />
 
-  toggleBtn.addEventListener('click', () => {
-    const currentTheme = document.body.getAttribute('data-theme');
-    if (currentTheme === 'dark') {
-      document.body.removeAttribute('data-theme'); // back to light
-      toggleBtn.textContent = 'Switch to Dark Mode';
-    } else {
-      document.body.setAttribute('data-theme', 'dark');
-      toggleBtn.textContent = 'Switch to Light Mode';
+        <label for="email">Email</label>
+        <input id="email" type="email" name="email" required placeholder="you@example.com" />
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" required placeholder="Write your message here..."></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+
+    <section id="login-area">
+      <h2>Login</h2>
+      <form id="login-form">
+        <input type="email" id="login-email" placeholder="Email" required />
+        <input type="password" id="login-password" placeholder="Password" required />
+        <button type="submit">Log In</button>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    // Fade in body on load
+    window.addEventListener('DOMContentLoaded', () => {
+      document.body.classList.add('visible');
+    });
+
+    // Theme toggle button logic
+    const themeToggle = document.getElementById('theme-toggle');
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.body.getAttribute('data-theme');
+      if (currentTheme === 'dark') {
+        fadeOutIn(() => {
+          document.body.removeAttribute('data-theme');
+          themeToggle.textContent = 'Switch to Dark Mode';
+        });
+      } else {
+        fadeOutIn(() => {
+          document.body.setAttribute('data-theme', 'dark');
+          themeToggle.textContent = 'Switch to Light Mode';
+        });
+      }
+    });
+
+    // Simple fade out/in animation helper for body
+    function fadeOutIn(callback) {
+      document.body.style.opacity = '0';
+      setTimeout(() => {
+        callback();
+        document.body.style.opacity = '1';
+      }, 400);
     }
-  });
-</script>
 
+    // Optional: Prevent actual submit for forms (for demo only)
+    document.getElementById('contact-form').addEventListener('submit', e => {
+      e.preventDefault();
+      alert('Message sent! (demo)');
+      e.target.reset();
+    });
+
+    document.getElementById('login-form').addEventListener('submit', e => {
+      e.preventDefault();
+      alert('Login submitted! (demo)');
+      e.target.reset();
+    });
+  </script>
 </body>
 </html>
