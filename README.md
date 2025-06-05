@@ -8,8 +8,8 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
     body { background: #0a0a0a; color: #fff; line-height: 1.6; padding: 20px; }
-    head background: linear-gradient(145deg, #1c1c1c, #2b2b2b); border-radius: 16px; animation: fadeIn 1.2s ease-out; }
-    headeer { text-align: center; padding: 50px 20px;r h1 { font-size: 2.8rem; margin-bottom: 10px; color: #c084fc; }
+    header { background: linear-gradient(145deg, #1c1c1c, #2b2b2b); border-radius: 16px; animation: fadeIn 1.2s ease-out; text-align: center; padding: 50px 20px; }
+    header h1 { font-size: 2.8rem; margin-bottom: 10px; color: #c084fc; }
     header p { font-size: 1.2rem; color: #ccc; }
 
     section { max-width: 900px; margin: 60px auto; padding: 20px; animation: fadeInUp 1s ease-out; }
@@ -48,37 +48,19 @@
 
   <section>
     <h2>About Me</h2>
-    <p>I'm Wish, a versatile creator with years of experience in 3D modeling, game asset development, animation, and teaching. My work blends technical skill with artistic creativity, allowing me to build immersive assets for Roblox, Minecraft, and other platforms. I specialize in creating optimized, game-ready models and animations that elevate player experiences. Beyond content creation, I’m passionate about sharing knowledge through one-on-one teaching, tutorials, and mentorship—helping others grow in the world of game development and design. Whether it's a freelance commission or a collaborative project, I strive to deliver professional, polished results that exceed expectations.</p>
+    <p>I'm Wish, a 3D modeler, game asset creator, animator, and instructor with a few years of experience. My work embodies technical proficiency blended with artistic expression, enabling me to create compelling assets. I specialize in the creation of optimized, game-ready models and animations that enhance gameplay experiences. In addition to content creation, I possess a keen interest in imparting knowledge through one-on-one instruction, tutorials, and mentorship, thereby assisting others in progressing in the realm of game development and design. Be it a freelance project or a collaborative work, I make every attempt to produce professional and quality outputs above expectations.</p>
   </section>
 
   <section>
     <h2>Skills</h2>
     <ul>
       <li>🧊 3D Modeling & Game Asset Creation</li>
-      <li>🎥 Animation for Games</li>
+      <li>🎥 Animates Anything</li>
       <li>💼 Freelancing & Asset Selling</li>
       <li>🎓 Teaching / Explaining Complex Topics</li>
     </ul>
   </section>
-
-  <section>
-    <h2>Portfolio</h2>
-    <div class="portfolio-grid">
-      <div class="card">
-        <img src="https://via.placeholder.com/400x250" alt="Project 1" />
-        <h3>Skeleton King (Roblox Model)</h3>
-      </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/400x250" alt="Project 2" />
-        <h3>Charged Sheep (Minecraft Asset)</h3>
-      </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/400x250" alt="Project 3" />
-        <h3>Combat System Demo (Roblox)</h3>
-      </div>
-    </div>
-  </section>
-
+  
   <section>
     <h2>Services</h2>
     <ul>
@@ -105,10 +87,9 @@
         <p>"Wish not only built us an animation pack that runs smoothly in Roblox Studio, but also taught our junior devs how to animate better. A true mentor."</p>
       </div>
     </div>
-  $1
-    <p>Email: <a href="mailto:your@email.com">your@email.com</a></p>
-    <p>Discord: YourDiscordTag</p>
-    <p>Twitter: <a href="https://twitter.com/yourhandle" target="_blank">@yourhandle</a></p>
+    <p>Email: <a href="therealuponastarwish@gmail.com">therealuponastarwish@gmail.com</a></p>
+    <p>Discord: no_nameiscool1_45977</p>
+    <p>Twitter: <a href="https://x.com/3d_modeler_Wish" target="_blank">@yourhandle</a></p>
   </section>
 
   <footer>
