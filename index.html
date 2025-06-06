@@ -27,23 +27,49 @@
       align-items: center;
       justify-content: center;
       z-index: 1000;
-      animation: splashFade 2s 1;
+      /* Remove default animation so JS can control it */
       opacity: 1;
-      transition: opacity 0.5s ease;
+      transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1);
+      pointer-events: none;
     }
     #splash-screen .star {
       font-size: 4rem;
-      animation: twinkle 1.2s infinite alternate;
+      animation: splash-star-move 2s cubic-bezier(0.65,0,0.35,1), twinkle 1.2s infinite alternate;
+      /* Both movement and twinkle */
+      display: inline-block;
+      will-change: transform, filter;
     }
     #splash-screen .text {
       font-size: 2.2rem;
       margin-top: 1rem;
       font-weight: 600;
       letter-spacing: 2px;
+      opacity: 0;
+      animation: splash-text-fade-in 1.1s 0.7s forwards cubic-bezier(0.4,0,0.2,1);
     }
     @keyframes twinkle {
       from { filter: brightness(1); }
       to { filter: brightness(1.4) drop-shadow(0 0 10px gold); }
+    }
+    @keyframes splash-star-move {
+      0% {
+        transform: scale(0.7) rotate(-20deg) translateY(-30px);
+        filter: brightness(1);
+      }
+      55% {
+        filter: brightness(1.7) drop-shadow(0 0 16px gold);
+      }
+      80% {
+        transform: scale(1.1) rotate(8deg) translateY(5px);
+        filter: brightness(1.25);
+      }
+      100% {
+        transform: scale(1) rotate(0deg) translateY(0);
+        filter: brightness(1);
+      }
+    }
+    @keyframes splash-text-fade-in {
+      to { opacity: 1; }
     }
     header {
       background: linear-gradient(90deg, #6dd5ed 0%, #2193b0 100%);
@@ -413,12 +439,14 @@
   </div>
   
   <script>
-    // Splash screen fadeout after 2s
+    // Splash screen animation and fadeout
     window.addEventListener('load', () => {
+      // Optionally, you can add more stars or particles for extra flair here.
+
       setTimeout(() => {
         const splash = document.getElementById('splash-screen');
         splash.style.opacity = 0;
-        setTimeout(() => splash.style.display = 'none', 600);
+        setTimeout(() => splash.style.display = 'none', 800);
       }, 2000);
     });
 
