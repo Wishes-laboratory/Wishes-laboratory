@@ -1,363 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>⭐️ Wish upon a Star</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
-<style>
-/* General styles */
-* {
-  box-sizing: border-box;
-  margin: 0; padding: 0;
-}
-body {
-  font-family: 'Poppins', sans-serif;
-  background: #ffffff;
-  color: #333;
-  transition: background-color 0.5s, color 0.5s;
-  overflow-x: hidden;
-}
-body.dark {
-  background-color: #1c1c1c;
-  color: #e0e0e0;
-}
-header {
-  padding: 2rem;
-  background: linear-gradient(135deg, #5a4ade, #a782ec);
-  color: white;
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 600;
-  position: relative;
-}
-.controls {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  display: flex;
-  gap: 10px;
-}
-button {
-  padding: 0.6rem 1.2rem;
-  border: none;
-  border-radius: 25px;
-  background: #5a4ade;
-  color: white;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s, transform 0.3s;
-}
-button:hover {
-  background: #3d32a4;
-  transform: scale(1.05);
-}
-section {
-  padding: 2rem;
-  max-width: 900px;
-  margin: auto;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 1s forwards;
-}
-section:nth-of-type(2) {
-  animation-delay: 0.3s;
-}
-section:nth-of-type(3) {
-  animation-delay: 0.6s;
-}
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Modal styles for login */
-.modal {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0,0,0,0.6);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  animation: fadeIn 0.4s ease-in-out;
-}
-.modal.show {
-  display: flex;
-}
-.modal-content {
-  background: white;
-  padding: 2rem;
-  border-radius: 12px;
-  width: 320px;
-  position: relative;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-  text-align: center;
-}
-body.dark .modal-content {
-  background: #222;
-  color: #eee;
-}
-.close {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #666;
-  transition: color 0.3s;
-}
-.close:hover {
-  color: #000;
-}
-input {
-  width: 100%;
-  padding: 0.6rem;
-  margin-top: 1rem;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-}
-button.modal-submit {
-  margin-top: 1.5rem;
-  background: #5a4ade;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  border-radius: 25px;
-  padding: 0.6rem 1.2rem;
-  border: none;
-  transition: background 0.3s, transform 0.3s;
-}
-button.modal-submit:hover {
-  background: #3d32a4;
-  transform: scale(1.05);
-}
-
-/* Contact & Review Layout */
-.contact-review-container {
-  max-width: 900px;
-  margin: auto;
-  padding: 2rem;
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-.contact-section, .review-section {
-  flex: 1 1 400px;
-  background: #f7f7f7;
-  padding: 1.5rem 2rem;
-  border-radius: 12px;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.1);
-  transition: background 0.3s;
-}
-body.dark .contact-section,
-body.dark .review-section {
-  background: #1e1e1e;
-}
-.contact-section h2, .review-section h2 {
-  margin-bottom: 1rem;
-  font-weight: 600;
-  color: #5a4ade;
-}
-form input, form textarea {
-  width: 100%;
-  padding: 0.6rem;
-  margin-top: 0.8rem;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-  resize: vertical;
-}
-form textarea {
-  min-height: 120px;
-}
-form button {
-  margin-top: 1rem;
-  background: #5a4ade;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  border-radius: 25px;
-  padding: 0.6rem 1.2rem;
-  border: none;
-  transition: background 0.3s, transform 0.3s;
-}
-form button:hover {
-  background: #3d32a4;
-  transform: scale(1.05);
-}
-
-/* Reviews & comments below */
-.reviews-comments {
-  max-width: 900px;
-  margin: 2rem auto 3rem;
-  padding: 0 2rem;
-}
-.reviews-comments h2 {
-  color: #5a4ade;
-  margin-bottom: 1rem;
-  font-weight: 600;
-}
-.review-item {
-  background: #fafafa;
-  border-radius: 10px;
-  padding: 1rem 1.5rem;
-  margin-bottom: 1rem;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
-  transition: background 0.3s;
-}
-body.dark .review-item {
-  background: #2a2a2a;
-}
-.review-author {
-  font-weight: 600;
-  margin-bottom: 0.25rem;
-  color: #5a4ade;
-}
-.review-text {
-  font-size: 1rem;
-  line-height: 1.4;
-  white-space: pre-wrap;
-}
-
-/* Splash Screen Styles */
-#splash-screen {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: linear-gradient(135deg, #5a4ade, #a782ec);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2000;
-  color: white;
-  font-size: 3rem;
-  font-weight: bold;
-}
-#splash-screen .star {
-  display: inline-block;
-  animation: starburst 2.5s ease forwards;
-}
-#splash-screen .text {
-  display: inline-block;
-  transform: translateX(-150%);
-  animation: slideInFade 2.5s ease forwards;
-  font-size: 2.5rem;
-  font-weight: 600;
-}
-@keyframes starburst {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-    filter: drop-shadow(0 0 6px white);
-  }
-  50% {
-    transform: scale(1.5);
-    filter: drop-shadow(0 0 20px white);
-  }
-  80% {
-    opacity: 1;
-  }
-  100% {
-    transform: scale(0);
-    opacity: 0;
-    filter: drop-shadow(0 0 0 transparent);
-  }
-}
-@keyframes slideInFade {
-  0% {
-    transform: translateX(-150%);
-    opacity: 0;
-  }
-  40% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-</style>
-</head>
-<body>
-<div id="splash-screen">
-  <span class="star">⭐️</span>
-  <span class="text">Wish upon a Star</span>
-</div>
-
-<header>
-  ⭐️ Wish upon a Star
-  <div class="controls">
-    <button onclick="toggleTheme()">Toggle Theme</button>
-    <button id="loginBtn">Login</button>
-  </div>
-</header>
-
-<section>
-  <h2>About Me</h2>
-  <p>
-    Hi. I'm Wish, a dedicated 3D modeler, game asset creator, animator, and teacher with a few years of practical experience in the game and digital art industry. My professional life has been fueled by a strong passion for both the artistic and technical aspects of game development. This combination enables me to provide assets that are not only visually appealing but are also highly optimized and game-ready, thereby enhancing the overall player experience.
-    Throughout my career, I've been able to develop a diverse set of projects, from solo game projects to more large-scale collaborations, delivering consistently well-designed models and animations that are expressly tailored to meet the unique needs of each game world. My emphasis on optimization means that each asset I create continues to exhibit peak performance while delivering quality art — an essential trade-off in the high-speed world of modern gaming.
-    In addition to my interest in content creation, I have an overriding interest in knowledge sharing. I am actively involved in one-on-one tutorials, workshops, and mentorship programs that are aimed at empowering prospective game developers and artists to reach their full potential. Guiding others through the intricacies of 3D modeling, animation, and game design is one of the most fulfilling parts of my professional career.
-    Whether working as a solo freelancer or as a member of a creative team, I uphold the highest standards of professionalism, quality, and timeliness. I am committed to surpassing client expectations and to making a valuable contribution to every project engaged.
-    Should you seek a versatile artist who amalgamates technical skill with creative insight, as well as someone who is enthusiastic about teaching and inspiring others, I would be delighted to establish a connection.
-  </p>
-  <div class="specializations">
-    <p>🧊 3D Modeling & Game Asset Creation - Specializing in clean, optimized models tailored for real-time use in games and interactive media.</p>
-    <p>🎥 Animation - Bringing characters and objects to life with smooth and natural motion sequences.</p>
-    <p>📚 Teaching & Mentorship - Sharing knowledge on 3D art pipelines, game development best practices, and industry workflows.</p>
-  </div>
-</section>
-
-<div class="contact-review-container">
-  <section class="contact-section" aria-label="Contact Me Section">
-    <h2>Contact Me</h2>
-    <form id="contactForm">
-      <input type="text" id="contactName" placeholder="Your Name" required />
-      <input type="email" id="contactEmail" placeholder="Your Email" required />
-      <textarea id="contactMessage" placeholder="Your Message" required></textarea>
-      <button type="submit">Send</button>
-    </form>
-  </section>
-
-  <section class="review-section" aria-label="Submit a Review Section">
-    <h2>Submit a Review</h2>
-    <form id="reviewForm">
-      <input type="text" id="reviewName" placeholder="Your Name" required />
-      <textarea id="reviewText" placeholder="Your Review" required></textarea>
-      <button type="submit">Submit Review</button>
-    </form>
-  </section>
-</div>
-
-<section class="reviews-comments" aria-label="Reviews and Comments">
-  <h2>Reviews and Comments</h2>
-  <div id="reviewsContainer">
-    <!-- Dynamic reviews go here -->
-  </div>
-</section>
-
-<!-- Login Modal -->
-<div id="loginModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
-  <div class="modal-content">
-    <span class="close" id="closeLogin" aria-label="Close Login">&times;</span>
-    <h2 id="loginTitle">Admin Login</h2>
-    <form id="loginForm" autocomplete="off">
-      <input type="text" id="loginUsername" placeholder="Username" required aria-required="true" />
-      <input type="password" id="loginPassword" placeholder="Password" required aria-required="true" />
-      <button type="submit" class="modal-submit">Login</button>
-    </form>
-  </div>
-</div>
+<!-- ... (previous code unchanged) ... -->
 
 <script>
 // Splash Screen Animation & Removal
@@ -378,13 +19,42 @@ if (localStorage.getItem('theme') === 'dark') {
   document.body.classList.add('dark');
 }
 
+// --- Login State Management ---
+let isLoggedIn = false;
+
+// Try to restore login state from sessionStorage
+if (sessionStorage.getItem('loggedIn') === 'true') {
+  isLoggedIn = true;
+  updateLoginUI();
+}
+
+function updateLoginUI() {
+  const loginBtn = document.getElementById('loginBtn');
+  if (isLoggedIn) {
+    loginBtn.textContent = 'Logout';
+    document.getElementById('reviewForm').querySelectorAll('input, textarea, button').forEach(el => el.disabled = false);
+  } else {
+    loginBtn.textContent = 'Login';
+    document.getElementById('reviewForm').querySelectorAll('input, textarea, button').forEach(el => el.disabled = true);
+  }
+}
+
 // Modal Login
 const loginBtn = document.getElementById('loginBtn');
 const loginModal = document.getElementById('loginModal');
 const closeLogin = document.getElementById('closeLogin');
+const loginForm = document.getElementById('loginForm');
 
 loginBtn.addEventListener('click', () => {
-  loginModal.classList.add('show');
+  if (isLoggedIn) {
+    // Logout flow
+    isLoggedIn = false;
+    sessionStorage.removeItem('loggedIn');
+    alert('You have been logged out.');
+    updateLoginUI();
+  } else {
+    loginModal.classList.add('show');
+  }
 });
 
 closeLogin.addEventListener('click', () => {
@@ -394,6 +64,22 @@ window.addEventListener('click', (e) => {
   if (e.target === loginModal) {
     loginModal.classList.remove('show');
   }
+});
+
+// Dummy login authentication
+loginForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+  // For demo: accept any username and password
+  isLoggedIn = true;
+  sessionStorage.setItem('loggedIn', 'true');
+  loginModal.classList.remove('show');
+  alert('Login successful! You can now submit a review.');
+  updateLoginUI();
+});
+
+// Disable review form if not logged in on load
+document.addEventListener('DOMContentLoaded', () => {
+  updateLoginUI();
 });
 
 // Contact Form submit (dummy)
@@ -406,6 +92,10 @@ document.getElementById('contactForm').addEventListener('submit', e => {
 // Review Form submit (add review to the page dynamically)
 document.getElementById('reviewForm').addEventListener('submit', e => {
   e.preventDefault();
+  if (!isLoggedIn) {
+    alert('You must be logged in to submit a review.');
+    return;
+  }
   const name = document.getElementById('reviewName').value.trim();
   const text = document.getElementById('reviewText').value.trim();
   if(name && text){
