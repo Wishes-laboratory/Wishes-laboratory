@@ -1,77 +1,76 @@
-!DOCTYPE html>
-
-&lt;html lang="en">
-&lt;head>
-&lt;meta charset="UTF-8" />
-&lt;meta name="viewport" content="width=device-width, initial-scale=1" />
-&lt;title>⭐️ Wish upon a Star&lt;/title>
-&lt;link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&amp;display=swap" rel="stylesheet" />
-&lt;style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>⭐️ Wish upon a Star</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+<style>
 /* General styles */
 * {
-box-sizing: border-box;
-margin: 0; padding: 0;
+  box-sizing: border-box;
+  margin: 0; padding: 0;
 }
 body {
-font-family: 'Poppins', sans-serif;
-background: #ffffff;
-color: #333;
-transition: background-color 0.5s, color 0.5s;
-overflow-x: hidden;
+  font-family: 'Poppins', sans-serif;
+  background: #ffffff;
+  color: #333;
+  transition: background-color 0.5s, color 0.5s;
+  overflow-x: hidden;
 }
 body.dark {
-background-color: #1c1c1c;
-color: #e0e0e0;
+  background-color: #1c1c1c;
+  color: #e0e0e0;
 }
 header {
-padding: 2rem;
-background: linear-gradient(135deg, #5a4ade, #a782ec);
-color: white;
-text-align: center;
-font-size: 2rem;
-font-weight: 600;
-position: relative;
+  padding: 2rem;
+  background: linear-gradient(135deg, #5a4ade, #a782ec);
+  color: white;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  position: relative;
 }
 .controls {
-position: absolute;
-top: 10px;
-right: 10px;
-display: flex;
-gap: 10px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 10px;
 }
 button {
-padding: 0.6rem 1.2rem;
-border: none;
-border-radius: 25px;
-background: #5a4ade;
-color: white;
-cursor: pointer;
-font-weight: bold;
-transition: background 0.3s, transform 0.3s;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 25px;
+  background: #5a4ade;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.3s;
 }
 button:hover {
-background: #3d32a4;
-transform: scale(1.05);
+  background: #3d32a4;
+  transform: scale(1.05);
 }
 section {
-padding: 2rem;
-max-width: 900px;
-margin: auto;
-opacity: 0;
-transform: translateY(20px);
-animation: fadeInUp 1s forwards;
+  padding: 2rem;
+  max-width: 900px;
+  margin: auto;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s forwards;
 }
 section:nth-of-type(2) {
-animation-delay: 0.3s;
+  animation-delay: 0.3s;
 }
 section:nth-of-type(3) {
-animation-delay: 0.6s;
+  animation-delay: 0.6s;
 }
 @keyframes fadeInUp {
-to {
-opacity: 1;
-transform: translateY(0);
-}
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Modal styles for login */
@@ -287,184 +286,148 @@ body.dark .review-item {
     opacity: 0;
   }
 }
-&lt;/style>
-&lt;/head>
-&lt;body>
-&lt;div id="splash-screen">
-&lt;span class="star">⭐️&lt;/span>
-&lt;span class="text">Wish upon a Star&lt;/span>
-&lt;/div>
+</style>
+</head>
+<body>
+<div id="splash-screen">
+  <span class="star">⭐️</span>
+  <span class="text">Wish upon a Star</span>
+</div>
 
-&lt;header>
-⭐️ Wish upon a Star
-&lt;div class="controls">
-&lt;button onclick="toggleTheme()">Toggle Theme&lt;/button>
-&lt;button id="loginBtn">Login&lt;/button>
-&lt;/div>
-&lt;/header>
+<header>
+  ⭐️ Wish upon a Star
+  <div class="controls">
+    <button onclick="toggleTheme()">Toggle Theme</button>
+    <button id="loginBtn">Login</button>
+  </div>
+</header>
 
-&lt;section>
-&lt;h2>About Me&lt;/h2>
-&lt;p>
-Hi. I'm Wish, a dedicated 3D modeler, game asset creator, animator, and teacher with a few years of practical experience in the game and digital art industry. My professional life has been fueled by a strong passion for both the artistic and technical aspects of game development. This combination enables me to provide assets that are not only visually appealing but are also highly optimized and game-ready, thereby enhancing the overall player experience.
-Throughout my career, I've been able to develop a diverse set of projects, from solo game projects to more large-scale collaborations, delivering consistently well-designed models and animations that are expressly tailored to meet the unique needs of each game world. My emphasis on optimization means that each asset I create continues to exhibit peak performance while delivering quality art — an essential trade-off in the high-speed world of modern gaming.
-In addition to my interest in content creation, I have an overriding interest in knowledge sharing. I am actively involved in one-on-one tutorials, workshops, and mentorship programs that are aimed at empowering prospective game developers and artists to reach their full potential. Guiding others through the intricacies of 3D modeling, animation, and game design is one of the most fulfilling parts of my professional career.
-Whether working as a solo freelancer or as a member of a creative team, I uphold the highest standards of professionalism, quality, and timeliness. I am committed to surpassing client expectations and to making a valuable contribution to every project engaged.
-Should you seek a versatile artist who amalgamates technical skill with creative insight, as well as someone who is enthusiastic about teaching and inspiring others, I would be delighted to establish a connection.
-&lt;/p>
-&lt;div class="specializations">
-&lt;p>🧊 3D Modeling & Game Asset Creation - Specializing in clean, optimized models tailored for real-time use in games and interactive media.&lt;/p>
-&lt;p>🎥 Animation - Bringing characters and objects to life with smooth and natural motion sequences.&lt;/p>
-&lt;p>📚 Teaching & Mentorship - Sharing knowledge on 3D art pipelines, game development best practices, and industry workflows.&lt;/p>
-&lt;/div>
-&lt;/section>
-
-&lt;div class="contact-review-container">
-&lt;section class="contact-section" aria-label="Contact Me Section">
-&lt;h2>Contact Me&lt;/h2>
-&lt;form id="contactForm">
-&lt;input type="text" id="contactName" placeholder="Your Name" required />
-&lt;input type="email" id="contactEmail" placeholder="Your Email" required />
-&lt;textarea id="contactMessage" placeholder="Your Message" required>&lt;/textarea>
-&lt;button type="submit">Send&lt;/button>
-&lt;/form>
-&lt;/section>
-
-<section class="review-section" aria-label="Review Section">
-  <h2>Write a Review</h2>
-  <div id="reviewFormContainer">
-    <p>Please login to write a review.</p>
+<section>
+  <h2>About Me</h2>
+  <p>
+    Hi. I'm Wish, a dedicated 3D modeler, game asset creator, animator, and teacher with a few years of practical experience in the game and digital art industry. My professional life has been fueled by a strong passion for both the artistic and technical aspects of game development. This combination enables me to provide assets that are not only visually appealing but are also highly optimized and game-ready, thereby enhancing the overall player experience.
+    Throughout my career, I've been able to develop a diverse set of projects, from solo game projects to more large-scale collaborations, delivering consistently well-designed models and animations that are expressly tailored to meet the unique needs of each game world. My emphasis on optimization means that each asset I create continues to exhibit peak performance while delivering quality art — an essential trade-off in the high-speed world of modern gaming.
+    In addition to my interest in content creation, I have an overriding interest in knowledge sharing. I am actively involved in one-on-one tutorials, workshops, and mentorship programs that are aimed at empowering prospective game developers and artists to reach their full potential. Guiding others through the intricacies of 3D modeling, animation, and game design is one of the most fulfilling parts of my professional career.
+    Whether working as a solo freelancer or as a member of a creative team, I uphold the highest standards of professionalism, quality, and timeliness. I am committed to surpassing client expectations and to making a valuable contribution to every project engaged.
+    Should you seek a versatile artist who amalgamates technical skill with creative insight, as well as someone who is enthusiastic about teaching and inspiring others, I would be delighted to establish a connection.
+  </p>
+  <div class="specializations">
+    <p>🧊 3D Modeling & Game Asset Creation - Specializing in clean, optimized models tailored for real-time use in games and interactive media.</p>
+    <p>🎥 Animation - Bringing characters and objects to life with smooth and natural motion sequences.</p>
+    <p>📚 Teaching & Mentorship - Sharing knowledge on 3D art pipelines, game development best practices, and industry workflows.</p>
   </div>
 </section>
-&lt;/div>
 
-&lt;section class="reviews-comments" aria-label="Comments and Reviews">
-&lt;h2>Comments & Reviews&lt;/h2>
-&lt;div id="reviewsContainer">
-&lt;/div>
-&lt;/section>
+<div class="contact-review-container">
+  <section class="contact-section" aria-label="Contact Me Section">
+    <h2>Contact Me</h2>
+    <form id="contactForm">
+      <input type="text" id="contactName" placeholder="Your Name" required />
+      <input type="email" id="contactEmail" placeholder="Your Email" required />
+      <textarea id="contactMessage" placeholder="Your Message" required></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </section>
 
-&lt;div id="loginModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
-&lt;div class="modal-content">
-&lt;span class="close" id="closeModal" aria-label="Close Login">&amp;times;&lt;/span>
-&lt;h2 id="loginTitle">Login&lt;/h2>
-&lt;form id="loginForm">
-&lt;input type="text" id="username" placeholder="Username" required autocomplete="off" />
-&lt;button type="submit" class="modal-submit">Login&lt;/button>
-&lt;/form>
-&lt;/div>
-&lt;/div>
+  <section class="review-section" aria-label="Submit a Review Section">
+    <h2>Submit a Review</h2>
+    <form id="reviewForm">
+      <input type="text" id="reviewName" placeholder="Your Name" required />
+      <textarea id="reviewText" placeholder="Your Review" required></textarea>
+      <button type="submit">Submit Review</button>
+    </form>
+  </section>
+</div>
 
-&lt;script>
-// Theme toggle
+<section class="reviews-comments" aria-label="Reviews and Comments">
+  <h2>Reviews and Comments</h2>
+  <div id="reviewsContainer">
+    <!-- Dynamic reviews go here -->
+  </div>
+</section>
+
+<!-- Login Modal -->
+<div id="loginModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+  <div class="modal-content">
+    <span class="close" id="closeLogin" aria-label="Close Login">&times;</span>
+    <h2 id="loginTitle">Admin Login</h2>
+    <form id="loginForm" autocomplete="off">
+      <input type="text" id="loginUsername" placeholder="Username" required aria-required="true" />
+      <input type="password" id="loginPassword" placeholder="Password" required aria-required="true" />
+      <button type="submit" class="modal-submit">Login</button>
+    </form>
+  </div>
+</div>
+
+<script>
+// Splash Screen Animation & Removal
+window.addEventListener('load', () => {
+  const splash = document.getElementById('splash-screen');
+  setTimeout(() => {
+    splash.style.display = 'none';
+  }, 2600); // After animations finish
+});
+
+// Theme Toggle
 function toggleTheme() {
-document.body.classList.toggle('dark');
+  document.body.classList.toggle('dark');
+  localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+}
+// Load saved theme
+if (localStorage.getItem('theme') === 'dark') {
+  document.body.classList.add('dark');
 }
 
-// Login modal logic
-const loginBtn = document.getElementById(&#39;loginBtn&#39;);
-const loginModal = document.getElementById(&#39;loginModal&#39;);
-const closeModal = document.getElementById(&#39;closeModal&#39;);
+// Modal Login
+const loginBtn = document.getElementById('loginBtn');
+const loginModal = document.getElementById('loginModal');
+const closeLogin = document.getElementById('closeLogin');
 
-loginBtn.addEventListener(&#39;click&#39;, () =&gt; {
-  loginModal.classList.add(&#39;show&#39;);
+loginBtn.addEventListener('click', () => {
+  loginModal.classList.add('show');
 });
 
-closeModal.addEventListener(&#39;click&#39;, () =&gt; {
-  loginModal.classList.remove(&#39;show&#39;);
+closeLogin.addEventListener('click', () => {
+  loginModal.classList.remove('show');
 });
-
-window.addEventListener(&#39;click&#39;, e =&gt; {
+window.addEventListener('click', (e) => {
   if (e.target === loginModal) {
-    loginModal.classList.remove(&#39;show&#39;);
+    loginModal.classList.remove('show');
   }
 });
 
-// User state
-let loggedInUser = null;
-
-// Login form submit
-const loginForm = document.getElementById(&#39;loginForm&#39;);
-loginForm.addEventListener(&#39;submit&#39;, e =&gt; {
+// Contact Form submit (dummy)
+document.getElementById('contactForm').addEventListener('submit', e => {
   e.preventDefault();
-  const usernameInput = document.getElementById(&#39;username&#39;).value.trim();
-  if (usernameInput.length &gt; 0) {
-    loggedInUser = usernameInput;
-    loginModal.classList.remove(&#39;show&#39;);
-    updateReviewForm();
-  }
-});
-
-// Update Review form area
-const reviewFormContainer = document.getElementById(&#39;reviewFormContainer&#39;);
-function updateReviewForm() {
-  if (loggedInUser) {
-    reviewFormContainer.innerHTML = `
-      &lt;form id=&quot;reviewForm&quot;&gt;
-        &lt;label for=&quot;reviewText&quot;&gt;Username&lt;/label&gt;
-        &lt;input type=&quot;text&quot; id=&quot;reviewUser&quot; value=&quot;${loggedInUser}&quot; readonly /&gt;
-        &lt;label for=&quot;reviewText&quot;&gt;Your Review&lt;/label&gt;
-        &lt;textarea id=&quot;reviewText&quot; rows=&quot;4&quot; placeholder=&quot;Write your review here...&quot; required&gt;&lt;/textarea&gt;
-        <button type="submit">Submit Review</button>
-      </form>
-    `;
-    const reviewForm = document.getElementById('reviewForm');
-    reviewForm.addEventListener('submit', e => {
-      e.preventDefault();
-      const text = document.getElementById('reviewText').value.trim();
-      if (text) {
-        addReview(loggedInUser, text);
-        reviewForm.reset();
-      }
-    });
-  } else {
-    reviewFormContainer.innerHTML = `<p>Please login to write a review.</p>`;
-  }
-}
-
-// Add review display
-const reviewsContainer = document.getElementById('reviewsContainer');
-function addReview(author, text) {
-  const reviewEl = document.createElement('div');
-  reviewEl.classList.add('review-item');
-  reviewEl.innerHTML = `
-    <div class="review-author">${escapeHTML(author)}</div>
-    <div class="review-text">${escapeHTML(text)}</div>
-  `;
-  reviewsContainer.prepend(reviewEl);
-}
-
-// Escape HTML helper
-function escapeHTML(text) {
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
-}
-
-// Contact form logic (just alert for demo)
-const contactForm = document.getElementById('contactForm');
-contactForm.addEventListener('submit', e => {
-  e.preventDefault();
-  alert('Thank you for contacting me! I will respond soon.');
+  alert('Thanks for reaching out! I will get back to you soon.');
   e.target.reset();
 });
 
-// Initialize review form area on load and handle splash screen
-window.addEventListener('load', () => {
-  updateReviewForm();
-  // Hide splash screen after animation (2.5s from CSS animation)
-  const splash = document.getElementById('splash-screen');
-  setTimeout(() => {
-    if (splash) {
-      splash.style.display = 'none';
-      // Reveal main content animations after splash is hidden
-      document.querySelectorAll('section').forEach(section => {
-        section.style.opacity = '1';
-        section.style.transform = 'translateY(0)';
-      });
-    }
-  }, 2600);
+// Review Form submit (add review to the page dynamically)
+document.getElementById('reviewForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const name = document.getElementById('reviewName').value.trim();
+  const text = document.getElementById('reviewText').value.trim();
+  if(name && text){
+    addReview(name, text);
+    e.target.reset();
+    alert('Thank you for your review!');
+  }
 });
-&lt;/script>
-&lt;/body>
-&lt;/html>
+
+// Add review to reviews container
+function addReview(name, text) {
+  const container = document.getElementById('reviewsContainer');
+  const div = document.createElement('div');
+  div.className = 'review-item';
+  div.innerHTML = `<div class="review-author">${sanitize(name)}</div><div class="review-text">${sanitize(text)}</div>`;
+  container.prepend(div);
+}
+
+// Simple text sanitizer
+function sanitize(str) {
+  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+</script>
+</body>
+</html>
