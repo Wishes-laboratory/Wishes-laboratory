@@ -1,1 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>⭐️ Wish upon a Star</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: #f5f5f7;
+      color: #222;
+      transition: background 0.5s, color 0.5s;
+      min-height: 100vh;
+    }
+    body.dark {
+      background: #181824;
+      color: #f7f7f7;
+    }
+    #splash-screen {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg, #90caf9 0%, #fceabb 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      /* Remove default animation so JS can control it */
+      opacity: 1;
+      transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1);
+      pointer-events: none;
+    }
+    #splash-screen .star {
+      font-size: 4rem;
+      animation: splash-star-move 2s cubic-bezier(0.65,0,0.35,1), twinkle 1.2s infinite alternate;
+      /* Both movement and twinkle */
+      display: inline-block;
+      will-change: transform, filter;
+    }
+    #splash-screen .text {
+      font-size: 2.2rem;
+      margin-top: 1rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      opacity: 0;
+      animation: splash-text-fade-in 1.1s 0.7s forwards cubic-bezier(0.4,0,0.2,1);
+    }
+    @keyframes twinkle {
+      from { filter: brightness(1); }
+      to { filter: brightness(1.4) drop-shadow(0 0 10px gold); }
+    }
+    @keyframes splash-star-move {
+      0% {
+        transform: scale(0.7) rotate(-20deg) translateY(-30px);
+        filter: brightness(1);
+      }
+      55% {
+        filter: brightness(1.7) drop-shadow(0 0 16px gold);
+      }
+      80% {
+        transform: scale(1.1) rotate(8deg) translateY(5px);
+        filter: brightness(1.25);
+      }
+      100% {
+        transform: scale(1) rotate(0deg) translateY(0);
+        filter: brightness(1);
+      }
+    }
+    @keyframes splash-text-fade-in {
+      to { opacity: 1; }
+    }
+    header {
+      background: linear-gradient(90deg, #6dd5ed 0%, #2193b0 100%);
+      color: #fff;
+      font-size: 1.6rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      padding: 1.2rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom-left-radius: 1.5rem;
+      border-bottom-right-radius: 1.5rem;
+      box-shadow: 0 4px 20px rgba(33,147,176,0.1);
+      position: sticky; top: 0; z-index: 999;
+    }
+    .header-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .header-title .star {
+      font-size: 1.6rem;
+      margin-right: 0.2rem;
+    }
+    .controls button {
+      margin-left: 1rem;
+      padding: 0.5rem 1.2rem;
+      border: none;
+      border-radius: 8px;
+      background: #fff;
+      color: #2193b0;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      box-shadow: 0 1px 3px rgba(33,147,176,0.04);
+    }
+    .controls button:hover, .controls button:focus {
+      background: #2193b0;
+      color: #fff;
+      outline: none;
+    }
+    section {
+      max-width: 700px;
+      margin: 2.5rem auto 2rem auto;
+      background: rgba(255,255,255,0.96);
+      border-radius: 1.5rem;
+      box-shadow: 0 2px 12px rgba(33,147,176,0.06);
+      padding: 2rem 2.5rem;
+    }
+    body.dark section {
+      background: rgba(26,28,44,0.98);
+      box-shadow: 0 2px 12px rgba(33,147,176,0.20);
+    }
+    h2 {
+      margin-top: 0;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #2193b0;
+      letter-spacing: 0.5px;
+    }
+    body.dark h2 {
+      color: #90caf9;
+    }
+    .specializations {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      margin-top: 1rem;
+    }
+    .specializations p {
+      background: #e3f2fd;
+      color: #1565c0;
+      padding: 0.7rem 1.2rem;
+      border-radius: 2rem;
+      font-size: 1rem;
+      margin: 0;
+      font-weight: 500;
+      transition: background 0.2s, color 0.2s;
+    }
+    body.dark .specializations p {
+      background: #293b5f;
+      color: #90caf9;
+    }
+    .contact-review-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+    .contact-section, .review-section {
+      flex: 1 1 320px;
+      background: rgba(255,255,255,0.97);
+      border-radius: 1rem;
+      box-shadow: 0 2px 8px rgba(33,147,176,0.06);
+      padding: 1.5rem;
+    }
+    body.dark .contact-section, body.dark .review-section {
+      background: rgba(28,32,53,0.98);
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      margin-bottom: 1rem;
+      border: 1px solid #b2dfdb;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: inherit;
+      background: #fafbfc;
+      transition: border 0.2s;
+      box-sizing: border-box;
+    }
+    body.dark form input, body.dark form textarea {
+      background: #23253a;
+      border: 1px solid #90caf9;
+      color: #fff;
+    }
+    form label {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+      display: block;
+    }
+    form input:focus, form textarea:focus {
+      outline: none;
+      border-color: #2193b0;
+    }
+    form button {
+      padding: 0.6rem 1.5rem;
+      background: #2193b0;
+      color: #fff;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.2s;
+      box-shadow: 0 1px 4px rgba(33,147,176,0.07);
+    }
+    form button:disabled {
+      background: #bdbdbd;
+      color: #fff;
+      cursor: not-allowed;
+    }
+    .reviews-comments {
+      max-width: 700px;
+      margin: 2rem auto;
+      background: rgba(255,255,255,0.96);
+      border-radius: 1.5rem;
+      box-shadow: 0 2px 12px rgba(33,147,176,0.08);
+      padding: 2rem 2.5rem;
+    }
+    body.dark .reviews-comments {
+      background: rgba(28,32,53,0.98);
+    }
+    #reviewsContainer {
+      margin-top: 1.2rem;
+    }
+    .review-item {
+      background: #e3f2fd;
+      color: #1a237e;
+      border-radius: 1rem;
+      padding: 1rem 1.5rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 1px 4px rgba(33,147,176,0.05);
+      transition: background 0.2s, color 0.2s;
+    }
+    body.dark .review-item {
+      background: #23253a;
+      color: #90caf9;
+    }
+    .review-author {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 0.2rem;
+    }
+    .review-text {
+      font-size: 1rem;
+      margin-left: 0.5rem;
+      margin-bottom: 0.3rem;
+    }
+    .review-stars {
+      color: gold;
+      font-size: 1.2rem;
+      user-select: none;
+      margin-left: 0.5rem;
+    }
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      overflow: auto;
+      background: rgba(33,147,176,0.13);
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+    }
+    .modal.show {
+      display: flex;
+    }
+    .modal-content {
+      background: #fff;
+      color: #222;
+      margin: auto;
+      border-radius: 1rem;
+      padding: 2rem 2.5rem;
+      box-shadow: 0 4px 32px rgba(33,147,176,0.20);
+      position: relative;
+      min-width: 320px;
+      max-width: 95vw;
+    }
+    body.dark .modal-content {
+      background: #23253a;
+      color: #fff;
+    }
+    .close {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #2193b0;
+      background: none;
+      border: none;
+      transition: color 0.2s;
+    }
+    .close:hover {
+      color: #e53935;
+    }
+    .modal-submit {
+      width: 100%;
+    }
+    /* Star rating styles */
+    .star-rating {
+      display: flex;
+      flex-direction: row;
+      gap: 0.25rem;
+      margin-bottom: 1rem;
+      align-items: center;
+    }
+    .star-rating input {
+      display: none;
+    }
+    .star-rating label {
+      font-size: 2rem;
+      color: #ccc;
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.2s;
+    }
+    .star-rating label:hover,
+    .star-rating label:hover ~ label,
+    .star-rating input:checked ~ label {
+      color: gold;
+    }
+    .star-rating input:focus + label {
+      outline: 2px solid #2193b0;
+      outline-offset: 2px;
+    }
+    @media (max-width: 600px) {
+      .contact-review-container {
+        flex-direction: column;
+      }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.7rem;
+      }
+      .controls {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="splash-screen" aria-label="Splash Screen" role="dialog" aria-modal="true" aria-live="assertive">
+    <div class="star" aria-hidden="true">⭐️</div>
+    <div class="text">Wish upon a Star</div>
+  </div>
 
+  <header>
+    <div class="header-title"><span class="star" aria-hidden="true">⭐️</span> Wish upon a Star</div>
+    <div class="controls">
+      <button id="themeToggle" aria-label="Toggle light/dark mode">Toggle Theme</button>
+      <button id="openReviewModal" aria-haspopup="dialog">Write a Review</button>
+    </div>
+  </header>
+  
+  <section aria-labelledby="aboutTitle">
+    <h2 id="aboutTitle">About Me</h2>
+    <p>
+      Hello, I'm <strong>Wish</strong>, a multidisciplinary 3D modeler, game asset artist, animator, and instructor with a proven track record of delivering high-quality assets for interactive environments. I blend technical expertise with creative vision to develop optimized, game-ready models and animations that elevate user experiences. Beyond content creation, I am passionate about mentoring and sharing knowledge to empower emerging talent in the field.
+    </p>
+  </section>
+  
+  <section aria-labelledby="specializationsTitle">
+    <h2 id="specializationsTitle">Areas of Expertise</h2>
+    <div class="specializations" role="list">
+      <p role="listitem">Roblox Modeling</p>
+      <p role="listitem">Roblox Scripting</p>
+      <p role="listitem">Roblox Building</p>
+      <p role="listitem">Game Asset Creation</p>
+      <p role="listitem">Portfolio Websites</p>
+    </div>
+  </section>
+  
+  <div class="contact-review-container">
+    <section class="contact-section" aria-labelledby="contactTitle">
+      <h2 id="contactTitle">Contact</h2>
+      <form id="contactForm" aria-describedby="contactInfo" autocomplete="off">
+        <label for="contactName">Name</label>
+        <input type="text" id="contactName" name="contactName" required autocomplete="name" />
+        <label for="contactEmail">Email</label>
+        <input type="email" id="contactEmail" name="contactEmail" required autocomplete="email" />
+        <label for="contactMessage">Message</label>
+        <textarea id="contactMessage" name="contactMessage" rows="4" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+
+    <section class="review-section" aria-labelledby="reviewTitle">
+      <h2 id="reviewTitle">Client Reviews</h2>
+      <button id="openReviewModal2" aria-haspopup="dialog" aria-controls="reviewModal">Write a Review</button>
+      <div id="reviewsContainer" aria-live="polite" aria-relevant="additions"></div>
+    </section>
+  </div>
+
+  <!-- Review Modal -->
+  <div id="reviewModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="reviewModalTitle" aria-describedby="reviewModalDesc">
+    <div class="modal-content">
+      <button class="close" id="closeReviewModal" aria-label="Close review form">&times;</button>
+      <h2 id="reviewModalTitle">Share Your Experience</h2>
+      <p id="reviewModalDesc">Your feedback is highly valued. Please rate your experience and leave a brief comment.</p>
+      <form id="reviewForm" novalidate>
+        <div class="form-group">
+          <label for="reviewName">Your Name</label>
+          <input type="text" id="reviewName" name="reviewName" required placeholder="Enter your name" autocomplete="name" />
+        </div>
+        <div class="form-group">
+          <label for="reviewText">Your Feedback</label>
+          <textarea id="reviewText" name="reviewText" rows="4" required placeholder="Write your review here..."></textarea>
+        </div>
+        <div class="form-group star-rating" aria-label="Star Rating" role="radiogroup" aria-required="true">
+          <span class="rating-label">Your Rating</span>
+          <input type="radio" id="star5" name="rating" value="5" required />
+          <label for="star5" title="5 stars" aria-label="5 stars">★</label>
+          <input type="radio" id="star4" name="rating" value="4" />
+          <label for="star4" title="4 stars" aria-label="4 stars">★</label>
+          <input type="radio" id="star3" name="rating" value="3" />
+          <label for="star3" title="3 stars" aria-label="3 stars">★</label>
+          <input type="radio" id="star2" name="rating" value="2" />
+          <label for="star2" title="2 stars" aria-label="2 stars">★</label>
+          <input type="radio" id="star1" name="rating" value="1" />
+          <label for="star1" title="1 star" aria-label="1 star">★</label>
+        </div>
+        <button type="submit" class="modal-submit">Submit Review</button>
+      </form>
+    </div>
+  </div>
+  
+  <script>
+    // Splash screen animation and fadeout
+    window.addEventListener('load', () => {
+      // Optionally, you can add more stars or particles for extra flair here.
+
+      setTimeout(() => {
+        const splash = document.getElementById('splash-screen');
+        splash.style.opacity = 0;
+        setTimeout(() => splash.style.display = 'none', 800);
+      }, 2000);
+    });
+
+    // Theme toggle with persistence
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const body = document.body;
+    function applyTheme(theme) {
+      if (theme === 'dark') {
+        body.classList.add('dark');
+      } else {
+        body.classList.remove('dark');
+      }
+    }
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    applyTheme(savedTheme);
+    themeToggleBtn.textContent = savedTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
+    themeToggleBtn.addEventListener('click', () => {
+      const currentTheme = body.classList.contains('dark') ? 'dark' : 'light';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      applyTheme(newTheme);
+      localStorage.setItem('theme', newTheme);
+      themeToggleBtn.textContent = newTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
+    });
+
+    // Review modal open/close
+    const reviewModal = document.getElementById('reviewModal');
+    const openReviewBtns = [document.getElementById('openReviewModal'), document.getElementById('openReviewModal2')];
+    const closeReviewBtn = document.getElementById('closeReviewModal');
+    const reviewNameInput = document.getElementById('reviewName');
+    openReviewBtns.forEach(btn => btn.addEventListener('click', () => {
+      reviewModal.classList.add('show');
+      setTimeout(() => reviewNameInput.focus(), 100);
+    }));
+    closeReviewBtn.addEventListener('click', () => {
+      reviewModal.classList.remove('show');
+      reviewForm.reset();
+    });
+    window.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && reviewModal.classList.contains('show')) {
+        reviewModal.classList.remove('show');
+        reviewForm.reset();
+      }
+    });
+
+    // Reviews storage (in-memory + localStorage)
+    const reviewsContainer = document.getElementById('reviewsContainer');
+    const reviewForm = document.getElementById('reviewForm');
+    let reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
+    function renderReviews() {
+      reviewsContainer.innerHTML = '';
+      if (reviews.length === 0) {
+        reviewsContainer.textContent = 'No reviews yet.';
+        return;
+      }
+      reviews.forEach(({ name, text, rating }) => {
+        const div = document.createElement('div');
+        div.classList.add('review-item');
+        const stars = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+        div.innerHTML = `
+          <div class="review-author">${escapeHtml(name)} <span class="review-stars" aria-label="${rating} out of 5 stars">${stars}</span></div>
+          <div class="review-text">${escapeHtml(text)}</div>
+        `;
+        reviewsContainer.appendChild(div);
+      });
+    }
+    renderReviews();
+
+    // Escape HTML helper to avoid injection
+    function escapeHtml(text) {
+      const p = document.createElement('p');
+      p.textContent = text;
+      return p.innerHTML;
+    }
+
+    reviewForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const name = reviewForm.reviewName.value.trim();
+      const text = reviewForm.reviewText.value.trim();
+      const rating = parseInt(reviewForm.rating.value);
+
+      if (!name || !text || !(rating >= 1 && rating <= 5)) {
+        alert('Please complete all fields and select a star rating.');
+        return;
+      }
+
+      // Save review
+      reviews.unshift({ name, text, rating });
+      localStorage.setItem('reviews', JSON.stringify(reviews));
+
+      // Re-render and close modal
+      renderReviews();
+      reviewModal.classList.remove('show');
+      reviewForm.reset();
+    });
+  </script>
+</body>
+</html>
