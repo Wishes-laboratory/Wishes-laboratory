@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>⭐️ Wish upon a Star </title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
@@ -15,18 +14,10 @@
 
     body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(270deg, #5a4ade, #a782ec, #5a4ade);
-      background-size: 600% 600%;
-      animation: gradientBG 10s ease infinite;
+      background: #ffffff;
       color: #333;
       transition: background-color 0.5s, color 0.5s;
       overflow-x: hidden;
-    }
-
-    @keyframes gradientBG {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
     }
 
     body.dark {
@@ -36,7 +27,7 @@
 
     header {
       padding: 2rem;
-      background: rgba(0, 0, 0, 0.3);
+      background: linear-gradient(135deg, #5a4ade, #a782ec);
       color: white;
       text-align: center;
       font-size: 2rem;
@@ -72,6 +63,24 @@
       padding: 2rem;
       max-width: 900px;
       margin: auto;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s forwards;
+    }
+
+    section:nth-of-type(2) {
+      animation-delay: 0.3s;
+    }
+
+    section:nth-of-type(3) {
+      animation-delay: 0.6s;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .modal {
@@ -83,6 +92,7 @@
       align-items: center;
       justify-content: center;
       z-index: 1000;
+      animation: fadeIn 0.4s ease-in-out;
     }
 
     .modal.show {
@@ -150,6 +160,7 @@
       background: #1e1e1e;
     }
 
+    /* Splash screen styles */
     #splash-screen {
       position: fixed;
       top: 0; left: 0;
@@ -181,15 +192,40 @@
     }
 
     @keyframes starburst {
-      0% {transform: scale(1);opacity: 1;filter: drop-shadow(0 0 6px white);}
-      50% {transform: scale(1.5);filter: drop-shadow(0 0 20px white);}
-      100% {transform: scale(0);opacity: 0;filter: drop-shadow(0 0 0 transparent);}
+      0% {
+        transform: scale(1);
+        opacity: 1;
+        filter: drop-shadow(0 0 6px white);
+      }
+      50% {
+        transform: scale(1.5);
+        filter: drop-shadow(0 0 20px white);
+      }
+      80% {
+        opacity: 1;
+      }
+      100% {
+        transform: scale(0);
+        opacity: 0;
+        filter: drop-shadow(0 0 0 transparent);
+      }
     }
 
     @keyframes slideInFade {
-      0% {transform: translateX(-150%);opacity: 0;}
-      40% {transform: translateX(0);opacity: 1;}
-      100% {opacity: 0;}
+      0% {
+        transform: translateX(-150%);
+        opacity: 0;
+      }
+      40% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
     }
 
     .contact-info a {
@@ -217,37 +253,47 @@
     </div>
   </header>
 
-  <section data-aos="fade-up">
+  <section>
     <h2>About Me</h2>
-    <p>Hi. I'm Wish...</p>
+    <p>
+      Hi. I'm Wish, a dedicated 3D modeler, game asset creator, animator, and teacher with a few years of practical experience in the game and digital art industry. My professional life has been fueled by a strong passion for both the artistic and technical aspects of game development. This combination enables me to provide assets that are not only visually appealing but are also highly optimized and game-ready, thereby enhancing the overall player experience.
+      Throughout my career, I've been able to develop a diverse set of projects, from solo game projects to more large-scale collaborations, delivering consistently well-designed models and animations that are expressly tailored to meet the unique needs of each game world. My emphasis on optimization means that each asset I create continues to exhibit peak performance while delivering quality art — an essential trade-off in the high-speed world of modern gaming.
+      In addition to my interest in content creation, I have an overriding interest in knowledge sharing. I am actively involved in one-on-one tutorials, workshops, and mentorship programs that are aimed at empowering prospective game developers and artists to reach their full potential. Guiding others through the intricacies of 3D modeling, animation, and game design is one of the most fulfilling parts of my professional career.
+      Whether working as a solo freelancer or as a member of a creative team, I uphold the highest standards of professionalism, quality, and timeliness. I am committed to surpassing client expectations and to making a valuable contribution to every project engaged.
+      Should you seek a versatile artist who amalgamates technical skill with creative insight, as well as someone who is enthusiastic about teaching and inspiring others, I would be delighted to establish a connection.
+    </p>
     <div class="specializations">
-      <p>🧊 3D Modeling...</p>
-      <p>🎥 Animation...</p>
-      <p>💼 Freelancing...</p>
-      <p>🎓 Teaching...</p>
+      <p>🧊 3D Modeling & Game Asset Creation
+        Specializing in clean, optimized models tailored for real-time use in games and interactive media.</p>
+      <p>🎥 Animation
+        Bringing characters and objects to life with smooth, expressive animations designed to enhance immersion.</p>
+      <p>💼 Freelancing & Asset Selling
+        Offering custom asset creation and ready-to-use models for a variety of game engines and platforms.</p>
+      <p>🎓 Teaching & Mentorship
+        Explaining complex technical concepts in approachable ways, guiding students and creators through the intricacies of game development workflows.</p>
     </div>
   </section>
 
-  <section data-aos="fade-up" data-aos-delay="200">
+  <section>
     <h2>Portfolio</h2>
     <p>Coming Soon...</p>
   </section>
 
-  <section data-aos="fade-up" data-aos-delay="400">
-    <h2>Contact Me</h2>
-    <form id="contactForm">
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="email" name="email" placeholder="Your Email" required />
-      <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
+<section>
+  <h2>Contact Me</h2>
+  <form onsubmit="event.preventDefault(); alert('Message sent!')">
+    <input type="text" placeholder="Your Name" required />
+    <input type="email" placeholder="Your Email" required />
+    <textarea placeholder="Your Message" rows="5" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
 
-    <div class="contact-info" style="margin-top: 1.5rem;">
-      <p>📧 <strong>Email:</strong> <a href="mailto:therealuponastarwish@gmail.com">therealuponastarwish@gmail.com</a></p>
-      <p>🐦 <strong>X:</strong> <a href="https://x.com/3d_modeler_Wish" target="_blank">@3d_modeler_Wish</a></p>
-      <p>💬 <strong>Discord:</strong> <span style="font-family: monospace;">no_nameiscool1_45977</span></p>
-    </div>
-  </section>
+  <div class="contact-info" style="margin-top: 1.5rem;">
+    <p>📧 <strong>Email:</strong> <a href="mailto:therealuponastarwish@gmail.com">therealuponastarwish@gmail.com</a></p>
+    <p>🐦 <strong>X:</strong> <a href="https://x.com/3d_modeler_Wish" target="_blank" rel="noopener noreferrer">@3d_modeler_Wish</a></p>
+    <p>💬 <strong>Discord:</strong> <span style="font-family: monospace;">no_nameiscool1_45977</span></p>
+  </div>
+</section>
 
   <div id="loginModal" class="modal">
     <div class="modal-content">
@@ -261,10 +307,7 @@
     </div>
   </div>
 
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    AOS.init();
-
     function toggleTheme() {
       document.body.classList.toggle('dark');
     }
@@ -279,15 +322,9 @@
 
     window.addEventListener('load', () => {
       const splash = document.getElementById('splash-screen');
-      setTimeout(() => splash.style.display = 'none', 2600);
-    });
-
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const formData = new FormData(this);
-      const data = Object.fromEntries(formData.entries());
-      alert(`Thanks ${data.name}! Your message has been sent.`);
-      this.reset();
+      setTimeout(() => {
+        splash.style.display = 'none';
+      }, 2600);
     });
   </script>
 </body>
