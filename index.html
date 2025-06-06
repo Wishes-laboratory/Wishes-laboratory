@@ -1,4 +1,3 @@
-```html name=index.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -432,8 +431,6 @@ function sanitize(str) {
 </script>
 </body>
 </html>
-```
-<!-- ... (previous code unchanged) ... -->
 
 <script>
 // Splash Screen Animation & Removal
@@ -460,17 +457,19 @@ let isLoggedIn = false;
 // Try to restore login state from sessionStorage
 if (sessionStorage.getItem('loggedIn') === 'true') {
   isLoggedIn = true;
-  updateLoginUI();
 }
 
+// Update login/logout UI and review form
 function updateLoginUI() {
   const loginBtn = document.getElementById('loginBtn');
+  const reviewForm = document.getElementById('reviewForm');
+  if (!loginBtn || !reviewForm) return;
   if (isLoggedIn) {
     loginBtn.textContent = 'Logout';
-    document.getElementById('reviewForm').querySelectorAll('input, textarea, button').forEach(el => el.disabled = false);
+    reviewForm.querySelectorAll('input, textarea, button').forEach(el => el.disabled = false);
   } else {
     loginBtn.textContent = 'Login';
-    document.getElementById('reviewForm').querySelectorAll('input, textarea, button').forEach(el => el.disabled = true);
+    reviewForm.querySelectorAll('input, textarea, button').forEach(el => el.disabled = true);
   }
 }
 
@@ -480,21 +479,25 @@ const loginModal = document.getElementById('loginModal');
 const closeLogin = document.getElementById('closeLogin');
 const loginForm = document.getElementById('loginForm');
 
-loginBtn.addEventListener('click', () => {
-  if (isLoggedIn) {
-    // Logout flow
-    isLoggedIn = false;
-    sessionStorage.removeItem('loggedIn');
-    alert('You have been logged out.');
-    updateLoginUI();
-  } else {
-    loginModal.classList.add('show');
-  }
-});
+if (loginBtn) {
+  loginBtn.addEventListener('click', () => {
+    if (isLoggedIn) {
+      // Logout flow
+      isLoggedIn = false;
+      sessionStorage.removeItem('loggedIn');
+      alert('You have been logged out.');
+      updateLoginUI();
+    } else {
+      loginModal.classList.add('show');
+    }
+  });
+}
 
-closeLogin.addEventListener('click', () => {
-  loginModal.classList.remove('show');
-});
+if (closeLogin) {
+  closeLogin.addEventListener('click', () => {
+    loginModal.classList.remove('show');
+  });
+}
 window.addEventListener('click', (e) => {
   if (e.target === loginModal) {
     loginModal.classList.remove('show');
@@ -502,43 +505,51 @@ window.addEventListener('click', (e) => {
 });
 
 // Dummy login authentication
-loginForm.addEventListener('submit', function(e) {
-  e.preventDefault();
-  // For demo: accept any username and password
-  isLoggedIn = true;
-  sessionStorage.setItem('loggedIn', 'true');
-  loginModal.classList.remove('show');
-  alert('Login successful! You can now submit a review.');
-  updateLoginUI();
-});
+if (loginForm) {
+  loginForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    // For demo: accept any username and password
+    isLoggedIn = true;
+    sessionStorage.setItem('loggedIn', 'true');
+    loginModal.classList.remove('show');
+    alert('Login successful! You can now submit a review.');
+    updateLoginUI();
+  });
+}
 
-// Disable review form if not logged in on load
+// On DOMContentLoaded, update login UI
 document.addEventListener('DOMContentLoaded', () => {
   updateLoginUI();
 });
 
 // Contact Form submit (dummy)
-document.getElementById('contactForm').addEventListener('submit', e => {
-  e.preventDefault();
-  alert('Thanks for reaching out! I will get back to you soon.');
-  e.target.reset();
-});
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+  contactForm.addEventListener('submit', e => {
+    e.preventDefault();
+    alert('Thanks for reaching out! I will get back to you soon.');
+    e.target.reset();
+  });
+}
 
 // Review Form submit (add review to the page dynamically)
-document.getElementById('reviewForm').addEventListener('submit', e => {
-  e.preventDefault();
-  if (!isLoggedIn) {
-    alert('You must be logged in to submit a review.');
-    return;
-  }
-  const name = document.getElementById('reviewName').value.trim();
-  const text = document.getElementById('reviewText').value.trim();
-  if(name && text){
-    addReview(name, text);
-    e.target.reset();
-    alert('Thank you for your review!');
-  }
-});
+const reviewForm = document.getElementById('reviewForm');
+if (reviewForm) {
+  reviewForm.addEventListener('submit', e => {
+    e.preventDefault();
+    if (!isLoggedIn) {
+      alert('You must be logged in to submit a review.');
+      return;
+    }
+    const name = document.getElementById('reviewName').value.trim();
+    const text = document.getElementById('reviewText').value.trim();
+    if(name && text){
+      addReview(name, text);
+      e.target.reset();
+      alert('Thank you for your review!');
+    }
+  });
+}
 
 // Add review to reviews container
 function addReview(name, text) {
@@ -554,5 +565,3 @@ function sanitize(str) {
   return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 </script>
-</body>
-</html>
