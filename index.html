@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>⭐️ Wish upon a Star </title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <title>⭐️ Wish upon a Star</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
@@ -68,19 +68,11 @@
       animation: fadeInUp 1s forwards;
     }
 
-    section:nth-of-type(2) {
-      animation-delay: 0.3s;
-    }
-
-    section:nth-of-type(3) {
-      animation-delay: 0.6s;
-    }
+    section:nth-of-type(2) { animation-delay: 0.3s; }
+    section:nth-of-type(3) { animation-delay: 0.6s; }
 
     @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .modal {
@@ -92,12 +84,9 @@
       align-items: center;
       justify-content: center;
       z-index: 1000;
-      animation: fadeIn 0.4s ease-in-out;
     }
 
-    .modal.show {
-      display: flex;
-    }
+    .modal.show { display: flex; }
 
     .modal-content {
       background: white;
@@ -160,72 +149,32 @@
       background: #1e1e1e;
     }
 
-    /* Splash screen styles */
     #splash-screen {
       position: fixed;
       top: 0; left: 0;
       width: 100vw;
       height: 100vh;
-      background: linear-gradient(135deg, #5a4ade, #a782ec);
+      background: linear-gradient(-45deg, #5a4ade, #a782ec, #5a4ade, #a782ec);
+      background-size: 400% 400%;
+      animation: gradientBG 6s ease infinite, splashFade 2s ease forwards 2.5s;
       display: flex;
       justify-content: center;
       align-items: center;
       z-index: 2000;
       color: white;
-      font-size: 3rem;
+      font-size: 2rem;
       font-weight: bold;
-      gap: 0.5rem;
-      overflow: visible;
+      text-align: center;
     }
 
-    #splash-screen .star {
-      display: inline-block;
-      animation: starburst 2.5s ease forwards;
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
-    #splash-screen .text {
-      display: inline-block;
-      transform: translateX(-150%);
-      animation: slideInFade 2.5s ease forwards;
-      font-size: 2.5rem;
-      font-weight: 600;
-    }
-
-    @keyframes starburst {
-      0% {
-        transform: scale(1);
-        opacity: 1;
-        filter: drop-shadow(0 0 6px white);
-      }
-      50% {
-        transform: scale(1.5);
-        filter: drop-shadow(0 0 20px white);
-      }
-      80% {
-        opacity: 1;
-      }
-      100% {
-        transform: scale(0);
-        opacity: 0;
-        filter: drop-shadow(0 0 0 transparent);
-      }
-    }
-
-    @keyframes slideInFade {
-      0% {
-        transform: translateX(-150%);
-        opacity: 0;
-      }
-      40% {
-        transform: translateX(0);
-        opacity: 1;
-      }
-      90% {
-        opacity: 1;
-      }
-      100% {
-        opacity: 0;
-      }
+    @keyframes splashFade {
+      to { opacity: 0; visibility: hidden; }
     }
 
     .contact-info a {
@@ -240,10 +189,7 @@
   </style>
 </head>
 <body>
-  <div id="splash-screen">
-    <span class="star">⭐️</span>
-    <span class="text">Wish upon a Star</span>
-  </div>
+  <div id="splash-screen">⭐️ Welcome to Wish upon a Star</div>
 
   <header>
     ⭐️ Wish upon a Star
@@ -255,18 +201,12 @@
 
   <section>
     <h2>About Me</h2>
-    <p>
-      I'm Wish, a 3D modeler, game asset creator, animator, and instructor with a few years of experience. My work embodies technical proficiency blended with artistic expression, enabling me to create compelling assets. I specialize in the creation of optimized, game-ready models and animations that enhance gameplay experiences. In addition to content creation, I possess a keen interest in imparting knowledge through one-on-one instruction, tutorials, and mentorship, thereby assisting others in progressing in the realm of game development and design. Be it a freelance project or a collaborative work, I make every attempt to produce professional and quality outputs above expectations.
-    </p>
+    <p>Hi. I'm Wish, a dedicated 3D modeler, game asset creator, animator, and teacher with a few years of practical experience in the game and digital art industry...</p>
     <div class="specializations">
-      <p>🧊 3D Modeling & Game Asset Creation
-        Specializing in clean, optimized models tailored for real-time use in games and interactive media.</p>
-      <p>🎥 Animation
-        Bringing characters and objects to life with smooth, expressive animations designed to enhance immersion.</p>
-      <p>💼 Freelancing & Asset Selling
-        Offering custom asset creation and ready-to-use models for a variety of game engines and platforms.</p>
-      <p>🎓 Teaching & Mentorship
-        Explaining complex technical concepts in approachable ways, guiding students and creators through the intricacies of game development workflows.</p>
+      <p>🧊 3D Modeling & Game Asset Creation</p>
+      <p>🎥 Animation</p>
+      <p>💼 Freelancing & Asset Selling</p>
+      <p>🎓 Teaching & Mentorship</p>
     </div>
   </section>
 
@@ -278,15 +218,16 @@
   <section>
     <h2>Contact Me</h2>
     <form onsubmit="event.preventDefault(); alert('Message sent!')">
-      <input type="text" placeholder="Your Name" required />
-      <input type="email" placeholder="Your Email" required />
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
       <textarea placeholder="Your Message" rows="5" required></textarea>
       <button type="submit">Send Message</button>
     </form>
 
     <div class="contact-info" style="margin-top: 1.5rem;">
       <p>📧 <strong>Email:</strong> <a href="mailto:therealuponastarwish@gmail.com">therealuponastarwish@gmail.com</a></p>
-      <p>🐦 <strong>X:</strong> <a href="https://x.com/3d_modeler_Wish" target="_blank" rel="noopener noreferrer">@3d_modeler_Wish</a></p>
+      <p>🐦 <strong>X:</strong> <a href="https://x.com/3d_modeler_Wish" target="_blank">@3d_modeler_Wish</a></p>
+      <p>💬 <strong>Discord:</strong> <span style="font-family: monospace;">no_nameiscool1_45977</span></p>
     </div>
   </section>
 
@@ -295,8 +236,8 @@
       <span class="close" onclick="hideLogin()">&times;</span>
       <h2>Login</h2>
       <form onsubmit="event.preventDefault(); alert('Logged in!'); hideLogin();">
-        <input type="email" placeholder="Email" required />
-        <input type="password" placeholder="Password" required />
+        <input type="email" placeholder="Email" required>
+        <input type="password" placeholder="Password" required>
         <button type="submit">Login</button>
       </form>
     </div>
@@ -314,13 +255,6 @@
     function hideLogin() {
       document.getElementById('loginModal').classList.remove('show');
     }
-
-    window.addEventListener('load', () => {
-      const splash = document.getElementById('splash-screen');
-      setTimeout(() => {
-        splash.style.display = 'none';
-      }, 2600);
-    });
   </script>
 </body>
 </html>
