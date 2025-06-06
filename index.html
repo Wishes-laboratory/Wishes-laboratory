@@ -37,7 +37,69 @@ header {
   right: 10px;
   display: flex;
   gap: 10px;
+  align-items: center;
 }
+/* Dark Mode Toggle Switch */
+
+.theme-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 30px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.theme-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: relative;
+  background-color: #ccc;
+  border-radius: 30px;
+  width: 100%;
+  height: 100%;
+  transition: background-color 0.4s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6px;
+  box-sizing: border-box;
+}
+
+.icon {
+  font-size: 16px;
+  user-select: none;
+  pointer-events: none;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  height: 24px;
+  width: 24px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.4s ease, background-color 0.4s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* When checked (dark mode enabled) */
+.theme-switch input:checked + .slider {
+  background-color: #5a4ade;
+}
+
+.theme-switch input:checked + .slider::before {
+  transform: translateX(30px);
+  background-color: #222;
+}
+
 button {
   padding: 0.6rem 1.2rem;
   border: none;
@@ -48,9 +110,14 @@ button {
   font-weight: bold;
   transition: background 0.3s, transform 0.3s;
 }
-button:hover {
+button:hover:not(:disabled) {
   background: #3d32a4;
   transform: scale(1.05);
+}
+button:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+  transform: none;
 }
 section {
   padding: 2rem;
@@ -246,188 +313,206 @@ body.dark .review-item {
 }
 #splash-screen .text {
   display: inline-block;
-  transform: translateX(-150%);
-  animation: slideInFade 2.5s ease forwards;
-  font-size: 2.5rem;
-  font-weight: 600;
+  transform: translateX(-30px);
+  opacity: 0;
+  animation: fadeInText 2.5s ease forwards;
+  animation-delay: 0.5s;
 }
 @keyframes starburst {
-  0% {
-    transform: scale(1);
+  0% { transform: scale(0.5) rotate(0deg); opacity: 0; }
+  50% { transform: scale(1.4) rotate(720deg); opacity: 1; }
+  100% { transform: scale(1) rotate(1080deg); opacity: 1; }
+}
+@keyframes fadeInText {
+  to {
     opacity: 1;
-    filter: drop-shadow(0 0 6px white);
-  }
-  50% {
-    transform: scale(1.5);
-    filter: drop-shadow(0 0 20px white);
-  }
-  80% {
-    opacity: 1;
-  }
-  100% {
-    transform: scale(0);
-    opacity: 0;
-    filter: drop-shadow(0 0 0 transparent);
+    transform: translateX(0);
   }
 }
-@keyframes slideInFade {
-  0% {
-    transform: translateX(-150%);
-    opacity: 0;
-  }
-  40% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
+
+/* Responsive tweaks */
+@media (max-width: 650px) {
+  .contact-review-container {
+    flex-direction: column;
   }
 }
 </style>
 </head>
 <body>
 <div id="splash-screen">
-  <span class="star">⭐️</span>
-  <span class="text">Wish upon a Star</span>
+  <span class="star">⭐️</span><span class="text"> Wish upon a Star</span>
 </div>
 
 <header>
-  ⭐️ Wish upon a Star
+  Wish upon a Star
   <div class="controls">
-    <button onclick="toggleTheme()">Toggle Theme</button>
+    <label class="theme-switch" aria-label="Toggle Dark Mode">
+      <input type="checkbox" id="themeToggle" />
+      <span class="slider">
+        <span class="icon sun">☀️</span>
+        <span class="icon moon">🌙</span>
+      </span>
+    </label>
     <button id="loginBtn">Login</button>
   </div>
 </header>
 
-<section>
-  <h2>About Me</h2>
-  <p>
-    Hi. I'm Wish, a dedicated 3D modeler, game asset creator, animator, and teacher with a few years of practical experience in the game and digital art industry. My professional life has been fueled by a strong passion for both the artistic and technical aspects of game development. This combination enables me to provide assets that are not only visually appealing but are also highly optimized and game-ready, thereby enhancing the overall player experience.
-    Throughout my career, I've been able to develop a diverse set of projects, from solo game projects to more large-scale collaborations, delivering consistently well-designed models and animations that are expressly tailored to meet the unique needs of each game world. My emphasis on optimization means that each asset I create continues to exhibit peak performance while delivering quality art — an essential trade-off in the high-speed world of modern gaming.
-    In addition to my interest in content creation, I have an overriding interest in knowledge sharing. I am actively involved in one-on-one tutorials, workshops, and mentorship programs that are aimed at empowering prospective game developers and artists to reach their full potential. Guiding others through the intricacies of 3D modeling, animation, and game design is one of the most fulfilling parts of my professional career.
-    Whether working as a solo freelancer or as a member of a creative team, I uphold the highest standards of professionalism, quality, and timeliness. I am committed to surpassing client expectations and to making a valuable contribution to every project engaged.
-    Should you seek a versatile artist who amalgamates technical skill with creative insight, as well as someone who is enthusiastic about teaching and inspiring others, I would be delighted to establish a connection.
-  </p>
-  <div class="specializations">
-    <p>🧊 3D Modeling & Game Asset Creation - Specializing in clean, optimized models tailored for real-time use in games and interactive media.</p>
-    <p>🎥 Animation - Bringing characters and objects to life with smooth and natural motion sequences.</p>
-    <p>📚 Teaching & Mentorship - Sharing knowledge on 3D art pipelines, game development best practices, and industry workflows.</p>
-  </div>
-</section>
-
-<div class="contact-review-container">
-  <section class="contact-section" aria-label="Contact Me Section">
-    <h2>Contact Me</h2>
-    <form id="contactForm">
-      <input type="text" id="contactName" placeholder="Your Name" required />
-      <input type="email" id="contactEmail" placeholder="Your Email" required />
-      <textarea id="contactMessage" placeholder="Your Message" required></textarea>
-      <button type="submit">Send</button>
-    </form>
+<main>
+  <section>
+    <h2>About Me</h2>
+    <p>Hi, I'm Wishes, a dedicated 3D modeler and scripter with 4 years of experience on Roblox Studio. I create immersive assets and engaging gameplay experiences tailored to your needs.</p>
   </section>
 
-  <section class="review-section" aria-label="Submit a Review Section">
-    <h2>Submit a Review</h2>
-    <form id="reviewForm">
-      <input type="text" id="reviewName" placeholder="Your Name" required />
-      <textarea id="reviewText" placeholder="Your Review" required></textarea>
-      <button type="submit">Submit Review</button>
-    </form>
-  </section>
-</div>
+  <section class="contact-review-container">
+    <section class="contact-section">
+      <h2>Contact Me</h2>
+      <form id="contactForm" autocomplete="off">
+        <input type="text" name="name" id="contactName" placeholder="Your name" required />
+        <input type="email" name="email" id="contactEmail" placeholder="Your email" required />
+        <textarea name="message" id="contactMessage" placeholder="Your message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
 
-<section class="reviews-comments" aria-label="Reviews and Comments">
-  <h2>Reviews and Comments</h2>
-  <div id="reviewsContainer">
-    <!-- Dynamic reviews go here -->
-  </div>
-</section>
+    <section class="review-section">
+      <h2>Reviews</h2>
+      <form id="reviewForm" autocomplete="off">
+        <textarea id="reviewText" placeholder="Write your review..." rows="4" disabled required></textarea>
+        <button type="submit" disabled>Submit Review (Login required)</button>
+      </form>
+      <div class="reviews-comments" id="reviewsContainer"></div>
+    </section>
+  </section>
+</main>
 
 <!-- Login Modal -->
-<div id="loginModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+<div class="modal" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="loginModalTitle">
   <div class="modal-content">
-    <span class="close" id="closeLogin" aria-label="Close Login">&times;</span>
-    <h2 id="loginTitle">Admin Login</h2>
+    <span class="close" id="closeModal" tabindex="0" role="button" aria-label="Close Login Modal">&times;</span>
+    <h2 id="loginModalTitle">Login</h2>
     <form id="loginForm" autocomplete="off">
-      <input type="text" id="loginUsername" placeholder="Username" required aria-required="true" />
-      <input type="password" id="loginPassword" placeholder="Password" required aria-required="true" />
+      <input type="text" id="usernameInput" placeholder="Enter your username" required />
       <button type="submit" class="modal-submit">Login</button>
     </form>
   </div>
 </div>
 
 <script>
-// Splash Screen Animation & Removal
+// Splash screen fade out after 3 seconds
 window.addEventListener('load', () => {
-  const splash = document.getElementById('splash-screen');
   setTimeout(() => {
-    splash.style.display = 'none';
-  }, 2600); // After animations finish
+    const splash = document.getElementById('splash-screen');
+    splash.style.transition = 'opacity 0.8s ease';
+    splash.style.opacity = '0';
+    setTimeout(() => splash.style.display = 'none', 800);
+  }, 3000);
 });
 
-// Theme Toggle
-function toggleTheme() {
-  document.body.classList.toggle('dark');
-  localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
-}
-// Load saved theme
-if (localStorage.getItem('theme') === 'dark') {
-  document.body.classList.add('dark');
+// Dark mode toggle
+const toggleCheckbox = document.getElementById('themeToggle');
+
+function applyTheme(theme) {
+  if(theme === 'dark') {
+    document.body.classList.add('dark');
+    toggleCheckbox.checked = true;
+  } else {
+    document.body.classList.remove('dark');
+    toggleCheckbox.checked = false;
+  }
+  localStorage.setItem('theme', theme);
 }
 
-// Modal Login
+// Load theme on start
+applyTheme(localStorage.getItem('theme') || 'light');
+
+// Toggle event
+toggleCheckbox.addEventListener('change', () => {
+  applyTheme(toggleCheckbox.checked ? 'dark' : 'light');
+});
+
+// Login modal logic
 const loginBtn = document.getElementById('loginBtn');
 const loginModal = document.getElementById('loginModal');
-const closeLogin = document.getElementById('closeLogin');
+const closeModalBtn = document.getElementById('closeModal');
+const loginForm = document.getElementById('loginForm');
+const usernameInput = document.getElementById('usernameInput');
+const reviewText = document.getElementById('reviewText');
+const reviewForm = document.getElementById('reviewForm');
+const submitReviewBtn = reviewForm.querySelector('button');
+const reviewsContainer = document.getElementById('reviewsContainer');
+
+function updateLoginUI(username) {
+  if(username) {
+    loginBtn.textContent = `Logout (${username})`;
+    reviewText.disabled = false;
+    submitReviewBtn.disabled = false;
+  } else {
+    loginBtn.textContent = 'Login';
+    reviewText.disabled = true;
+    submitReviewBtn.disabled = true;
+  }
+}
+
+function loadReviews() {
+  const reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
+  reviewsContainer.innerHTML = '';
+  reviews.forEach(({user, text}) => {
+    const div = document.createElement('div');
+    div.classList.add('review-item');
+    div.innerHTML = `<div class="review-author">${user}</div><div class="review-text">${text}</div>`;
+    reviewsContainer.appendChild(div);
+  });
+}
 
 loginBtn.addEventListener('click', () => {
-  loginModal.classList.add('show');
+  if(localStorage.getItem('username')) {
+    // Logout
+    localStorage.removeItem('username');
+    updateLoginUI(null);
+  } else {
+    loginModal.classList.add('show');
+    usernameInput.focus();
+  }
 });
 
-closeLogin.addEventListener('click', () => {
+closeModalBtn.addEventListener('click', () => {
   loginModal.classList.remove('show');
+  loginForm.reset();
 });
-window.addEventListener('click', (e) => {
-  if (e.target === loginModal) {
+
+loginForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const username = usernameInput.value.trim();
+  if(username) {
+    localStorage.setItem('username', username);
+    updateLoginUI(username);
     loginModal.classList.remove('show');
+    loginForm.reset();
   }
 });
 
-// Contact Form submit (dummy)
-document.getElementById('contactForm').addEventListener('submit', e => {
+// Submit review logic
+reviewForm.addEventListener('submit', e => {
   e.preventDefault();
-  alert('Thanks for reaching out! I will get back to you soon.');
-  e.target.reset();
-});
-
-// Review Form submit (add review to the page dynamically)
-document.getElementById('reviewForm').addEventListener('submit', e => {
-  e.preventDefault();
-  const name = document.getElementById('reviewName').value.trim();
-  const text = document.getElementById('reviewText').value.trim();
-  if(name && text){
-    addReview(name, text);
-    e.target.reset();
-    alert('Thank you for your review!');
+  const text = reviewText.value.trim();
+  const user = localStorage.getItem('username');
+  if(!user) {
+    alert('Please log in to submit a review.');
+    return;
   }
+  if(text.length === 0) return;
+  const reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
+  reviews.push({user, text});
+  localStorage.setItem('reviews', JSON.stringify(reviews));
+  reviewText.value = '';
+  loadReviews();
 });
 
-// Add review to reviews container
-function addReview(name, text) {
-  const container = document.getElementById('reviewsContainer');
-  const div = document.createElement('div');
-  div.className = 'review-item';
-  div.innerHTML = `<div class="review-author">${sanitize(name)}</div><div class="review-text">${sanitize(text)}</div>`;
-  container.prepend(div);
-}
-
-// Simple text sanitizer
-function sanitize(str) {
-  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-}
+// On page load
+document.addEventListener('DOMContentLoaded', () => {
+  updateLoginUI(localStorage.getItem('username'));
+  loadReviews();
+});
 </script>
 </body>
 </html>
