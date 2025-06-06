@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>⭐️ Wish upon a Star</title>
+  <title>⭐️ Wish upon a Star </title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
   <style>
     * {
@@ -61,7 +61,7 @@
 
     section {
       padding: 2rem;
-      max-width: 1000px;
+      max-width: 900px;
       margin: auto;
       opacity: 0;
       transform: translateY(20px);
@@ -83,7 +83,44 @@
       }
     }
 
-    input, select, textarea {
+    .modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      width: 300px;
+      position: relative;
+    }
+
+    .dark .modal-content {
+      background: #222;
+      color: #eee;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    input, textarea {
       width: 100%;
       padding: 0.6rem;
       margin-top: 1rem;
@@ -91,14 +128,20 @@
       border: 1px solid #ccc;
     }
 
-    .contact-info a {
-      color: #5a4ade;
-      text-decoration: none;
-      transition: color 0.3s ease;
+    h2 {
+      margin-bottom: 1rem;
     }
 
-    .contact-info a:hover {
-      color: #3d32a4;
+    .specializations {
+      margin-top: 1rem;
+      line-height: 1.8;
+      font-size: 1.1rem;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
     }
 
     .portfolio-item {
@@ -107,17 +150,17 @@
       border-radius: 10px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       transition: transform 0.3s ease;
-      animation: fadeInUp 0.5s ease forwards;
     }
 
     .portfolio-item:hover {
-      transform: translateY(-5px);
+      transform: translateY(-10px);
     }
 
     .dark .portfolio-item {
       background: #1e1e1e;
     }
 
+    /* Splash screen styles */
     #splash-screen {
       position: fixed;
       top: 0; left: 0;
@@ -131,6 +174,8 @@
       color: white;
       font-size: 3rem;
       font-weight: bold;
+      gap: 0.5rem;
+      overflow: visible;
     }
 
     #splash-screen .star {
@@ -183,10 +228,14 @@
       }
     }
 
-    @media (max-width: 768px) {
-      .flex-columns {
-        flex-direction: column;
-      }
+    .contact-info a {
+      color: #5a4ade;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .contact-info a:hover {
+      color: #3d32a4;
     }
   </style>
 </head>
@@ -206,8 +255,23 @@
 
   <section>
     <h2>About Me</h2>
-    <p>Hi. I'm Wish, a dedicated 3D modeler, game asset creator, animator, and teacher...</p>
-    <!-- Keep your full about text here -->
+    <p>
+      Hi. I'm Wish, a dedicated 3D modeler, game asset creator, animator, and teacher with a few years of practical experience in the game and digital art industry. My professional life has been fueled by a strong passion for both the artistic and technical aspects of game development. This combination enables me to provide assets that are not only visually appealing but are also highly optimized and game-ready, thereby enhancing the overall player experience.
+      Throughout my career, I've been able to develop a diverse set of projects, from solo game projects to more large-scale collaborations, delivering consistently well-designed models and animations that are expressly tailored to meet the unique needs of each game world. My emphasis on optimization means that each asset I create continues to exhibit peak performance while delivering quality art — an essential trade-off in the high-speed world of modern gaming.
+      In addition to my interest in content creation, I have an overriding interest in knowledge sharing. I am actively involved in one-on-one tutorials, workshops, and mentorship programs that are aimed at empowering prospective game developers and artists to reach their full potential. Guiding others through the intricacies of 3D modeling, animation, and game design is one of the most fulfilling parts of my professional career.
+      Whether working as a solo freelancer or as a member of a creative team, I uphold the highest standards of professionalism, quality, and timeliness. I am committed to surpassing client expectations and to making a valuable contribution to every project engaged.
+      Should you seek a versatile artist who amalgamates technical skill with creative insight, as well as someone who is enthusiastic about teaching and inspiring others, I would be delighted to establish a connection.
+    </p>
+    <div class="specializations">
+      <p>🧊 3D Modeling & Game Asset Creation
+        Specializing in clean, optimized models tailored for real-time use in games and interactive media.</p>
+      <p>🎥 Animation
+        Bringing characters and objects to life with smooth, expressive animations designed to enhance immersion.</p>
+      <p>💼 Freelancing & Asset Selling
+        Offering custom asset creation and ready-to-use models for a variety of game engines and platforms.</p>
+      <p>🎓 Teaching & Mentorship
+        Explaining complex technical concepts in approachable ways, guiding students and creators through the intricacies of game development workflows.</p>
+    </div>
   </section>
 
   <section>
@@ -237,9 +301,9 @@
       <!-- Review Form -->
       <div style="flex: 1; min-width: 280px;">
         <h3>⭐️ Leave a Review</h3>
-        <form onsubmit="event.preventDefault(); submitReview()">
-          <input id="reviewer" type="text" placeholder="Your Name" required />
-          <select id="rating" required>
+        <form id="reviewForm" onsubmit="event.preventDefault(); submitReview()">
+          <input id="reviewer" type="text" placeholder="Your Name" required disabled />
+          <select id="rating" required disabled>
             <option value="">Rating</option>
             <option value="⭐️">⭐️</option>
             <option value="⭐️⭐️">⭐️⭐️</option>
@@ -247,8 +311,11 @@
             <option value="⭐️⭐️⭐️⭐️">⭐️⭐️⭐️⭐️</option>
             <option value="⭐️⭐️⭐️⭐️⭐️">⭐️⭐️⭐️⭐️⭐️</option>
           </select>
-          <textarea id="reviewText" placeholder="Your Review" rows="5" required></textarea>
-          <button type="submit">Submit Review</button>
+          <textarea id="reviewText" placeholder="Your Review" rows="5" required disabled></textarea>
+          <button id="submitReviewBtn" type="submit" disabled>Submit Review</button>
+          <p id="loginPrompt" style="color: red; margin-top: 1rem; display: block; font-weight: 600;">
+            Please login to leave a review.
+          </p>
         </form>
       </div>
     </div>
@@ -261,32 +328,99 @@
   </section>
 
   <!-- Login Modal -->
-  <div id="loginModal" class="modal" style="display: none;">
-    <div class="modal-content">
+  <div id="loginModal">
+    <div class="modal-content" id="loginModalContent">
       <span class="close" onclick="hideLogin()">&times;</span>
       <h2>Login</h2>
-      <form onsubmit="event.preventDefault(); alert('Logged in!'); hideLogin();">
-        <input type="email" placeholder="Email" required />
-        <input type="password" placeholder="Password" required />
+      <form id="loginForm" onsubmit="event.preventDefault(); doLogin()">
+        <input type="email" id="loginEmail" placeholder="Email" required />
+        <input type="password" id="loginPassword" placeholder="Password" required />
         <button type="submit">Login</button>
       </form>
     </div>
   </div>
 
   <script>
+    // Track login state
+    let isLoggedIn = false;
+
     function toggleTheme() {
       document.body.classList.toggle('dark');
+      // Also toggle modal theme
+      const modalContent = document.getElementById('loginModalContent');
+      modalContent.classList.toggle('dark');
     }
 
     function showLogin() {
-      document.getElementById('loginModal').style.display = 'flex';
+      document.getElementById('loginModal').classList.add('active');
     }
 
     function hideLogin() {
-      document.getElementById('loginModal').style.display = 'none';
+      document.getElementById('loginModal').classList.remove('active');
+    }
+
+    function doLogin() {
+      // Simple dummy login for demo
+      const email = document.getElementById('loginEmail').value.trim();
+      const pass = document.getElementById('loginPassword').value.trim();
+
+      // For demo, accept any non-empty email & pass
+      if (email && pass) {
+        isLoggedIn = true;
+        hideLogin();
+        alert(`Welcome back, ${email}! You can now leave reviews.`);
+
+        // Enable review form inputs & button
+        setReviewFormEnabled(true);
+
+        // Change login button to "Logout"
+        updateLoginButton();
+
+        // Clear login form
+        document.getElementById('loginForm').reset();
+      } else {
+        alert("Please enter valid email and password.");
+      }
+    }
+
+    function updateLoginButton() {
+      const btn = document.getElementById('loginBtn');
+      if (isLoggedIn) {
+        btn.textContent = "Logout";
+        btn.onclick = () => {
+          doLogout();
+        };
+      } else {
+        btn.textContent = "Login";
+        btn.onclick = () => {
+          showLogin();
+        };
+      }
+    }
+
+    function doLogout() {
+      isLoggedIn = false;
+      alert("You have logged out.");
+      setReviewFormEnabled(false);
+      updateLoginButton();
+    }
+
+    function setReviewFormEnabled(enabled) {
+      const form = document.getElementById('reviewForm');
+      const inputs = form.querySelectorAll('input, select, textarea, button[type="submit"]');
+      inputs.forEach(el => {
+        el.disabled = !enabled;
+      });
+      // Show or hide login prompt message
+      document.getElementById('loginPrompt').style.display = enabled ? 'none' : 'block';
     }
 
     function submitReview() {
+      if (!isLoggedIn) {
+        alert("Please login to submit a review.");
+        return;
+      }
+
       const name = document.getElementById('reviewer').value.trim();
       const rating = document.getElementById('rating').value;
       const text = document.getElementById('reviewText').value.trim();
@@ -300,21 +434,38 @@
       const reviewEl = document.createElement('div');
       reviewEl.className = 'portfolio-item';
       reviewEl.innerHTML = `
-        <p><strong>${name}</strong> ${rating}</p>
-        <p>${text}</p>
+        <p><strong>${escapeHtml(name)}</strong> ${escapeHtml(rating)}</p>
+        <p>${escapeHtml(text)}</p>
       `;
       container.prepend(reviewEl);
 
-      document.getElementById('reviewer').value = '';
-      document.getElementById('rating').value = '';
-      document.getElementById('reviewText').value = '';
+      document.getElementById('reviewForm').reset();
     }
 
+    // Escape HTML to prevent XSS
+    function escapeHtml(text) {
+      return text.replace(/[&<>"']/g, function(m) {
+        return ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#39;'
+        })[m];
+      });
+    }
+
+    // On load
     window.addEventListener('load', () => {
+      // Hide splash screen after animation
       const splash = document.getElementById('splash-screen');
       setTimeout(() => {
         splash.style.display = 'none';
       }, 2600);
+
+      // Initialize login button and review form state
+      updateLoginButton();
+      setReviewFormEnabled(false);
     });
   </script>
 </body>
