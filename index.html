@@ -203,6 +203,13 @@
     .review-text {
       font-size: 1rem;
       margin-left: 0.5rem;
+      margin-bottom: 0.3rem;
+    }
+    .review-stars {
+      color: gold;
+      font-size: 1.2rem;
+      user-select: none;
+      margin-left: 0.5rem;
     }
     /* Modal */
     .modal {
@@ -250,6 +257,32 @@
     .modal-submit {
       width: 100%;
     }
+    /* Star rating styles */
+    .star-rating {
+      display: flex;
+      flex-direction: row;
+      gap: 0.25rem;
+      margin-bottom: 1rem;
+    }
+    .star-rating input {
+      display: none;
+    }
+    .star-rating label {
+      font-size: 2rem;
+      color: #ccc;
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.2s;
+    }
+    .star-rating label:hover,
+    .star-rating label:hover ~ label,
+    .star-rating input:checked ~ label {
+      color: gold;
+    }
+    .star-rating input:focus + label {
+      outline: 2px solid #2193b0;
+      outline-offset: 2px;
+    }
     @media (max-width: 600px) {
       .contact-review-container {
         flex-direction: column;
@@ -274,159 +307,189 @@
   </div>
 
   <header>
-    <div>⭐️ Wish upon a Star</div>
-    <div class="controls" aria-label="Page controls">
-      <button id="themeToggle" aria-pressed="false" aria-label="Toggle light/dark theme">Dark Mode</button>
-      <button id="openReview" aria-haspopup="dialog" aria-controls="reviewModal">Leave a Review</button>
+    <div>Wish upon a Star</div>
+    <div class="controls">
+      <button id="themeToggle" aria-label="Toggle light/dark mode">Toggle Theme</button>
+      <button id="openReviewModal" aria-haspopup="dialog">Write a Review</button>
     </div>
   </header>
 
-  <section aria-labelledby="aboutTitle">
-    <h2 id="aboutTitle">About Me</h2>
-    <p>Hello! I'm a passionate 3D modeler, builder, and coder, creating unique assets and tools for games. I specialize in Roblox and Minecraft development, and I love crafting memorable experiences with creative visuals and smooth gameplay.</p>
-    <div class="specializations" aria-label="Specializations">
-      <p>Roblox Studio</p>
-      <p>MythicMobs</p>
-      <p>Blender Modeling</p>
-      <p>Scripting & Coding</p>
-      <p>Game Asset Creation</p>
+  <section aria-labelledby="specializationsTitle">
+    <h2 id="specializationsTitle">My Specializations</h2>
+    <div class="specializations" role="list">
+      <p role="listitem">Roblox Modeling</p>
+      <p role="listitem">Roblox Scripting</p>
+      <p role="listitem">Roblox Building</p>
+      <p role="listitem">Game Asset Creation</p>
+      <p role="listitem">Portfolio Websites</p>
     </div>
   </section>
+
+<section aria-labelledby="aboutTitle">
+  <h2 id="aboutTitle">About Me</h2>
+  <p>
+    I'm Wish, a 3D modeler, game asset creator, animator, and instructor with a few years of experience. My work embodies technical proficiency blended with artistic expression, enabling me to create compelling assets. I specialize in the creation of optimized, game-ready models and animations that enhance gameplay experiences. In addition to content creation, I possess a keen interest in imparting knowledge and skills to others.
+  </p>
+</section>
 
   <div class="contact-review-container">
     <section class="contact-section" aria-labelledby="contactTitle">
       <h2 id="contactTitle">Contact Me</h2>
-      <form id="contactForm" aria-describedby="contactDesc" novalidate>
-        <p id="contactDesc">Send me a message about projects or inquiries.</p>
+      <form id="contactForm" aria-describedby="contactInfo">
         <label for="contactName">Name</label>
-        <input type="text" id="contactName" name="name" required aria-required="true" />
+        <input type="text" id="contactName" name="contactName" required autocomplete="name" />
         <label for="contactEmail">Email</label>
-        <input type="email" id="contactEmail" name="email" required aria-required="true" />
+        <input type="email" id="contactEmail" name="contactEmail" required autocomplete="email" />
         <label for="contactMessage">Message</label>
-        <textarea id="contactMessage" name="message" rows="4" required aria-required="true"></textarea>
-        <button type="submit">Send</button>
+        <textarea id="contactMessage" name="contactMessage" rows="4" required></textarea>
+        <button type="submit">Send Message</button>
       </form>
     </section>
 
     <section class="review-section" aria-labelledby="reviewTitle">
       <h2 id="reviewTitle">Reviews</h2>
+      <button id="openReviewModal2" aria-haspopup="dialog" aria-controls="reviewModal">Write a Review</button>
       <div id="reviewsContainer" aria-live="polite" aria-relevant="additions"></div>
     </section>
   </div>
 
   <!-- Review Modal -->
-  <div id="reviewModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="reviewModalTitle" aria-describedby="reviewModalDesc" tabindex="-1">
+  <div id="reviewModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="reviewModalTitle" aria-describedby="reviewModalDesc">
     <div class="modal-content">
-      <button class="close" id="closeReview" aria-label="Close review form">&times;</button>
-      <h2 id="reviewModalTitle">Leave a Review</h2>
-      <p id="reviewModalDesc">Please provide your name and review below.</p>
-      <form id="reviewForm" class="modal-submit" novalidate>
+      <button class="close" id="closeReviewModal" aria-label="Close review form">&times;</button>
+      <h2 id="reviewModalTitle">Write a Review</h2>
+      <p id="reviewModalDesc">Please fill out the form and select a star rating.</p>
+      <form id="reviewForm">
         <label for="reviewName">Name</label>
-        <input type="text" id="reviewName" name="reviewName" required aria-required="true" />
+        <input type="text" id="reviewName" name="reviewName" required autocomplete="name" />
+
         <label for="reviewText">Review</label>
-        <textarea id="reviewText" name="reviewText" rows="4" required aria-required="true"></textarea>
-        <button type="submit">Submit Review</button>
+        <textarea id="reviewText" name="reviewText" rows="4" required></textarea>
+
+        <fieldset class="star-rating" aria-label="Star Rating" role="radiogroup" aria-required="true">
+          <input type="radio" id="star5" name="rating" value="5" required />
+          <label for="star5" title="5 stars" aria-label="5 stars">★</label>
+
+          <input type="radio" id="star4" name="rating" value="4" />
+          <label for="star4" title="4 stars" aria-label="4 stars">★</label>
+
+          <input type="radio" id="star3" name="rating" value="3" />
+          <label for="star3" title="3 stars" aria-label="3 stars">★</label>
+
+          <input type="radio" id="star2" name="rating" value="2" />
+          <label for="star2" title="2 stars" aria-label="2 stars">★</label>
+
+          <input type="radio" id="star1" name="rating" value="1" />
+          <label for="star1" title="1 star" aria-label="1 star">★</label>
+        </fieldset>
+
+        <button type="submit" class="modal-submit">Submit Review</button>
       </form>
     </div>
   </div>
 
   <script>
-    // Splash Screen Logic with Audio
-    const splash = document.getElementById('splash-screen');
-    const splashDuration = 2500;
-    const splashAudio = new Audio('https://cdn.pixabay.com/download/audio/2022/03/15/audio_d876d401ac.mp3?filename=happy-birthday-music-10910.mp3');
-    splashAudio.volume = 0.5;
-
+    // Splash screen fadeout after 2s
     window.addEventListener('load', () => {
-      splashAudio.play().catch(() => {
-        // Autoplay might be blocked; ignore error
-      });
       setTimeout(() => {
-        splash.style.opacity = '0';
+        const splash = document.getElementById('splash-screen');
+        splash.style.opacity = 0;
         setTimeout(() => splash.style.display = 'none', 600);
-      }, splashDuration);
+      }, 2000);
     });
 
-    // Dark Mode Toggle
-    const themeToggle = document.getElementById('themeToggle');
-    themeToggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark');
-      const isDark = document.body.classList.contains('dark');
-      themeToggle.textContent = isDark ? 'Light Mode' : 'Dark Mode';
-      themeToggle.setAttribute('aria-pressed', isDark.toString());
+    // Theme toggle with persistence
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const body = document.body;
+    function applyTheme(theme) {
+      if (theme === 'dark') {
+        body.classList.add('dark');
+      } else {
+        body.classList.remove('dark');
+      }
+    }
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    applyTheme(savedTheme);
+    themeToggleBtn.textContent = savedTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
+    themeToggleBtn.addEventListener('click', () => {
+      const currentTheme = body.classList.contains('dark') ? 'dark' : 'light';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      applyTheme(newTheme);
+      localStorage.setItem('theme', newTheme);
+      themeToggleBtn.textContent = newTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
     });
 
-    // Review Modal Logic
+    // Review modal open/close
     const reviewModal = document.getElementById('reviewModal');
-    const openReviewBtn = document.getElementById('openReview');
-    const closeReviewBtn = document.getElementById('closeReview');
-    const reviewForm = document.getElementById('reviewForm');
-    const reviewsContainer = document.getElementById('reviewsContainer');
-
-    openReviewBtn.addEventListener('click', () => {
+    const openReviewBtns = [document.getElementById('openReviewModal'), document.getElementById('openReviewModal2')];
+    const closeReviewBtn = document.getElementById('closeReviewModal');
+    const reviewNameInput = document.getElementById('reviewName');
+    openReviewBtns.forEach(btn => btn.addEventListener('click', () => {
       reviewModal.classList.add('show');
-      reviewModal.focus();
-    });
-
+      reviewNameInput.focus();
+    }));
     closeReviewBtn.addEventListener('click', () => {
       reviewModal.classList.remove('show');
-      openReviewBtn.focus();
+      reviewForm.reset();
     });
-
-    reviewModal.addEventListener('click', (e) => {
-      if (e.target === reviewModal) {
+    window.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && reviewModal.classList.contains('show')) {
         reviewModal.classList.remove('show');
-        openReviewBtn.focus();
+        reviewForm.reset();
       }
     });
 
-    // Store reviews in localStorage for demo purposes
-    function loadReviews() {
-      const reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
+    // Reviews storage (in-memory + localStorage)
+    const reviewsContainer = document.getElementById('reviewsContainer');
+    const reviewForm = document.getElementById('reviewForm');
+
+    // Load stored reviews from localStorage on page load
+    let reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
+    function renderReviews() {
       reviewsContainer.innerHTML = '';
-      reviews.forEach(({name, text}) => {
+      if (reviews.length === 0) {
+        reviewsContainer.textContent = 'No reviews yet.';
+        return;
+      }
+      reviews.forEach(({ name, text, rating }) => {
         const div = document.createElement('div');
-        div.className = 'review-item';
-        div.innerHTML = `<div class="review-author">${escapeHTML(name)}</div><div class="review-text">${escapeHTML(text)}</div>`;
+        div.classList.add('review-item');
+        const stars = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+        div.innerHTML = `
+          <div class="review-author">${escapeHtml(name)} <span class="review-stars" aria-label="${rating} out of 5 stars">${stars}</span></div>
+          <div class="review-text">${escapeHtml(text)}</div>
+        `;
         reviewsContainer.appendChild(div);
       });
     }
-    function saveReview(name, text) {
-      const reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
-      reviews.push({name, text});
-      localStorage.setItem('reviews', JSON.stringify(reviews));
-      loadReviews();
-    }
-    function escapeHTML(str) {
-      return str.replace(/[&<>"']/g, m => ({
-        '&':'&amp;',
-        '<':'&lt;',
-        '>':'&gt;',
-        '"':'&quot;',
-        "'":'&#39;'
-      })[m]);
+    renderReviews();
+
+    // Escape HTML helper to avoid injection
+    function escapeHtml(text) {
+      const p = document.createElement('p');
+      p.textContent = text;
+      return p.innerHTML;
     }
 
     reviewForm.addEventListener('submit', e => {
       e.preventDefault();
       const name = reviewForm.reviewName.value.trim();
       const text = reviewForm.reviewText.value.trim();
-      if(name && text) {
-        saveReview(name, text);
-        reviewForm.reset();
-        reviewModal.classList.remove('show');
-        openReviewBtn.focus();
+      const rating = parseInt(reviewForm.rating.value);
+
+      if (!name || !text || !(rating >= 1 && rating <= 5)) {
+        alert('Please fill in all fields and select a star rating.');
+        return;
       }
-    });
 
-    loadReviews();
+      // Save review
+      reviews.unshift({ name, text, rating });
+      localStorage.setItem('reviews', JSON.stringify(reviews));
 
-    // Contact form simple validation (just demo)
-    const contactForm = document.getElementById('contactForm');
-    contactForm.addEventListener('submit', e => {
-      e.preventDefault();
-      alert('Thank you for contacting! This is a demo, no real sending.');
-      contactForm.reset();
+      // Re-render and close modal
+      renderReviews();
+      reviewModal.classList.remove('show');
+      reviewForm.reset();
     });
   </script>
 </body>
