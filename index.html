@@ -340,6 +340,33 @@
       outline: 2px solid #2193b0;
       outline-offset: 2px;
     }
+    /* Services Section Styles */
+    .services-section {
+      max-width: 700px;
+      margin: 2.5rem auto 2rem auto;
+      background: rgba(255,255,255,0.96);
+      border-radius: 1.5rem;
+      box-shadow: 0 2px 12px rgba(33,147,176,0.06);
+      padding: 2rem 2.5rem;
+    }
+    body.dark .services-section {
+      background: rgba(26,28,44,0.98);
+      box-shadow: 0 2px 12px rgba(33,147,176,0.20);
+    }
+    .services-section ul {
+      padding-left: 1.5rem;
+    }
+    .services-section ul li {
+      margin-bottom: 0.4rem;
+      line-height: 1.5;
+    }
+    .services-section h3 {
+      margin-top: 1.5rem;
+      color: #1565c0;
+    }
+    body.dark .services-section h3 {
+      color: #90caf9;
+    }
     @media (max-width: 600px) {
       .contact-review-container {
         flex-direction: column;
@@ -353,6 +380,9 @@
         width: 100%;
         display: flex;
         justify-content: flex-end;
+      }
+      .services-section, section {
+        padding: 1.2rem 0.8rem;
       }
     }
   </style>
@@ -410,6 +440,87 @@
       <div id="reviewsContainer" aria-live="polite" aria-relevant="additions"></div>
     </section>
   </div>
+
+  <!-- Services Section (merged from your new content) -->
+  <section class="services-section" aria-labelledby="servicesTitle">
+    <h2 id="servicesTitle">What I Do</h2>
+    
+    <h3>🔧 1. Services</h3>
+    <ul>
+      <li>Game asset creation (Roblox, Unity, Unreal)</li>
+      <li>Character and creature modeling</li>
+      <li>Architectural visualization</li>
+      <li>Product rendering for brands</li>
+      <li>Logo animations or intros</li>
+      <li>NFT or concept art rendering</li>
+    </ul>
+
+    <h3>🧩 2. Selling Assets</h3>
+    <p>Create reusable 3D assets and earn semi-passive income by selling on marketplaces.</p>
+    <strong>What I sell:</strong>
+    <ul>
+      <li>Game assets (low/high-poly models, rigs, textures)</li>
+      <li>Scene kits or environment packs</li>
+      <li>Shader/material bundles</li>
+      <li>Animation packs</li>
+    </ul>
+    <strong>Where:</strong>
+    <ul>
+      <li>Blender Market</li>
+      <li>Sketchfab Store</li>
+      <li>CGTrader</li>
+      <li>Unity Asset Store / Unreal Marketplace</li>
+      <li>Itch.io</li>
+    </ul>
+
+    <h3>📹 3. Content Creation</h3>
+    <p>Grow a following on platforms like YouTube, TikTok, or Instagram by sharing:</p>
+    <ul>
+      <li>Modeling/sculpting timelapses</li>
+      <li>Beginner-to-advanced tutorials</li>
+      <li>Blender tips & tricks</li>
+      <li>Animation shorts</li>
+    </ul>
+    <strong>Monetization:</strong> YouTube AdSense, sponsorships, affiliate links, Patreon.
+
+    <h3>📚 4. Teaching Blender</h3>
+    <p>Leverage your teaching skills with:</p>
+    <ul>
+      <li>Gumroad / Ko-fi courses</li>
+      <li>Udemy video tutorials</li>
+      <li>YouTube audience building + paid content</li>
+      <li>1-on-1 tutoring on Discord or freelance sites</li>
+    </ul>
+
+    <h3>🕹️ 5. Game Development</h3>
+    <p>Use Blender to support indie games and monetize:</p>
+    <ul>
+      <li>Sell games on Steam, Itch.io, Roblox</li>
+      <li>Make asset packs & devlogs</li>
+      <li>Collaborate with coders for profit-sharing</li>
+    </ul>
+
+    <h3>🖼️ 6. Print-on-Demand / 3D Printing</h3>
+    <ul>
+      <li>Sell STL files on Cults3D, MyMiniFactory, Gumroad</li>
+      <li>Sell print-ready models or collectibles on Etsy</li>
+      <li>Use print-on-demand for custom merch or figures</li>
+    </ul>
+
+    <h3>💼 7. Studio Jobs or Internships</h3>
+    <ul>
+      <li>Apply as 3D Modeler, Animator, Rigger, or Environment Artist</li>
+      <li>Remote and part-time work is increasingly common</li>
+    </ul>
+
+    <h3>⭐ Tips to Succeed</h3>
+    <ul>
+      <li>Build a strong portfolio (✅ You're doing that!)</li>
+      <li>Be active on Twitter, ArtStation, LinkedIn</li>
+      <li>Join Blender Discords & forums</li>
+      <li>Learn adjacent tools (Substance, Unity, Photoshop)</li>
+    </ul>
+  </section>
 
   <!-- Review Modal -->
   <div id="reviewModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="reviewModalTitle" aria-describedby="reviewModalDesc">
@@ -553,10 +664,9 @@
         const div = document.createElement('div');
         div.classList.add('review-item');
         const stars = '★'.repeat(rating) + '☆'.repeat(5 - rating);
-        div.innerHTML = `
-          <div class="review-author">${escapeHtml(name)} <span class="review-stars" aria-label="${rating} out of 5 stars">${stars}</span></div>
-          <div class="review-text">${escapeHtml(text)}</div>
-        `;
+        div.innerHTML = 
+          `<div class="review-author">${escapeHtml(name)} <span class="review-stars" aria-label="${rating} out of 5 stars">${stars}</span></div>
+          <div class="review-text">${escapeHtml(text)}</div>`;
         reviewsContainer.appendChild(div);
       });
     }
