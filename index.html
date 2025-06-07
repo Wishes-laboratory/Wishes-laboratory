@@ -6,6 +6,15 @@
   <title>⭐️ Wish upon a Star</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
   <style>
+    #stars-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+    }
     body {
       font-family: 'Poppins', sans-serif;
       margin: 0;
@@ -27,7 +36,6 @@
       align-items: center;
       justify-content: center;
       z-index: 1000;
-      /* Remove default animation so JS can control it */
       opacity: 1;
       transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1);
       pointer-events: none;
@@ -35,7 +43,6 @@
     #splash-screen .star {
       font-size: 4rem;
       animation: splash-star-move 2s cubic-bezier(0.65,0,0.35,1), twinkle 1.2s infinite alternate;
-      /* Both movement and twinkle */
       display: inline-block;
       will-change: transform, filter;
     }
@@ -262,7 +269,6 @@
       user-select: none;
       margin-left: 0.5rem;
     }
-    /* Modal */
     .modal {
       display: none;
       position: fixed;
@@ -308,7 +314,6 @@
     .modal-submit {
       width: 100%;
     }
-    /* Star rating styles */
     .star-rating {
       display: flex;
       flex-direction: row;
@@ -353,6 +358,7 @@
   </style>
 </head>
 <body>
+  <canvas id="stars-canvas" aria-hidden="true"></canvas>
   <div id="splash-screen" aria-label="Splash Screen" role="dialog" aria-modal="true" aria-live="assertive">
     <div class="star" aria-hidden="true">⭐️</div>
     <div class="text">Wish upon a Star</div>
@@ -439,10 +445,52 @@
   </div>
   
   <script>
+    // Animated star canvas background
+    const canvas = document.getElementById('stars-canvas');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      generateStars();
+    }
+
+    function generateStars() {
+      stars = [];
+      for (let i = 0; i < 120; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: Math.random() * 1.2 + 0.3,
+          speed: Math.random() * 0.4 + 0.2,
+          opacity: Math.random() * 0.5 + 0.3
+        });
+      }
+    }
+
+    function animateStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let star of stars) {
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, 2 * Math.PI);
+        ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
+        ctx.fill();
+        star.y += star.speed;
+        if (star.y > canvas.height) {
+          star.y = 0;
+          star.x = Math.random() * canvas.width;
+        }
+      }
+      requestAnimationFrame(animateStars);
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    animateStars();
+
     // Splash screen animation and fadeout
     window.addEventListener('load', () => {
-      // Optionally, you can add more stars or particles for extra flair here.
-
       setTimeout(() => {
         const splash = document.getElementById('splash-screen');
         splash.style.opacity = 0;
