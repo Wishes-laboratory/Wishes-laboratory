@@ -15,6 +15,7 @@
       --star-shadow: rgba(142,36,170,0.1);
       --sec-bg: #ede7f6;
       --sec-text: #6a1b9a;
+      --glow: 0 0 12px 4px gold, 0 0 28px 8px #b388ff, 0 0 18px 4px #fff7b2;
     }
     #stars-canvas {
       position: fixed;
@@ -111,9 +112,24 @@
       align-items: center;
       gap: 0.6rem;
     }
+    /* ⭐️ Glowing effect for the star in the header-title */
     .header-title .star {
       font-size: 1.6rem;
       margin-right: 0.2rem;
+      animation: star-glow-pulse 1.6s infinite alternate;
+      filter: drop-shadow(0 0 6px gold);
+      text-shadow: var(--glow);
+      transition: filter 0.3s, text-shadow 0.3s;
+    }
+    @keyframes star-glow-pulse {
+      0% {
+        filter: drop-shadow(0 0 10px #ffd600) drop-shadow(0 0 20px #b388ff);
+        text-shadow: 0 0 12px gold, 0 0 24px #b388ff, 0 0 8px #fff7b2;
+      }
+      100% {
+        filter: drop-shadow(0 0 20px #fff700) drop-shadow(0 0 28px #b388ff);
+        text-shadow: 0 0 22px #fff7b2, 0 0 36px #b388ff, 0 0 16px gold;
+      }
     }
     .controls {
       display: flex;
@@ -296,6 +312,7 @@
       margin-bottom: 1rem;
       box-shadow: 0 1px 4px var(--star-shadow);
       transition: background 0.2s, color 0.2s;
+      position: relative;
     }
     body.dark .review-item {
       background: #4527a0;
@@ -317,6 +334,55 @@
       user-select: none;
       margin-left: 0.5rem;
     }
+    /* Like/Dislike styles for reviews */
+    .review-actions {
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+      margin-top: 0.4rem;
+    }
+    .like-btn, .dislike-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.2rem 0.7rem;
+      border: none;
+      border-radius: 6px;
+      background: #ede7f6;
+      color: #6a1b9a;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s;
+      outline: none;
+      box-shadow: 0 1px 2px var(--star-shadow);
+      gap: 0.3em;
+      user-select: none;
+    }
+    .like-btn.active, .like-btn:active {
+      background: #d1c4e9;
+      color: #8e24aa;
+    }
+    .dislike-btn.active, .dislike-btn:active {
+      background: #f8bbd0;
+      color: #d81b60;
+    }
+    .like-btn svg, .dislike-btn svg {
+      margin-right: 0.3em;
+      vertical-align: middle;
+    }
+    body.dark .like-btn, body.dark .dislike-btn {
+      background: #5e35b1;
+      color: #fff;
+    }
+    body.dark .like-btn.active {
+      background: #9575cd;
+      color: #fff;
+    }
+    body.dark .dislike-btn.active {
+      background: #e57373;
+      color: #fff;
+    }
+    /* End Like/Dislike styles */
     .modal {
       display: none;
       position: fixed;
@@ -719,20 +785,75 @@
     const reviewsContainer = document.getElementById('reviewsContainer');
     const reviewForm = document.getElementById('reviewForm');
     let reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
+    // Like/dislike counts per review (by hash)
+    let reviewVotes = JSON.parse(localStorage.getItem('reviewVotes') || '{}');
+    // User-voted status (review hash -> "like" or "dislike")
+    let userVotes = JSON.parse(localStorage.getItem('userVotes') || '{}');
+
+    function getReviewHash(review) {
+      // Basic hash based on name+text+rating
+      return btoa(unescape(encodeURIComponent(`${review.name}|${review.text}|${review.rating}`)));
+    }
+
     function renderReviews() {
       reviewsContainer.innerHTML = '';
       if (reviews.length === 0) {
         reviewsContainer.textContent = 'No reviews yet.';
         return;
       }
-      reviews.forEach(({ name, text, rating }) => {
+      reviews.forEach((review, idx) => {
+        const { name, text, rating } = review;
         const div = document.createElement('div');
         div.classList.add('review-item');
         const stars = '★'.repeat(rating) + '☆'.repeat(5 - rating);
-        div.innerHTML = 
-          `<div class="review-author">${escapeHtml(name)} <span class="review-stars" aria-label="${rating} out of 5 stars">${stars}</span></div>
-          <div class="review-text">${escapeHtml(text)}</div>`;
+        const reviewHash = getReviewHash(review);
+
+        // Ensure votes are initialized for this review
+        if (!reviewVotes[reviewHash]) {
+          reviewVotes[reviewHash] = { like: 0, dislike: 0 };
+        }
+        const userVote = userVotes[reviewHash] || null;
+
+        div.innerHTML = `
+          <div class="review-author">${escapeHtml(name)} <span class="review-stars" aria-label="${rating} out of 5 stars">${stars}</span></div>
+          <div class="review-text">${escapeHtml(text)}</div>
+          <div class="review-actions">
+            <button class="like-btn${userVote==='like'?' active':''}" aria-label="Like review" data-action="like" data-hash="${reviewHash}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 24 24" style="vertical-align:middle;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6.5 3.5 5 5.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5 18.5 5 20 6.5 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span class="like-count">${reviewVotes[reviewHash].like}</span>
+            </button>
+            <button class="dislike-btn${userVote==='dislike'?' active':''}" aria-label="Dislike review" data-action="dislike" data-hash="${reviewHash}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 24 24" style="vertical-align:middle;"><path d="M12 2.65l1.45 1.32C18.6 8.64 22 11.72 22 15.5c0 2-1.5 3.5-3.5 3.5-1.54 0-3.04-.99-3.57-2.36h-1.87C10.54 18.01 9.04 19 7.5 19 5.5 19 4 17.5 4 15.5c0-3.78 3.4-6.86 8.55-11.54L12 2.65z"/></svg>
+              <span class="dislike-count">${reviewVotes[reviewHash].dislike}</span>
+            </button>
+          </div>
+        `;
         reviewsContainer.appendChild(div);
+      });
+
+      // Attach like/dislike handlers
+      Array.from(document.querySelectorAll('.review-actions button')).forEach(btn => {
+        btn.onclick = function() {
+          const hash = btn.getAttribute('data-hash');
+          const action = btn.getAttribute('data-action');
+          const other = action === 'like' ? 'dislike' : 'like';
+
+          // If user already voted this way, unvote
+          if (userVotes[hash] === action) {
+            reviewVotes[hash][action] = Math.max(0, (reviewVotes[hash][action] || 0) - 1);
+            userVotes[hash] = null;
+          } else {
+            // Remove other vote if present
+            if (userVotes[hash] === other && reviewVotes[hash][other]) {
+              reviewVotes[hash][other] = Math.max(0, reviewVotes[hash][other] - 1);
+            }
+            reviewVotes[hash][action] = (reviewVotes[hash][action] || 0) + 1;
+            userVotes[hash] = action;
+          }
+          localStorage.setItem('reviewVotes', JSON.stringify(reviewVotes));
+          localStorage.setItem('userVotes', JSON.stringify(userVotes));
+          renderReviews();
+        };
       });
     }
     renderReviews();
