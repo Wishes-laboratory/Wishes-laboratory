@@ -137,7 +137,6 @@
       color: #fff;
       outline: none;
     }
-    /* Patreon Button Styles */
     .patreon-button {
       background: #f96854;
       color: #fff;
@@ -159,25 +158,31 @@
     .main-sections-container {
       display: flex;
       flex-wrap: wrap;
-      gap: 2rem;
+      gap: 2.5rem;
       justify-content: center;
       align-items: flex-start;
-      max-width: 1500px;
+      max-width: 1400px;
       margin: 2.5rem auto 2rem auto;
     }
     section {
-      flex: 1 1 320px;
-      min-width: 320px;
-      max-width: 480px;
-      background: rgba(255,255,255,0.96);
+      flex: 1 1 360px;
+      min-width: 340px;
+      max-width: 430px;
+      background: rgba(255,255,255,0.98);
       border-radius: 1.5rem;
-      box-shadow: 0 2px 12px var(--star-shadow);
-      padding: 2rem 2.5rem;
+      box-shadow: 0 2px 16px var(--star-shadow);
+      padding: 2.2rem 2.5rem 2.1rem 2.5rem;
       box-sizing: border-box;
+      margin-bottom: 0.3rem;
+      position: relative;
+      transition: box-shadow 0.2s;
+    }
+    section:hover {
+      box-shadow: 0 6px 28px var(--star-shadow);
     }
     body.dark section {
-      background: rgba(26,28,44,0.98);
-      box-shadow: 0 2px 12px rgba(142,36,170,0.20);
+      background: rgba(26,28,44,0.99);
+      box-shadow: 0 2px 16px rgba(142,36,170,0.25);
     }
     h2 {
       margin-top: 0;
@@ -185,6 +190,9 @@
       font-weight: 700;
       color: var(--main-color);
       letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
     }
     body.dark h2 {
       color: #ce93d8;
@@ -205,212 +213,35 @@
       font-size: 1rem;
       margin: 0;
       font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5em;
       transition: background 0.2s, color 0.2s;
-      display: inline-block;
       max-width: fit-content;
+      box-shadow: 0 1px 4px rgba(142,36,170,0.11);
     }
     body.dark .specializations li {
       background: #4527a0;
       color: #ce93d8;
     }
-    .contact-review-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      justify-content: center;
-      margin-bottom: 2rem;
-    }
-    .contact-section, .review-section {
-      flex: 1 1 320px;
-      background: rgba(255,255,255,0.97);
-      border-radius: 1rem;
-      box-shadow: 0 2px 8px var(--star-shadow);
-      padding: 1.5rem;
-    }
-    body.dark .contact-section, body.dark .review-section {
-      background: #311b92;
-    }
-    form input, form textarea {
-      width: 100%;
-      padding: 0.7rem 1rem;
-      margin-bottom: 1rem;
-      border: 1px solid #d1c4e9;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-family: inherit;
-      background: #fafbfc;
-      transition: border 0.2s;
-      box-sizing: border-box;
-    }
-    body.dark form input, body.dark form textarea {
-      background: #23253a;
-      border: 1px solid #ce93d8;
-      color: #fff;
-    }
-    form label {
-      font-size: 1rem;
-      font-weight: 500;
-      margin-bottom: 0.2rem;
-      display: block;
-    }
-    form input:focus, form textarea:focus {
-      outline: none;
-      border-color: var(--main-color);
-    }
-    form button {
-      padding: 0.6rem 1.5rem;
-      background: var(--main-color);
-      color: #fff;
-      font-weight: 600;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: background 0.2s;
-      box-shadow: 0 1px 4px var(--star-shadow);
-    }
-    form button:disabled {
-      background: #bdbdbd;
-      color: #fff;
-      cursor: not-allowed;
-    }
-    .reviews-comments {
-      max-width: 700px;
-      margin: 2rem auto;
-      background: rgba(255,255,255,0.96);
-      border-radius: 1.5rem;
-      box-shadow: 0 2px 12px var(--star-shadow);
-      padding: 2rem 2.5rem;
-    }
-    body.dark .reviews-comments {
-      background: #311b92;
-    }
-    #reviewsContainer {
-      margin-top: 1.2rem;
-    }
-    .review-item {
-      background: var(--sec-bg);
-      color: var(--sec-text);
-      border-radius: 1rem;
-      padding: 1rem 1.5rem;
-      margin-bottom: 1rem;
-      box-shadow: 0 1px 4px var(--star-shadow);
-      transition: background 0.2s, color 0.2s;
-    }
-    body.dark .review-item {
-      background: #4527a0;
-      color: #ce93d8;
-    }
-    .review-author {
-      font-weight: 600;
-      font-size: 1.1rem;
-      margin-bottom: 0.2rem;
-    }
-    .review-text {
-      font-size: 1rem;
-      margin-left: 0.5rem;
-      margin-bottom: 0.3rem;
-    }
-    .review-stars {
-      color: gold;
-      font-size: 1.2rem;
-      user-select: none;
-      margin-left: 0.5rem;
-    }
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 2000;
-      left: 0; top: 0; width: 100vw; height: 100vh;
-      overflow: auto;
-      background: rgba(142,36,170,0.13);
-      align-items: center;
-      justify-content: center;
-      transition: background 0.3s;
-    }
-    .modal.show {
-      display: flex;
-    }
-    .modal-content {
-      background: #fff;
-      color: #222;
-      margin: auto;
-      border-radius: 1rem;
-      padding: 2rem 2.5rem;
-      box-shadow: 0 4px 32px rgba(142,36,170,0.20);
-      position: relative;
-      min-width: 320px;
-      max-width: 95vw;
-    }
-    body.dark .modal-content {
-      background: #23253a;
-      color: #fff;
-    }
-    .close {
-      position: absolute;
-      top: 1rem; right: 1rem;
-      font-size: 2rem;
-      cursor: pointer;
-      color: var(--main-color);
-      background: none;
-      border: none;
-      transition: color 0.2s;
-    }
-    .close:hover {
-      color: #e53935;
-    }
-    .modal-submit {
-      width: 100%;
-    }
-    .star-rating {
-      display: flex;
-      flex-direction: row;
-      gap: 0.25rem;
-      margin-bottom: 1rem;
-      align-items: center;
-    }
-    .star-rating input {
-      display: none;
-    }
-    .star-rating label {
-      font-size: 2rem;
-      color: #ccc;
-      cursor: pointer;
-      user-select: none;
-      transition: color 0.2s;
-    }
-    .star-rating label:hover,
-    .star-rating label:hover ~ label,
-    .star-rating input:checked ~ label {
-      color: gold;
-    }
-    .star-rating input:focus + label {
-      outline: 2px solid var(--main-color);
-      outline-offset: 2px;
-    }
-    .services-section ul {
+    .services-section ul,
+    section ul {
       padding-left: 1.5rem;
+      margin-top: 1rem;
     }
-    .services-section ul li {
+    .services-section ul li,
+    section ul li {
       margin-bottom: 0.4rem;
-      line-height: 1.5;
+      line-height: 1.6;
     }
-    .services-section h3 {
-      margin-top: 1.5rem;
-      color: var(--main-color-dark);
-    }
-    body.dark .services-section h3 {
-      color: #ce93d8;
-    }
-    /* Donations section styling */
     .donations-section {
       text-align: center;
+      background: linear-gradient(120deg, #ede7f6 80%, #fff 100%);
     }
-    .donations-section h2 {
-      color: var(--main-color);
-      margin-top: 0;
+    body.dark .donations-section {
+      background: linear-gradient(120deg, #311b92 80%, #23253a 100%);
     }
-    .tip-options {
+    .donations-section .tip-options {
       margin-top: 1.2rem;
       display: flex;
       gap: 1.2rem;
@@ -430,7 +261,7 @@
       margin: 0.3rem 0;
       background: var(--main-color);
       color: #fff;
-      transition: background 0.2s;
+      transition: background 0.2s, box-shadow 0.2s;
       box-shadow: 0 1px 3px var(--star-shadow);
       display: flex;
       align-items: center;
@@ -441,6 +272,36 @@
     .tip-btn[disabled] {
       opacity: 0.6;
       cursor: default;
+    }
+    .showcase-link {
+      color: var(--main-color);
+      font-weight: 600;
+      text-decoration: underline;
+      transition: color 0.2s;
+    }
+    .showcase-link:hover {
+      color: #7b1fa2;
+    }
+    .section-icon {
+      font-size: 1.4em;
+      vertical-align: -0.2em;
+      margin-right: 0.2em;
+    }
+    .testimonial {
+      margin-top: 1.5em;
+      background: #f3e5f5;
+      color: #6a1b9a;
+      border-left: 5px solid #ab47bc;
+      border-radius: 0 1em 1em 0;
+      padding: 1em 1.5em;
+      font-style: italic;
+      font-size: 1.06em;
+      box-shadow: 0 1px 4px var(--star-shadow);
+    }
+    body.dark .testimonial {
+      background: #4527a0;
+      color: #fff;
+      border-left: 5px solid #ce93d8;
     }
     @media (max-width: 1200px) {
       .main-sections-container {
@@ -464,6 +325,9 @@
       }
       .main-sections-container, .services-section, section, .donations-section {
         padding: 1.2rem 0.8rem;
+      }
+      section {
+        padding: 1.4rem 1rem;
       }
     }
   </style>
@@ -489,73 +353,78 @@
   <div class="main-sections-container">
     <!-- About Me -->
     <section aria-labelledby="aboutTitle">
-      <h2 id="aboutTitle">About Me</h2>
+      <h2 id="aboutTitle"><span class="section-icon" aria-hidden="true">👋</span>About Me</h2>
       <p>
-        Hello, I'm <strong>Wish</strong>, a multidisciplinary 3D modeler, game asset artist, animator, and instructor. I have a proven record of delivering high-quality assets for interactive environments. By blending technical expertise with creative vision, I develop optimized, game-ready models and animations that enhance user experiences. I am passionate about mentoring and sharing knowledge to empower the next generation of talent in the field.
+        Hello, I'm <strong>Wish</strong> — a multidisciplinary 3D modeler, game asset artist, animator, and instructor. I specialize in crafting high-quality, game-ready assets and animations by blending technical expertise with creative vision. My focus is on delivering value for interactive environments, and I am passionate about mentoring and empowering the next generation of creators.
       </p>
-    </section>
-
-    <!-- Donations & Tips -->
-    <section aria-labelledby="donationsTitle" class="donations-section">
-      <h2 id="donationsTitle">Donations &amp; Tips</h2>
-      <p>
-        If you appreciate my work or have found my resources valuable, please consider supporting me. Your generosity enables me to continue creating and sharing with the community. Thank you!
-      </p>
-      <div class="tip-options">
-        <a href="https://patreon.com/WishuponaStar1?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink" target="_blank" rel="noopener noreferrer">
-          <button class="tip-btn patreon" aria-label="Support me on Patreon">
-            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/patreon.svg" alt="Patreon" style="height:1.4em;vertical-align:middle;">Patreon
-          </button>
-        </a>
-        <!-- Add more tip/donation options here if you wish -->
+      <div class="testimonial">
+        “Wish is a rare combination of technical mastery and creative artistry. Their assets consistently bring our projects to the next level.”<br>
+        <span style="font-size:0.98em;font-style:normal;">— Satisfied Client</span>
       </div>
     </section>
 
     <!-- Areas of Expertise -->
     <section aria-labelledby="expertiseTitle">
-      <h2 id="expertiseTitle">Areas of Expertise</h2>
+      <h2 id="expertiseTitle"><span class="section-icon" aria-hidden="true">🛠️</span>Areas of Expertise</h2>
       <ul class="specializations" role="list" style="margin-bottom:0;">
-        <li role="listitem">Roblox Modeling</li>
-        <li role="listitem">Roblox Scripting</li>
-        <li role="listitem">Roblox Building</li>
-        <li role="listitem">Game Asset Creation</li>
-        <li role="listitem">Portfolio Websites</li>
+        <li><span aria-hidden="true">🧱</span>Roblox Modeling</li>
+        <li><span aria-hidden="true">⚙️</span>Roblox Scripting</li>
+        <li><span aria-hidden="true">🏗️</span>Roblox Building</li>
+        <li><span aria-hidden="true">🎮</span>Game Asset Creation</li>
+        <li><span aria-hidden="true">🌐</span>Portfolio Websites</li>
       </ul>
     </section>
 
     <!-- What I Do -->
     <section aria-labelledby="servicesTitle" class="services-section">
-      <h2 id="servicesTitle">What I Do</h2>
+      <h2 id="servicesTitle"><span class="section-icon" aria-hidden="true">💼</span>What I Do</h2>
       <ul>
-        <li>Game asset creation (Roblox, Unity, Unreal)</li>
-        <li>Character and creature modeling</li>
-        <li>Architectural visualization</li>
-        <li>Product rendering for brands</li>
-        <li>Logo animations and intros</li>
-        <li>NFT and concept art rendering</li>
+        <li><strong>Game Asset Creation:</strong> For Roblox, Unity, Unreal – optimized for performance and aesthetics.</li>
+        <li><strong>Character & Creature Modeling:</strong> Stylized or realistic, always rigged and ready for animation.</li>
+        <li><strong>Architectural Visualization:</strong> Bring concepts to life for games and presentations.</li>
+        <li><strong>Product & Logo Animation:</strong> Dynamic intros and brand showcases.</li>
+        <li><strong>NFT & Concept Art Rendering:</strong> Unique, high-impact visuals for the digital marketplace.</li>
       </ul>
     </section>
 
     <!-- Selli Assets -->
     <section aria-labelledby="selliTitle">
-      <h2 id="selliTitle">Selling Assets</h2>
+      <h2 id="selliTitle"><span class="section-icon" aria-hidden="true">🧩</span>Selli Assets</h2>
       <p>
-        I create reusable 3D assets for marketplaces, providing fellow creators with resources while generating semi-passive income.
+        I develop reusable 3D assets for global marketplaces, providing creators with high-quality resources and generating passive income.
       </p>
       <strong>Available asset types:</strong>
       <ul>
-        <li>Game assets (low/high-poly models, rigs, textures)</li>
-        <li>Scene kits and environment packs</li>
-        <li>Shader and material bundles</li>
+        <li>Low/High-poly game models (rigged & textured)</li>
+        <li>Scene kits & environment packs</li>
+        <li>Shader & material bundles</li>
         <li>Animation packs</li>
       </ul>
+      <p>
+        <a href="#" class="showcase-link">Browse my assets on [Marketplace]</a>
+      </p>
+    </section>
+
+    <!-- Support My Work -->
+    <section aria-labelledby="supportTitle" class="donations-section">
+      <h2 id="supportTitle"><span class="section-icon" aria-hidden="true">💖</span>Support My Work</h2>
+      <p>
+        If my work adds value to your projects or inspires you, please consider supporting me. Your contributions help me keep developing resources for the community!
+      </p>
+      <div class="tip-options">
+        <a href="https://patreon.com/WishuponaStar1" target="_blank" rel="noopener noreferrer">
+          <button class="tip-btn patreon">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/patreon.svg" alt="" style="height:1.4em;vertical-align:middle;">Patreon
+          </button>
+        </a>
+        <!-- Add more support options here! -->
+      </div>
     </section>
   </div>
 
   <div class="contact-review-container">
     <section class="contact-section" aria-labelledby="contactTitle">
       <h2 id="contactTitle">Contact</h2>
-      <!-- Social/contact links start -->
       <div style="margin-bottom: 1.3rem;">
         <a href="https://x.com/3d_modeler_Wish" target="_blank" rel="noopener noreferrer" style="margin-right: 1.1rem;">
           <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" alt="Twitter/X" style="height:1.2em;width:1.2em;vertical-align:middle;margin-right:0.4em;">@3d_modeler_Wish
@@ -569,7 +438,6 @@
           <span style="font-family:monospace;">no_nameiscool1_45977</span>
         </span>
       </div>
-      <!-- Social/contact links end -->
       <form id="contactForm" aria-describedby="contactInfo" autocomplete="off">
         <label for="contactName">Name</label>
         <input type="text" id="contactName" name="contactName" required autocomplete="name" />
