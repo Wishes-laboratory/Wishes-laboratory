@@ -6,6 +6,16 @@
   <title>⭐️ Wish upon a Star</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
   <style>
+    :root {
+      --main-gradient: linear-gradient(90deg, #b388ff 0%, #8e24aa 100%);
+      --main-color: #8e24aa;
+      --main-color-dark: #7b1fa2;
+      --special-bg: #ede7f6;
+      --special-color: #6a1b9a;
+      --star-shadow: rgba(142,36,170,0.1);
+      --sec-bg: #ede7f6;
+      --sec-text: #6a1b9a;
+    }
     #stars-canvas {
       position: fixed;
       top: 0;
@@ -30,7 +40,7 @@
     #splash-screen {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: linear-gradient(135deg, #90caf9 0%, #fceabb 100%);
+      background: linear-gradient(135deg, #b388ff 0%, #fceabb 100%);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -79,7 +89,7 @@
       to { opacity: 1; }
     }
     header {
-      background: linear-gradient(90deg, #6dd5ed 0%, #2193b0 100%);
+      background: var(--main-gradient);
       color: #fff;
       font-size: 1.6rem;
       font-weight: 600;
@@ -90,7 +100,7 @@
       align-items: center;
       border-bottom-left-radius: 1.5rem;
       border-bottom-right-radius: 1.5rem;
-      box-shadow: 0 4px 20px rgba(33,147,176,0.1);
+      box-shadow: 0 4px 20px var(--star-shadow);
       position: sticky; top: 0; z-index: 999;
     }
     .header-title {
@@ -115,15 +125,15 @@
       border: none;
       border-radius: 8px;
       background: #fff;
-      color: #2193b0;
+      color: var(--main-color);
       font-weight: 600;
       font-size: 1rem;
       cursor: pointer;
       transition: background 0.2s, color 0.2s;
-      box-shadow: 0 1px 3px rgba(33,147,176,0.04);
+      box-shadow: 0 1px 3px var(--star-shadow);
     }
     .controls button:hover, .controls button:focus {
-      background: #2193b0;
+      background: var(--main-color);
       color: #fff;
       outline: none;
     }
@@ -139,34 +149,45 @@
       font-size: 1rem;
       cursor: pointer;
       transition: background 0.2s, color 0.2s;
-      box-shadow: 0 1px 3px rgba(33,147,176,0.04);
+      box-shadow: 0 1px 3px var(--star-shadow);
     }
     .patreon-button:hover, .patreon-button:focus {
       background: #c24532;
       color: #fff;
       outline: none;
     }
-    section {
-      max-width: 700px;
+    .main-sections-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      align-items: flex-start;
+      max-width: 1500px;
       margin: 2.5rem auto 2rem auto;
+    }
+    section {
+      flex: 1 1 320px;
+      min-width: 320px;
+      max-width: 480px;
       background: rgba(255,255,255,0.96);
       border-radius: 1.5rem;
-      box-shadow: 0 2px 12px rgba(33,147,176,0.06);
+      box-shadow: 0 2px 12px var(--star-shadow);
       padding: 2rem 2.5rem;
+      box-sizing: border-box;
     }
     body.dark section {
       background: rgba(26,28,44,0.98);
-      box-shadow: 0 2px 12px rgba(33,147,176,0.20);
+      box-shadow: 0 2px 12px rgba(142,36,170,0.20);
     }
     h2 {
       margin-top: 0;
       font-size: 2rem;
       font-weight: 700;
-      color: #2193b0;
+      color: var(--main-color);
       letter-spacing: 0.5px;
     }
     body.dark h2 {
-      color: #90caf9;
+      color: #ce93d8;
     }
     .specializations {
       display: flex;
@@ -175,8 +196,8 @@
       margin-top: 1rem;
     }
     .specializations p {
-      background: #e3f2fd;
-      color: #1565c0;
+      background: var(--special-bg);
+      color: var(--special-color);
       padding: 0.7rem 1.2rem;
       border-radius: 2rem;
       font-size: 1rem;
@@ -185,8 +206,8 @@
       transition: background 0.2s, color 0.2s;
     }
     body.dark .specializations p {
-      background: #293b5f;
-      color: #90caf9;
+      background: #4527a0;
+      color: #ce93d8;
     }
     .contact-review-container {
       display: flex;
@@ -199,17 +220,17 @@
       flex: 1 1 320px;
       background: rgba(255,255,255,0.97);
       border-radius: 1rem;
-      box-shadow: 0 2px 8px rgba(33,147,176,0.06);
+      box-shadow: 0 2px 8px var(--star-shadow);
       padding: 1.5rem;
     }
     body.dark .contact-section, body.dark .review-section {
-      background: rgba(28,32,53,0.98);
+      background: #311b92;
     }
     form input, form textarea {
       width: 100%;
       padding: 0.7rem 1rem;
       margin-bottom: 1rem;
-      border: 1px solid #b2dfdb;
+      border: 1px solid #d1c4e9;
       border-radius: 8px;
       font-size: 1rem;
       font-family: inherit;
@@ -219,7 +240,7 @@
     }
     body.dark form input, body.dark form textarea {
       background: #23253a;
-      border: 1px solid #90caf9;
+      border: 1px solid #ce93d8;
       color: #fff;
     }
     form label {
@@ -230,11 +251,11 @@
     }
     form input:focus, form textarea:focus {
       outline: none;
-      border-color: #2193b0;
+      border-color: var(--main-color);
     }
     form button {
       padding: 0.6rem 1.5rem;
-      background: #2193b0;
+      background: var(--main-color);
       color: #fff;
       font-weight: 600;
       border: none;
@@ -242,7 +263,7 @@
       cursor: pointer;
       font-size: 1rem;
       transition: background 0.2s;
-      box-shadow: 0 1px 4px rgba(33,147,176,0.07);
+      box-shadow: 0 1px 4px var(--star-shadow);
     }
     form button:disabled {
       background: #bdbdbd;
@@ -254,27 +275,27 @@
       margin: 2rem auto;
       background: rgba(255,255,255,0.96);
       border-radius: 1.5rem;
-      box-shadow: 0 2px 12px rgba(33,147,176,0.08);
+      box-shadow: 0 2px 12px var(--star-shadow);
       padding: 2rem 2.5rem;
     }
     body.dark .reviews-comments {
-      background: rgba(28,32,53,0.98);
+      background: #311b92;
     }
     #reviewsContainer {
       margin-top: 1.2rem;
     }
     .review-item {
-      background: #e3f2fd;
-      color: #1a237e;
+      background: var(--sec-bg);
+      color: var(--sec-text);
       border-radius: 1rem;
       padding: 1rem 1.5rem;
       margin-bottom: 1rem;
-      box-shadow: 0 1px 4px rgba(33,147,176,0.05);
+      box-shadow: 0 1px 4px var(--star-shadow);
       transition: background 0.2s, color 0.2s;
     }
     body.dark .review-item {
-      background: #23253a;
-      color: #90caf9;
+      background: #4527a0;
+      color: #ce93d8;
     }
     .review-author {
       font-weight: 600;
@@ -298,7 +319,7 @@
       z-index: 2000;
       left: 0; top: 0; width: 100vw; height: 100vh;
       overflow: auto;
-      background: rgba(33,147,176,0.13);
+      background: rgba(142,36,170,0.13);
       align-items: center;
       justify-content: center;
       transition: background 0.3s;
@@ -312,7 +333,7 @@
       margin: auto;
       border-radius: 1rem;
       padding: 2rem 2.5rem;
-      box-shadow: 0 4px 32px rgba(33,147,176,0.20);
+      box-shadow: 0 4px 32px rgba(142,36,170,0.20);
       position: relative;
       min-width: 320px;
       max-width: 95vw;
@@ -326,7 +347,7 @@
       top: 1rem; right: 1rem;
       font-size: 2rem;
       cursor: pointer;
-      color: #2193b0;
+      color: var(--main-color);
       background: none;
       border: none;
       transition: color 0.2s;
@@ -360,21 +381,8 @@
       color: gold;
     }
     .star-rating input:focus + label {
-      outline: 2px solid #2193b0;
+      outline: 2px solid var(--main-color);
       outline-offset: 2px;
-    }
-    /* Services Section Styles */
-    .services-section {
-      max-width: 700px;
-      margin: 2.5rem auto 2rem auto;
-      background: rgba(255,255,255,0.96);
-      border-radius: 1.5rem;
-      box-shadow: 0 2px 12px rgba(33,147,176,0.06);
-      padding: 2rem 2.5rem;
-    }
-    body.dark .services-section {
-      background: rgba(26,28,44,0.98);
-      box-shadow: 0 2px 12px rgba(33,147,176,0.20);
     }
     .services-section ul {
       padding-left: 1.5rem;
@@ -385,15 +393,21 @@
     }
     .services-section h3 {
       margin-top: 1.5rem;
-      color: #1565c0;
+      color: var(--main-color-dark);
     }
     body.dark .services-section h3 {
-      color: #90caf9;
+      color: #ce93d8;
+    }
+    @media (max-width: 1200px) {
+      .main-sections-container {
+        flex-direction: column;
+        max-width: 700px;
+      }
+      section {
+        max-width: 100%;
+      }
     }
     @media (max-width: 600px) {
-      .contact-review-container {
-        flex-direction: column;
-      }
       header {
         flex-direction: column;
         align-items: flex-start;
@@ -404,7 +418,7 @@
         display: flex;
         justify-content: flex-end;
       }
-      .services-section, section {
+      .main-sections-container, .services-section, section {
         padding: 1.2rem 0.8rem;
       }
     }
@@ -427,24 +441,48 @@
       </a>
     </div>
   </header>
-  
-  <section aria-labelledby="aboutTitle">
-    <h2 id="aboutTitle">About Me</h2>
-    <p>
-      Hello, I'm <strong>Wish</strong>, a multidisciplinary 3D modeler, game asset artist, animator, and instructor with a proven track record of delivering high-quality assets for interactive environments. I blend technical expertise with creative vision to develop optimized, game-ready models and animations that elevate user experiences. Beyond content creation, I am passionate about mentoring and sharing knowledge to empower emerging talent in the field.
-    </p>
-  </section>
-  
-  <section aria-labelledby="specializationsTitle">
-    <h2 id="specializationsTitle">Areas of Expertise</h2>
-    <div class="specializations" role="list">
-      <p role="listitem">Roblox Modeling</p>
-      <p role="listitem">Roblox Scripting</p>
-      <p role="listitem">Roblox Building</p>
-      <p role="listitem">Game Asset Creation</p>
-      <p role="listitem">Portfolio Websites</p>
-    </div>
-  </section>
+
+  <div class="main-sections-container">
+    <section aria-labelledby="aboutTitle">
+      <h2 id="aboutTitle">About Me</h2>
+      <p>
+        Hello, I'm <strong>Wish</strong>, a multidisciplinary 3D modeler, game asset artist, animator, and instructor with a proven track record of delivering high-quality assets for interactive environments. I blend technical expertise with creative vision to develop optimized, game-ready models and animations that elevate user experiences. Beyond content creation, I am passionate about mentoring and sharing knowledge to empower emerging talent in the field.
+      </p>
+    </section>
+    
+    <section aria-labelledby="specializationsTitle">
+      <h2 id="specializationsTitle">Areas of Expertise</h2>
+      <div class="specializations" role="list">
+        <p role="listitem">Roblox Modeling</p>
+        <p role="listitem">Roblox Scripting</p>
+        <p role="listitem">Roblox Building</p>
+        <p role="listitem">Game Asset Creation</p>
+        <p role="listitem">Portfolio Websites</p>
+      </div>
+    </section>
+
+    <section class="services-section" aria-labelledby="servicesTitle">
+      <h2 id="servicesTitle">What I Do</h2>
+      <h3>🔧 Services</h3>
+      <ul>
+        <li>Game asset creation (Roblox, Unity, Unreal)</li>
+        <li>Character and creature modeling</li>
+        <li>Architectural visualization</li>
+        <li>Product rendering for brands</li>
+        <li>Logo animations or intros</li>
+        <li>NFT or concept art rendering</li>
+      </ul>
+      <h3>🧩 Selli Assets</h3>
+      <p>Create reusable 3D assets and earn semi-passive income by selling on marketplaces.</p>
+      <strong>What I sell:</strong>
+      <ul>
+        <li>Game assets (low/high-poly models, rigs, textures)</li>
+        <li>Scene kits or environment packs</li>
+        <li>Shader/material bundles</li>
+        <li>Animation packs</li>
+      </ul>
+    </section>
+  </div>
   
   <div class="contact-review-container">
     <section class="contact-section" aria-labelledby="contactTitle">
@@ -481,30 +519,6 @@
       <div id="reviewsContainer" aria-live="polite" aria-relevant="additions"></div>
     </section>
   </div>
-
-  <section class="services-section" aria-labelledby="servicesTitle">
-    <h2 id="servicesTitle">What I Do</h2>
-    
-    <h3>🔧 Services</h3>
-    <ul>
-      <li>Game asset creation (Roblox, Unity, Unreal)</li>
-      <li>Character and creature modeling</li>
-      <li>Architectural visualization</li>
-      <li>Product rendering for brands</li>
-      <li>Logo animations or intros</li>
-      <li>NFT or concept art rendering</li>
-    </ul>
-
-    <h3>🧩 Selli Assets</h3>
-    <p>Create reusable 3D assets and earn semi-passive income by selling on marketplaces.</p>
-    <strong>What I sell:</strong>
-    <ul>
-      <li>Game assets (low/high-poly models, rigs, textures)</li>
-      <li>Scene kits or environment packs</li>
-      <li>Shader/material bundles</li>
-      <li>Animation packs</li>
-    </ul>
-  </section>
 
   <div id="reviewModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="reviewModalTitle" aria-describedby="reviewModalDesc">
     <div class="modal-content">
