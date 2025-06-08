@@ -175,6 +175,11 @@
       padding: 2rem 2.5rem;
       box-sizing: border-box;
     }
+    /* Special style for merged about section */
+    .about-combined-section {
+      flex: 2 1 520px;
+      max-width: 720px;
+    }
     body.dark section {
       background: rgba(26,28,44,0.98);
       box-shadow: 0 2px 12px rgba(142,36,170,0.20);
@@ -489,28 +494,32 @@
   </header>
 
   <div class="main-sections-container">
-    <section aria-labelledby="aboutTitle">
+    <!-- Combined About Me Section -->
+    <section aria-labelledby="aboutTitle" class="about-combined-section">
       <h2 id="aboutTitle">About Me</h2>
       <p>
         Hello, I'm <strong>Wish</strong>, a multidisciplinary 3D modeler, game asset artist, animator, and instructor with a proven track record of delivering high-quality assets for interactive environments. I blend technical expertise with creative vision to develop optimized, game-ready models and animations that elevate user experiences. Beyond content creation, I am passionate about mentoring and sharing knowledge to empower emerging talent in the field.
       </p>
-    </section>
-    
-    <section aria-labelledby="specializationsTitle">
-      <h2 id="specializationsTitle">Areas of Expertise</h2>
-      <div class="specializations" role="list">
+      <hr style="border: 0; border-top: 1.5px solid #eee; margin: 2em 0 1.3em 0;">
+      <h3 style="margin-bottom:0.6em;color:var(--main-color);font-size:1.3em;">💖 Donations &amp; Tips</h3>
+      <p>If you've enjoyed my work or found my resources helpful, consider leaving a tip or supporting me! Your generosity helps me keep creating and sharing more with the community. Thank you! 💜</p>
+      <div class="tip-options" style="margin-bottom:1.5em;">
+        <a href="https://patreon.com/WishuponaStar1?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink" target="_blank" rel="noopener noreferrer">
+          <button class="tip-btn patreon" aria-label="Support me on Patreon"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/patreon.svg" alt="Patreon" style="height:1.4em;vertical-align:middle;">Patreon</button>
+        </a>
+        <!-- Add more tip/donation options here if you wish -->
+      </div>
+      <hr style="border: 0; border-top: 1.5px solid #eee; margin: 2em 0 1.3em 0;">
+      <h3 style="margin-bottom:0.6em;color:var(--main-color);font-size:1.3em;">Areas of Expertise</h3>
+      <div class="specializations" role="list" style="margin-bottom:1.5em;">
         <p role="listitem">Roblox Modeling</p>
         <p role="listitem">Roblox Scripting</p>
         <p role="listitem">Roblox Building</p>
         <p role="listitem">Game Asset Creation</p>
         <p role="listitem">Portfolio Websites</p>
       </div>
-    </section>
-
-    <section class="services-section" aria-labelledby="servicesTitle">
-      <h2 id="servicesTitle">What I Do</h2>
-      <h3>🔧 Services</h3>
-      <ul>
+      <h3 style="margin-bottom:0.6em;color:var(--main-color);font-size:1.3em;">What I Do</h3>
+      <ul style="margin-bottom:1.5em;">
         <li>Game asset creation (Roblox, Unity, Unreal)</li>
         <li>Character and creature modeling</li>
         <li>Architectural visualization</li>
@@ -518,7 +527,7 @@
         <li>Logo animations or intros</li>
         <li>NFT or concept art rendering</li>
       </ul>
-      <h3>🧩 Selli Assets</h3>
+      <h3 style="margin-bottom:0.6em;color:var(--main-color);font-size:1.3em;">🧩 Selli Assets</h3>
       <p>Create reusable 3D assets and earn semi-passive income by selling on marketplaces.</p>
       <strong>What I sell:</strong>
       <ul>
@@ -529,23 +538,6 @@
       </ul>
     </section>
   </div>
-  
-  <!-- Donations & Tips Section -->
-  <section class="donations-section" aria-labelledby="donationsTitle">
-    <h2 id="donationsTitle">Donations &amp; Tips</h2>
-    <p>If you've enjoyed my work or found my resources helpful, consider leaving a tip or supporting me! Your generosity helps me keep creating and sharing more with the community. Thank you! 💜</p>
-    <div class="tip-options">
-      <a href="https://patreon.com/WishuponaStar1?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink" target="_blank" rel="noopener noreferrer">
-        <button class="tip-btn patreon" aria-label="Support me on Patreon"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/patreon.svg" alt="Patreon" style="height:1.4em;vertical-align:middle;">Patreon</button>
-      </a>
-      <!-- Example for more methods:
-      <a href="YOUR_PAYPAL_LINK" target="_blank" rel="noopener noreferrer">
-        <button class="tip-btn" style="background:#00457C;"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/paypal.svg" alt="PayPal" style="height:1.3em;vertical-align:middle;">PayPal</button>
-      </a>
-      -->
-      <!-- Add more tip/donation options here if you want! -->
-    </div>
-  </section>
   
   <div class="contact-review-container">
     <section class="contact-section" aria-labelledby="contactTitle">
