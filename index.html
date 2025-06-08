@@ -12,12 +12,9 @@
       --main-color-dark: #7b1fa2;
       --special-bg: #ede7f6;
       --special-color: #6a1b9a;
-      --star-shadow: rgba(142,36,170,0.25);
+      --star-shadow: rgba(142,36,170,0.1);
       --sec-bg: #ede7f6;
       --sec-text: #6a1b9a;
-      --3d-shadow: 0 10px 30px 2px #b388ff66, 0 1.5px 0 #fff;
-      --3d-inset: inset 0 6px 18px #b388ff44, inset 0 -2px 6px #8e24aa33;
-      --3d-btn: 0 6px 18px #b388ff66, 0 1.5px 0 #fff;
     }
     #stars-canvas {
       position: fixed;
@@ -27,16 +24,14 @@
       width: 100vw;
       height: 100vh;
       pointer-events: none;
-      filter: blur(0.5px) brightness(1.2);
     }
     body {
       font-family: 'Poppins', sans-serif;
       margin: 0;
       background: #f5f5f7;
       color: #222;
-      min-height: 100vh;
       transition: background 0.5s, color 0.5s;
-      perspective: 1200px;
+      min-height: 100vh;
     }
     body.dark {
       background: #181824;
@@ -54,16 +49,12 @@
       opacity: 1;
       transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1);
       pointer-events: none;
-      box-shadow: var(--3d-shadow);
-      transform: translateZ(100px) scale(1.01) rotateX(2deg);
     }
     #splash-screen .star {
       font-size: 4rem;
       animation: splash-star-move 2s cubic-bezier(0.65,0,0.35,1), twinkle 1.2s infinite alternate;
       display: inline-block;
       will-change: transform, filter;
-      text-shadow: 0 6px 16px #fff, 0 0 32px gold, 0 1.5px 0 #b388ff;
-      filter: drop-shadow(0 0 16px gold);
     }
     #splash-screen .text {
       font-size: 2.2rem;
@@ -72,19 +63,31 @@
       letter-spacing: 2px;
       opacity: 0;
       animation: splash-text-fade-in 1.1s 0.7s forwards cubic-bezier(0.4,0,0.2,1);
-      text-shadow: 0 3px 12px #fff, 0 1.5px 0 #b388ff;
     }
     @keyframes twinkle {
-      from { filter: brightness(1) drop-shadow(0 0 0px gold);}
-      to { filter: brightness(1.4) drop-shadow(0 0 16px gold);}
+      from { filter: brightness(1); }
+      to { filter: brightness(1.4) drop-shadow(0 0 10px gold); }
     }
     @keyframes splash-star-move {
-      0% { transform: scale(0.7) rotate(-20deg) translateY(-30px);}
-      55% { filter: brightness(1.7) drop-shadow(0 0 16px gold);}
-      80% { transform: scale(1.1) rotate(8deg) translateY(5px);}
-      100% { transform: scale(1) rotate(0deg) translateY(0);}
+      0% {
+        transform: scale(0.7) rotate(-20deg) translateY(-30px);
+        filter: brightness(1);
+      }
+      55% {
+        filter: brightness(1.7) drop-shadow(0 0 16px gold);
+      }
+      80% {
+        transform: scale(1.1) rotate(8deg) translateY(5px);
+        filter: brightness(1.25);
+      }
+      100% {
+        transform: scale(1) rotate(0deg) translateY(0);
+        filter: brightness(1);
+      }
     }
-    @keyframes splash-text-fade-in { to { opacity: 1; } }
+    @keyframes splash-text-fade-in {
+      to { opacity: 1; }
+    }
     header {
       background: var(--main-gradient);
       color: #fff;
@@ -97,9 +100,8 @@
       align-items: center;
       border-bottom-left-radius: 1.5rem;
       border-bottom-right-radius: 1.5rem;
-      box-shadow: var(--3d-shadow);
+      box-shadow: 0 4px 20px var(--star-shadow);
       position: sticky; top: 0; z-index: 999;
-      transform: translateZ(40px) rotateX(1.5deg);
     }
     .header-title {
       font-size: 1.8rem;
@@ -108,45 +110,46 @@
       display: flex;
       align-items: center;
       gap: 0.6rem;
-      text-shadow: 0 4px 12px #fff, 0 1.5px 0 #b388ff;
-      filter: drop-shadow(0 1.5px 0 #fff);
     }
     .header-title .star {
       font-size: 1.6rem;
       margin-right: 0.2rem;
-      text-shadow: 0 2px 6px #fff, 0 0 10px gold;
-      filter: drop-shadow(0 0 8px gold);
     }
     .controls {
       display: flex;
       align-items: center;
     }
-    .controls button, .controls .patreon-button {
+    .controls button {
       margin-left: 1rem;
       padding: 0.5rem 1.2rem;
       border: none;
-      border-radius: 12px;
-      background: linear-gradient(100deg,#fff 75%,#ede7f6 100%);
+      border-radius: 8px;
+      background: #fff;
       color: var(--main-color);
-      font-weight: 700;
+      font-weight: 600;
       font-size: 1rem;
       cursor: pointer;
-      transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.15s;
-      box-shadow: var(--3d-btn);
-      text-shadow: 0 1px 0 #fff;
-      transform: translateZ(10px);
+      transition: background 0.2s, color 0.2s;
+      box-shadow: 0 1px 3px var(--star-shadow);
     }
-    .controls button:hover, .controls button:focus, .controls .patreon-button:hover, .controls .patreon-button:focus {
+    .controls button:hover, .controls button:focus {
       background: var(--main-color);
       color: #fff;
       outline: none;
-      box-shadow: 0 3px 18px #8e24aa77, 0 3px 8px #fff;
-      transform: translateY(-2px) scale(1.03) perspective(80px) rotateX(4deg);
     }
+    /* Patreon Button Styles */
     .patreon-button {
-      background: linear-gradient(90deg,#f96854 70%,#fff 100%);
+      background: #f96854;
       color: #fff;
-      box-shadow: 0 4px 14px #f9685442, 0 1.5px 0 #fff;
+      margin-left: 1rem;
+      padding: 0.5rem 1.2rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      box-shadow: 0 1px 3px var(--star-shadow);
     }
     .patreon-button:hover, .patreon-button:focus {
       background: #c24532;
@@ -156,35 +159,30 @@
     .main-sections-container {
       display: flex;
       flex-wrap: wrap;
-      gap: 2.5rem;
+      gap: 2rem;
       justify-content: center;
       align-items: flex-start;
-      max-width: 1400px;
+      max-width: 1500px;
       margin: 2.5rem auto 2rem auto;
-      perspective: 1200px;
     }
     section {
-      flex: 1 1 340px;
+      flex: 1 1 320px;
       min-width: 320px;
       max-width: 480px;
-      background: linear-gradient(120deg,#fff 65%,#ede7f6 100%);
-      border-radius: 1.7rem;
-      box-shadow: var(--3d-shadow), var(--3d-inset);
-      padding: 2.3rem 2.5rem 2.1rem 2.5rem;
+      background: rgba(255,255,255,0.96);
+      border-radius: 1.5rem;
+      box-shadow: 0 2px 12px var(--star-shadow);
+      padding: 2rem 2.5rem;
       box-sizing: border-box;
-      margin-bottom: 0.3rem;
-      position: relative;
-      transition: box-shadow 0.2s, transform 0.2s;
-      transform: perspective(800px) rotateY(-6deg) scale3d(1.01,1.01,1.01);
     }
-    section:hover {
-      box-shadow: 0 12px 40px 8px #8e24aa66, 0 2.5px 0 #fff, 0 0.5px 0 #fff;
-      transform: perspective(600px) rotateY(4deg) scale3d(1.03,1.03,1.04);
-      z-index: 2;
+    /* Special style for merged about section */
+    .about-combined-section {
+      flex: 2 1 520px;
+      max-width: 720px;
     }
     body.dark section {
-      background: linear-gradient(100deg,#23253a 70%,#311b92 100%);
-      box-shadow: 0 2px 32px #b388ff33, 0 2px 8px #fff1, var(--3d-inset);
+      background: rgba(26,28,44,0.98);
+      box-shadow: 0 2px 12px rgba(142,36,170,0.20);
     }
     h2 {
       margin-top: 0;
@@ -192,105 +190,288 @@
       font-weight: 700;
       color: var(--main-color);
       letter-spacing: 0.5px;
-      display: flex;
-      align-items: center;
-      gap: 0.5em;
-      text-shadow: 0 2px 8px #fff, 0 1px 0 #b388ff;
-      filter: drop-shadow(0 0.5px 0 #fff);
     }
     body.dark h2 {
       color: #ce93d8;
-      text-shadow: 0 2px 12px #4527a0, 0 1px 0 #fff1;
     }
     .specializations {
       display: flex;
-      flex-direction: column;
-      gap: 0.7rem;
-      margin: 1rem 0 0 0;
-      padding: 0;
-      list-style: none;
-      transform: perspective(700px) rotateY(-8deg);
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      margin-top: 1rem;
     }
-    .specializations p,
-    .specializations li {
-      background: linear-gradient(90deg,#ede7f6 70%,#fff 100%);
+    .specializations p {
+      background: var(--special-bg);
       color: var(--special-color);
       padding: 0.7rem 1.2rem;
       border-radius: 2rem;
       font-size: 1rem;
       margin: 0;
       font-weight: 500;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5em;
-      box-shadow: 0 2px 8px #b388ff22, 0 1.5px 0 #fff;
-      transition: background 0.2s, color 0.2s, transform 0.2s;
-      transform: perspective(300px) rotateY(-10deg);
+      transition: background 0.2s, color 0.2s;
     }
-    .specializations p:hover,
-    .specializations li:hover {
-      background: #b388ff;
-      color: #fff;
-      transform: perspective(200px) rotateY(2deg) scale(1.06);
-    }
-    body.dark .specializations p,
-    body.dark .specializations li {
+    body.dark .specializations p {
       background: #4527a0;
       color: #ce93d8;
-      box-shadow: 0 2px 8px #4527a033;
     }
+    .contact-review-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+    .contact-section, .review-section {
+      flex: 1 1 320px;
+      background: rgba(255,255,255,0.97);
+      border-radius: 1rem;
+      box-shadow: 0 2px 8px var(--star-shadow);
+      padding: 1.5rem;
+    }
+    body.dark .contact-section, body.dark .review-section {
+      background: #311b92;
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      margin-bottom: 1rem;
+      border: 1px solid #d1c4e9;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: inherit;
+      background: #fafbfc;
+      transition: border 0.2s;
+      box-sizing: border-box;
+    }
+    body.dark form input, body.dark form textarea {
+      background: #23253a;
+      border: 1px solid #ce93d8;
+      color: #fff;
+    }
+    form label {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+      display: block;
+    }
+    form input:focus, form textarea:focus {
+      outline: none;
+      border-color: var(--main-color);
+    }
+    form button {
+      padding: 0.6rem 1.5rem;
+      background: var(--main-color);
+      color: #fff;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.2s;
+      box-shadow: 0 1px 4px var(--star-shadow);
+    }
+    form button:disabled {
+      background: #bdbdbd;
+      color: #fff;
+      cursor: not-allowed;
+    }
+    .reviews-comments {
+      max-width: 700px;
+      margin: 2rem auto;
+      background: rgba(255,255,255,0.96);
+      border-radius: 1.5rem;
+      box-shadow: 0 2px 12px var(--star-shadow);
+      padding: 2rem 2.5rem;
+    }
+    body.dark .reviews-comments {
+      background: #311b92;
+    }
+    #reviewsContainer {
+      margin-top: 1.2rem;
+    }
+    .review-item {
+      background: var(--sec-bg);
+      color: var(--sec-text);
+      border-radius: 1rem;
+      padding: 1rem 1.5rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 1px 4px var(--star-shadow);
+      transition: background 0.2s, color 0.2s;
+    }
+    body.dark .review-item {
+      background: #4527a0;
+      color: #ce93d8;
+    }
+    .review-author {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 0.2rem;
+    }
+    .review-text {
+      font-size: 1rem;
+      margin-left: 0.5rem;
+      margin-bottom: 0.3rem;
+    }
+    .review-stars {
+      color: gold;
+      font-size: 1.2rem;
+      user-select: none;
+      margin-left: 0.5rem;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      overflow: auto;
+      background: rgba(142,36,170,0.13);
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+    }
+    .modal.show {
+      display: flex;
+    }
+    .modal-content {
+      background: #fff;
+      color: #222;
+      margin: auto;
+      border-radius: 1rem;
+      padding: 2rem 2.5rem;
+      box-shadow: 0 4px 32px rgba(142,36,170,0.20);
+      position: relative;
+      min-width: 320px;
+      max-width: 95vw;
+    }
+    body.dark .modal-content {
+      background: #23253a;
+      color: #fff;
+    }
+    .close {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      font-size: 2rem;
+      cursor: pointer;
+      color: var(--main-color);
+      background: none;
+      border: none;
+      transition: color 0.2s;
+    }
+    .close:hover {
+      color: #e53935;
+    }
+    .modal-submit {
+      width: 100%;
+    }
+    .star-rating {
+      display: flex;
+      flex-direction: row;
+      gap: 0.25rem;
+      margin-bottom: 1rem;
+      align-items: center;
+    }
+    .star-rating input {
+      display: none;
+    }
+    .star-rating label {
+      font-size: 2rem;
+      color: #ccc;
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.2s;
+    }
+    .star-rating label:hover,
+    .star-rating label:hover ~ label,
+    .star-rating input:checked ~ label {
+      color: gold;
+    }
+    .star-rating input:focus + label {
+      outline: 2px solid var(--main-color);
+      outline-offset: 2px;
+    }
+    .services-section ul {
+      padding-left: 1.5rem;
+    }
+    .services-section ul li {
+      margin-bottom: 0.4rem;
+      line-height: 1.5;
+    }
+    .services-section h3 {
+      margin-top: 1.5rem;
+      color: var(--main-color-dark);
+    }
+    body.dark .services-section h3 {
+      color: #ce93d8;
+    }
+    /* Donations section styling */
     .donations-section {
+      max-width: 700px;
+      margin: 2rem auto 2.5rem auto;
+      background: rgba(255,255,255,0.96);
+      border-radius: 1.5rem;
+      box-shadow: 0 2px 12px var(--star-shadow);
+      padding: 2rem 2.5rem;
       text-align: center;
-      background: linear-gradient(120deg, #ede7f6 80%, #fff 100%);
-      box-shadow: 0 3px 18px #b388ff54, 0 1.5px 0 #fff;
-      transform: perspective(800px) rotateY(7deg) scale3d(1.02,1.01,1.01);
     }
-    body.dark .donations-section {
-      background: linear-gradient(120deg, #311b92 80%, #23253a 100%);
+    .donations-section h2 {
+      color: var(--main-color);
+      margin-top: 0;
     }
-    .donations-section .tip-options {
+    .tip-options {
       margin-top: 1.2rem;
       display: flex;
       gap: 1.2rem;
       justify-content: center;
       flex-wrap: wrap;
-      filter: drop-shadow(0 2px 8px #b388ff44);
     }
     .tip-options a {
       text-decoration: none;
     }
     .tip-btn {
       padding: 0.7rem 1.7rem;
-      border-radius: 14px;
+      border-radius: 8px;
       border: none;
       font-size: 1.1rem;
       font-weight: 600;
       cursor: pointer;
       margin: 0.3rem 0;
-      background: linear-gradient(90deg,#8e24aa 80%,#b388ff 100%);
+      background: var(--main-color);
       color: #fff;
-      transition: background 0.2s, box-shadow 0.18s, transform 0.18s;
-      box-shadow: 0 6px 16px #b388ff55, 0 1.5px 0 #fff;
+      transition: background 0.2s;
+      box-shadow: 0 1px 3px var(--star-shadow);
       display: flex;
       align-items: center;
       gap: 0.6em;
-      transform: translateZ(10px);
-      text-shadow: 0 1px 0 #fff5;
     }
-    .tip-btn.patreon { background: linear-gradient(90deg,#f96854 70%,#b388ff 100%);}
-    .tip-btn.patreon:hover { background: #c24532;}
-    .tip-btn[disabled] { opacity: 0.6; cursor: default;}
-    section ul, .services-section ul { padding-left: 1.5rem; margin-top: 1rem;}
-    section ul li, .services-section ul li { margin-bottom: 0.4rem; line-height: 1.6; }
+    .tip-btn.patreon { background: #f96854; }
+    .tip-btn.patreon:hover { background: #c24532; }
+    .tip-btn[disabled] {
+      opacity: 0.6;
+      cursor: default;
+    }
     @media (max-width: 1200px) {
-      .main-sections-container { flex-direction: column; max-width: 700px;}
-      section { max-width: 100%;}
+      .main-sections-container {
+        flex-direction: column;
+        max-width: 700px;
+      }
+      section {
+        max-width: 100%;
+      }
     }
     @media (max-width: 600px) {
-      header { flex-direction: column; align-items: flex-start; gap: 0.7rem;}
-      .controls { width: 100%; display: flex; justify-content: flex-end;}
-      .main-sections-container, .services-section, section, .donations-section { padding: 1.2rem 0.8rem;}
-      section { padding: 1.4rem 1rem;}
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.7rem;
+      }
+      .controls {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+      }
+      .main-sections-container, .services-section, section, .donations-section {
+        padding: 1.2rem 0.8rem;
+      }
     }
   </style>
 </head>
@@ -313,26 +494,32 @@
   </header>
 
   <div class="main-sections-container">
-    <section aria-labelledby="aboutTitle">
+    <!-- Combined About Me Section -->
+    <section aria-labelledby="aboutTitle" class="about-combined-section">
       <h2 id="aboutTitle">About Me</h2>
       <p>
         Hello, I'm <strong>Wish</strong>, a multidisciplinary 3D modeler, game asset artist, animator, and instructor with a proven track record of delivering high-quality assets for interactive environments. I blend technical expertise with creative vision to develop optimized, game-ready models and animations that elevate user experiences. Beyond content creation, I am passionate about mentoring and sharing knowledge to empower emerging talent in the field.
       </p>
-    </section>
-    <section aria-labelledby="specializationsTitle">
-      <h2 id="specializationsTitle">Areas of Expertise</h2>
-      <div class="specializations" role="list">
+      <hr style="border: 0; border-top: 1.5px solid #eee; margin: 2em 0 1.3em 0;">
+      <h3 style="margin-bottom:0.6em;color:var(--main-color);font-size:1.3em;">💖 Donations &amp; Tips</h3>
+      <p>If you've enjoyed my work or found my resources helpful, consider leaving a tip or supporting me! Your generosity helps me keep creating and sharing more with the community. Thank you! 💜</p>
+      <div class="tip-options" style="margin-bottom:1.5em;">
+        <a href="https://patreon.com/WishuponaStar1?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink" target="_blank" rel="noopener noreferrer">
+          <button class="tip-btn patreon" aria-label="Support me on Patreon"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/patreon.svg" alt="Patreon" style="height:1.4em;vertical-align:middle;">Patreon</button>
+        </a>
+        <!-- Add more tip/donation options here if you wish -->
+      </div>
+      <hr style="border: 0; border-top: 1.5px solid #eee; margin: 2em 0 1.3em 0;">
+      <h3 style="margin-bottom:0.6em;color:var(--main-color);font-size:1.3em;">Areas of Expertise</h3>
+      <div class="specializations" role="list" style="margin-bottom:1.5em;">
         <p role="listitem">Roblox Modeling</p>
         <p role="listitem">Roblox Scripting</p>
         <p role="listitem">Roblox Building</p>
         <p role="listitem">Game Asset Creation</p>
         <p role="listitem">Portfolio Websites</p>
       </div>
-    </section>
-    <section class="services-section" aria-labelledby="servicesTitle">
-      <h2 id="servicesTitle">What I Do</h2>
-      <h3>🔧 Services</h3>
-      <ul>
+      <h3 style="margin-bottom:0.6em;color:var(--main-color);font-size:1.3em;">What I Do</h3>
+      <ul style="margin-bottom:1.5em;">
         <li>Game asset creation (Roblox, Unity, Unreal)</li>
         <li>Character and creature modeling</li>
         <li>Architectural visualization</li>
@@ -340,7 +527,7 @@
         <li>Logo animations or intros</li>
         <li>NFT or concept art rendering</li>
       </ul>
-      <h3>🧩 Selling Assets</h3>
+      <h3 style="margin-bottom:0.6em;color:var(--main-color);font-size:1.3em;">🧩 Selli Assets</h3>
       <p>Create reusable 3D assets and earn semi-passive income by selling on marketplaces.</p>
       <strong>What I sell:</strong>
       <ul>
@@ -351,21 +538,6 @@
       </ul>
     </section>
   </div>
-  <section class="donations-section" aria-labelledby="donationsTitle">
-    <h2 id="donationsTitle">Donations &amp; Tips</h2>
-    <p>If you've enjoyed my work or found my resources helpful, consider leaving a tip or supporting me! Your generosity helps me keep creating and sharing more with the community. Thank you! 💜</p>
-    <div class="tip-options">
-      <a href="https://patreon.com/WishuponaStar1?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink" target="_blank" rel="noopener noreferrer">
-        <button class="tip-btn patreon" aria-label="Support me on Patreon"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/patreon.svg" alt="Patreon" style="height:1.4em;vertical-align:middle;">Patreon</button>
-      </a>
-      <!-- Example for more methods:
-      <a href="YOUR_PAYPAL_LINK" target="_blank" rel="noopener noreferrer">
-        <button class="tip-btn" style="background:#00457C;"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/paypal.svg" alt="PayPal" style="height:1.3em;vertical-align:middle;">PayPal</button>
-      </a>
-      -->
-      <!-- Add more tip/donation options here if you want! -->
-    </div>
-  </section>
   
   <div class="contact-review-container">
     <section class="contact-section" aria-labelledby="contactTitle">
