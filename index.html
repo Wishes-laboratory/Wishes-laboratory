@@ -105,6 +105,10 @@
       font-size: 1.6rem;
       margin-right: 0.2rem;
     }
+    .controls {
+      display: flex;
+      align-items: center;
+    }
     .controls button {
       margin-left: 1rem;
       padding: 0.5rem 1.2rem;
@@ -120,6 +124,25 @@
     }
     .controls button:hover, .controls button:focus {
       background: #2193b0;
+      color: #fff;
+      outline: none;
+    }
+    /* Patreon Button Styles */
+    .patreon-button {
+      background: #f96854;
+      color: #fff;
+      margin-left: 1rem;
+      padding: 0.5rem 1.2rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      box-shadow: 0 1px 3px rgba(33,147,176,0.04);
+    }
+    .patreon-button:hover, .patreon-button:focus {
+      background: #c24532;
       color: #fff;
       outline: none;
     }
@@ -399,6 +422,9 @@
     <div class="controls">
       <button id="themeToggle" aria-label="Toggle light/dark mode">Toggle Theme</button>
       <button id="openReviewModal" aria-haspopup="dialog">Write a Review</button>
+      <a href="https://patreon.com/WishuponaStar1?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink" target="_blank" rel="noopener noreferrer">
+        <button class="patreon-button" aria-label="Support me on Patreon">💖 Support</button>
+      </a>
     </div>
   </header>
   
