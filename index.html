@@ -112,7 +112,6 @@
       align-items: center;
       gap: 0.6rem;
     }
-    /* ⭐️ Glowing effect for the star in the header-title */
     .header-title .star {
       font-size: 1.6rem;
       margin-right: 0.2rem;
@@ -153,7 +152,6 @@
       color: #fff;
       outline: none;
     }
-    /* Patreon Button Styles */
     .patreon-button {
       background: #f96854;
       color: #fff;
@@ -334,7 +332,6 @@
       user-select: none;
       margin-left: 0.5rem;
     }
-    /* Like/Dislike styles for reviews */
     .review-actions {
       display: flex;
       gap: 0.8rem;
@@ -378,7 +375,6 @@
       background: #e57373;
       color: #fff;
     }
-    /* End Like/Dislike styles */
     .modal {
       display: none;
       position: fixed;
@@ -450,6 +446,24 @@
       outline: 2px solid var(--main-color);
       outline-offset: 2px;
     }
+    .auth-tab-btn {
+      padding: 0.5rem 2rem;
+      border: none;
+      background: #ede7f6;
+      color: #6a1b9a;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 1.2rem 1.2rem 0 0;
+      margin-right: 0.6rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      box-shadow: 0 1px 2px var(--star-shadow);
+    }
+    .auth-tab-btn.active, .auth-tab-btn:active {
+      background: #b388ff;
+      color: #fff;
+    }
+    #auth-modal .modal-content form label { margin-top: 0.7rem; }
     .services-section ul {
       padding-left: 1.5rem;
     }
@@ -464,7 +478,6 @@
     body.dark .services-section h3 {
       color: #ce93d8;
     }
-    /* Donations section styling */
     .donations-section {
       text-align: center;
     }
@@ -537,10 +550,42 @@
     <div class="text">Wish upon a Star</div>
   </div>
 
+  <!-- Authentication Modal -->
+  <div id="auth-modal" class="modal" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="authModalTitle" aria-describedby="authModalDesc">
+    <div class="modal-content" style="min-width:320px;max-width:90vw;">
+      <button class="close" id="closeAuthModal" aria-label="Close login/signup">&times;</button>
+      <h2 id="authModalTitle">Account</h2>
+      <p id="authModalDesc">Log in or Sign up to personalize your experience.</p>
+      <div id="auth-tabs" style="margin-bottom:1.2rem;">
+        <button id="showLoginTab" class="auth-tab-btn active" aria-selected="true">Login</button>
+        <button id="showSignupTab" class="auth-tab-btn" aria-selected="false">Sign up</button>
+      </div>
+      <form id="loginForm" autocomplete="off">
+        <label for="loginEmail">Email</label>
+        <input type="email" id="loginEmail" name="loginEmail" required autocomplete="username" />
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" name="loginPassword" required autocomplete="current-password" />
+        <button type="submit" style="width:100%;margin-top:1rem;">Login</button>
+        <div id="loginError" style="color:#d81b60;font-size:0.95em;margin-top:0.5rem;display:none"></div>
+      </form>
+      <form id="signupForm" autocomplete="off" style="display:none;">
+        <label for="signupName">Name</label>
+        <input type="text" id="signupName" name="signupName" required autocomplete="name" />
+        <label for="signupEmail">Email</label>
+        <input type="email" id="signupEmail" name="signupEmail" required autocomplete="username" />
+        <label for="signupPassword">Password</label>
+        <input type="password" id="signupPassword" name="signupPassword" required autocomplete="new-password" />
+        <button type="submit" style="width:100%;margin-top:1rem;">Sign up</button>
+        <div id="signupError" style="color:#d81b60;font-size:0.95em;margin-top:0.5rem;display:none"></div>
+      </form>
+    </div>
+  </div>
+
   <header>
     <div class="header-title"><span class="star" aria-hidden="true">⭐️</span> Wish upon a Star</div>
     <div class="controls">
       <button id="themeToggle" aria-label="Toggle light/dark mode">Toggle Theme</button>
+      <button id="openAuthModal" aria-haspopup="dialog">Login / Sign up</button>
       <button id="openReviewModal" aria-haspopup="dialog">Write a Review</button>
       <a href="https://patreon.com/WishuponaStar1?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink" target="_blank" rel="noopener noreferrer">
         <button class="patreon-button" aria-label="Support me on Patreon">💖 Support</button>
@@ -569,7 +614,6 @@
             <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/patreon.svg" alt="Patreon" style="height:1.4em;vertical-align:middle;">Patreon
           </button>
         </a>
-        <!-- Add more tip/donation options here if you wish -->
       </div>
     </section>
 
@@ -598,7 +642,7 @@
       </ul>
     </section>
 
-    <!-- Selli Assets -->
+    <!-- Selling Assets -->
     <section aria-labelledby="selliTitle">
       <h2 id="selliTitle">Selling Assets</h2>
       <p>
@@ -617,7 +661,6 @@
   <div class="contact-review-container">
     <section class="contact-section" aria-labelledby="contactTitle">
       <h2 id="contactTitle">Contact</h2>
-      <!-- Social/contact links start -->
       <div style="margin-bottom: 1.3rem;">
         <a href="https://x.com/3d_modeler_Wish" target="_blank" rel="noopener noreferrer" style="margin-right: 1.1rem;">
           <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" alt="Twitter/X" style="height:1.2em;width:1.2em;vertical-align:middle;margin-right:0.4em;">@3d_modeler_Wish
@@ -631,7 +674,6 @@
           <span style="font-family:monospace;">no_nameiscool1_45977</span>
         </span>
       </div>
-      <!-- Social/contact links end -->
       <form id="contactForm" aria-describedby="contactInfo" autocomplete="off">
         <label for="contactName">Name</label>
         <input type="text" id="contactName" name="contactName" required autocomplete="name" />
@@ -683,17 +725,190 @@
   </div>
   
   <script>
-    // Animated star canvas background
+    // --- Authentication Logic (localStorage, not secure for production) ---
+    let currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+    let users = JSON.parse(localStorage.getItem('users') || '{}');
+
+    const authModal = document.getElementById('auth-modal');
+    const openAuthBtn = document.getElementById('openAuthModal');
+    const closeAuthBtn = document.getElementById('closeAuthModal');
+
+    // Auth modal open/close
+    openAuthBtn.onclick = () => {
+      authModal.style.display = 'flex';
+      showLoginTab();
+      setTimeout(() => document.getElementById('loginEmail').focus(), 150);
+    };
+    closeAuthBtn.onclick = () => {
+      authModal.style.display = 'none';
+      clearAuthForms();
+    };
+    window.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && authModal.style.display === 'flex') {
+        authModal.style.display = 'none';
+        clearAuthForms();
+      }
+    });
+
+    // Auth tabs logic
+    function showLoginTab() {
+      document.getElementById('loginForm').style.display = '';
+      document.getElementById('signupForm').style.display = 'none';
+      document.getElementById('showLoginTab').classList.add('active');
+      document.getElementById('showLoginTab').setAttribute('aria-selected', 'true');
+      document.getElementById('showSignupTab').classList.remove('active');
+      document.getElementById('showSignupTab').setAttribute('aria-selected', 'false');
+    }
+    function showSignupTab() {
+      document.getElementById('loginForm').style.display = 'none';
+      document.getElementById('signupForm').style.display = '';
+      document.getElementById('showLoginTab').classList.remove('active');
+      document.getElementById('showLoginTab').setAttribute('aria-selected', 'false');
+      document.getElementById('showSignupTab').classList.add('active');
+      document.getElementById('showSignupTab').setAttribute('aria-selected', 'true');
+      setTimeout(() => document.getElementById('signupName').focus(), 150);
+    }
+    document.getElementById('showLoginTab').onclick = showLoginTab;
+    document.getElementById('showSignupTab').onclick = showSignupTab;
+
+    function clearAuthForms() {
+      document.getElementById('loginForm').reset();
+      document.getElementById('signupForm').reset();
+      document.getElementById('loginError').style.display = 'none';
+      document.getElementById('signupError').style.display = 'none';
+    }
+
+    // Login form handler
+    document.getElementById('loginForm').onsubmit = function(e) {
+      e.preventDefault();
+      const email = this.loginEmail.value.trim().toLowerCase();
+      const password = this.loginPassword.value;
+      if (!users[email] || users[email].password !== password) {
+        document.getElementById('loginError').textContent = 'Invalid email or password.';
+        document.getElementById('loginError').style.display = '';
+        return;
+      }
+      currentUser = { name: users[email].name, email };
+      localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      authModal.style.display = 'none';
+      clearAuthForms();
+      updateAuthUI();
+      updateReviewName();
+    };
+
+    // Signup form handler
+    document.getElementById('signupForm').onsubmit = function(e) {
+      e.preventDefault();
+      const name = this.signupName.value.trim();
+      const email = this.signupEmail.value.trim().toLowerCase();
+      const password = this.signupPassword.value;
+      if (!name || !email || !password) {
+        document.getElementById('signupError').textContent = 'Please fill all fields.';
+        document.getElementById('signupError').style.display = '';
+        return;
+      }
+      if (users[email]) {
+        document.getElementById('signupError').textContent = 'Email already registered.';
+        document.getElementById('signupError').style.display = '';
+        return;
+      }
+      users[email] = { name, password };
+      localStorage.setItem('users', JSON.stringify(users));
+      currentUser = { name, email };
+      localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      authModal.style.display = 'none';
+      clearAuthForms();
+      updateAuthUI();
+      updateReviewName();
+    };
+
+    // UI update for logged in/out state
+    function updateAuthUI() {
+      if (currentUser) {
+        openAuthBtn.textContent = `Logged in as ${currentUser.name} (Logout)`;
+        openAuthBtn.onclick = () => {
+          if (confirm("Log out?")) {
+            currentUser = null;
+            localStorage.removeItem('currentUser');
+            updateAuthUI();
+            updateReviewName();
+          }
+        };
+      } else {
+        openAuthBtn.textContent = "Login / Sign up";
+        openAuthBtn.onclick = () => {
+          authModal.style.display = 'flex';
+          showLoginTab();
+          setTimeout(() => document.getElementById('loginEmail').focus(), 150);
+        };
+      }
+    }
+    updateAuthUI();
+
+    // --- Review Modal: Login Required & Name Autofill ---
+    function isLoggedIn() {
+      try {
+        return !!JSON.parse(localStorage.getItem('currentUser'));
+      } catch { return false; }
+    }
+    const reviewModal = document.getElementById('reviewModal');
+    const openReviewBtns = [
+      document.getElementById('openReviewModal'),
+      document.getElementById('openReviewModal2')
+    ];
+    const reviewNameInput = document.getElementById('reviewName');
+
+    function updateReviewName() {
+      const user = JSON.parse(localStorage.getItem('currentUser') || 'null');
+      if (user && user.name) {
+        reviewNameInput.value = user.name;
+        reviewNameInput.readOnly = true;
+        reviewNameInput.setAttribute('tabindex', '-1');
+      } else {
+        reviewNameInput.value = '';
+        reviewNameInput.readOnly = false;
+        reviewNameInput.removeAttribute('tabindex');
+      }
+    }
+    updateReviewName();
+
+    openReviewBtns.forEach(btn => {
+      btn.onclick = function() {
+        if (!isLoggedIn()) {
+          authModal.style.display = 'flex';
+          showLoginTab();
+          setTimeout(() => document.getElementById('loginEmail').focus(), 120);
+          return;
+        }
+        updateReviewName();
+        reviewModal.classList.add('show');
+        setTimeout(() => reviewNameInput.focus(), 100);
+      };
+    });
+    // Close review modal
+    const closeReviewBtn = document.getElementById('closeReviewModal');
+    closeReviewBtn.addEventListener('click', () => {
+      reviewModal.classList.remove('show');
+      reviewForm.reset();
+      updateReviewName();
+    });
+    window.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && reviewModal.classList.contains('show')) {
+        reviewModal.classList.remove('show');
+        reviewForm.reset();
+        updateReviewName();
+      }
+    });
+
+    // --- Animated star canvas background (unchanged) ---
     const canvas = document.getElementById('stars-canvas');
     const ctx = canvas.getContext('2d');
     let stars = [];
-
     function resizeCanvas() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       generateStars();
     }
-
     function generateStars() {
       stars = [];
       for (let i = 0; i < 120; i++) {
@@ -706,7 +921,6 @@
         });
       }
     }
-
     function animateStars() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       for (let star of stars) {
@@ -722,11 +936,9 @@
       }
       requestAnimationFrame(animateStars);
     }
-
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
     animateStars();
-
     // Splash screen animation and fadeout
     window.addEventListener('load', () => {
       setTimeout(() => {
@@ -735,7 +947,6 @@
         setTimeout(() => splash.style.display = 'none', 800);
       }, 2000);
     });
-
     // Theme toggle with persistence
     const themeToggleBtn = document.getElementById('themeToggle');
     const body = document.body;
@@ -757,27 +968,7 @@
       themeToggleBtn.textContent = newTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
     });
 
-    // Review modal open/close
-    const reviewModal = document.getElementById('reviewModal');
-    const openReviewBtns = [document.getElementById('openReviewModal'), document.getElementById('openReviewModal2')];
-    const closeReviewBtn = document.getElementById('closeReviewModal');
-    const reviewNameInput = document.getElementById('reviewName');
-    openReviewBtns.forEach(btn => btn.addEventListener('click', () => {
-      reviewModal.classList.add('show');
-      setTimeout(() => reviewNameInput.focus(), 100);
-    }));
-    closeReviewBtn.addEventListener('click', () => {
-      reviewModal.classList.remove('show');
-      reviewForm.reset();
-    });
-    window.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && reviewModal.classList.contains('show')) {
-        reviewModal.classList.remove('show');
-        reviewForm.reset();
-      }
-    });
-
-    // Reviews storage (in-memory + localStorage)
+    // --- Reviews storage (in-memory + localStorage) ---
     const reviewsContainer = document.getElementById('reviewsContainer');
     const reviewForm = document.getElementById('reviewForm');
     let reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
@@ -828,6 +1019,12 @@
       // Attach like/dislike handlers
       Array.from(document.querySelectorAll('.review-actions button')).forEach(btn => {
         btn.onclick = function() {
+          if (!isLoggedIn()) {
+            authModal.style.display = 'flex';
+            showLoginTab();
+            setTimeout(() => document.getElementById('loginEmail').focus(), 120);
+            return;
+          }
           const hash = btn.getAttribute('data-hash');
           const action = btn.getAttribute('data-action');
           const other = action === 'like' ? 'dislike' : 'like';
@@ -861,7 +1058,16 @@
 
     reviewForm.addEventListener('submit', e => {
       e.preventDefault();
-      const name = reviewForm.reviewName.value.trim();
+      // Only allow submit if logged in
+      if (!isLoggedIn()) {
+        authModal.style.display = 'flex';
+        showLoginTab();
+        setTimeout(() => document.getElementById('loginEmail').focus(), 120);
+        return;
+      }
+      // Always use logged in user's name
+      const user = JSON.parse(localStorage.getItem('currentUser') || 'null');
+      const name = user && user.name ? user.name : '';
       const text = reviewForm.reviewText.value.trim();
       const rating = parseInt(reviewForm.rating.value);
 
@@ -878,7 +1084,20 @@
       renderReviews();
       reviewModal.classList.remove('show');
       reviewForm.reset();
+      updateReviewName();
     });
+
+    // If review name needs to update on login/logout from other tabs
+    window.addEventListener('storage', updateReviewName);
+    // Patch updateAuthUI so it always calls updateReviewName if needed
+    if (typeof updateAuthUI === 'function') {
+      const origUpdateAuthUI = updateAuthUI;
+      window.updateAuthUI = function() {
+        origUpdateAuthUI();
+        if (typeof updateReviewName === 'function') updateReviewName();
+      };
+    }
+    // --- End of script ---
   </script>
 </body>
 </html>
