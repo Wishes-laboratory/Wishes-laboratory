@@ -175,11 +175,6 @@
       padding: 2rem 2.5rem;
       box-sizing: border-box;
     }
-    /* Special style for merged about section */
-    .about-combined-section {
-      flex: 2 1 520px;
-      max-width: 720px;
-    }
     body.dark section {
       background: rgba(26,28,44,0.98);
       box-shadow: 0 2px 12px rgba(142,36,170,0.20);
@@ -196,11 +191,13 @@
     }
     .specializations {
       display: flex;
-      flex-wrap: wrap;
-      gap: 1.2rem;
-      margin-top: 1rem;
+      flex-direction: column;
+      gap: 0.7rem;
+      margin: 1rem 0 0 0;
+      padding: 0;
+      list-style: none;
     }
-    .specializations p {
+    .specializations li {
       background: var(--special-bg);
       color: var(--special-color);
       padding: 0.7rem 1.2rem;
@@ -209,8 +206,10 @@
       margin: 0;
       font-weight: 500;
       transition: background 0.2s, color 0.2s;
+      display: inline-block;
+      max-width: fit-content;
     }
-    body.dark .specializations p {
+    body.dark .specializations li {
       background: #4527a0;
       color: #ce93d8;
     }
@@ -405,12 +404,6 @@
     }
     /* Donations section styling */
     .donations-section {
-      max-width: 700px;
-      margin: 2rem auto 2.5rem auto;
-      background: rgba(255,255,255,0.96);
-      border-radius: 1.5rem;
-      box-shadow: 0 2px 12px var(--star-shadow);
-      padding: 2rem 2.5rem;
       text-align: center;
     }
     .donations-section h2 {
@@ -494,51 +487,71 @@
   </header>
 
   <div class="main-sections-container">
-    <!-- Combined About Me Section -->
-    <section aria-labelledby="aboutTitle" class="about-combined-section">
+    <!-- About Me -->
+    <section aria-labelledby="aboutTitle">
       <h2 id="aboutTitle">About Me</h2>
       <p>
-        Hello, I'm <strong>Wish</strong>, a multidisciplinary 3D modeler, game asset artist, animator, and instructor with a proven track record of delivering high-quality assets for interactive environments. I blend technical expertise with creative vision to develop optimized, game-ready models and animations that elevate user experiences. Beyond content creation, I am passionate about mentoring and sharing knowledge to empower emerging talent in the field.
+        Hello, I'm <strong>Wish</strong>, a multidisciplinary 3D modeler, game asset artist, animator, and instructor. I have a proven record of delivering high-quality assets for interactive environments. By blending technical expertise with creative vision, I develop optimized, game-ready models and animations that enhance user experiences. I am passionate about mentoring and sharing knowledge to empower the next generation of talent in the field.
       </p>
-      <hr style="border: 0; border-top: 1.5px solid #eee; margin: 2em 0 1.3em 0;">
-      <h3 style="margin-bottom:0.6em;color:var(--main-color);font-size:1.3em;">💖 Donations &amp; Tips</h3>
-      <p>If you've enjoyed my work or found my resources helpful, consider leaving a tip or supporting me! Your generosity helps me keep creating and sharing more with the community. Thank you! 💜</p>
-      <div class="tip-options" style="margin-bottom:1.5em;">
+    </section>
+
+    <!-- Donations & Tips -->
+    <section aria-labelledby="donationsTitle" class="donations-section">
+      <h2 id="donationsTitle">Donations &amp; Tips</h2>
+      <p>
+        If you appreciate my work or have found my resources valuable, please consider supporting me. Your generosity enables me to continue creating and sharing with the community. Thank you!
+      </p>
+      <div class="tip-options">
         <a href="https://patreon.com/WishuponaStar1?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink" target="_blank" rel="noopener noreferrer">
-          <button class="tip-btn patreon" aria-label="Support me on Patreon"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/patreon.svg" alt="Patreon" style="height:1.4em;vertical-align:middle;">Patreon</button>
+          <button class="tip-btn patreon" aria-label="Support me on Patreon">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/patreon.svg" alt="Patreon" style="height:1.4em;vertical-align:middle;">Patreon
+          </button>
         </a>
         <!-- Add more tip/donation options here if you wish -->
       </div>
-      <hr style="border: 0; border-top: 1.5px solid #eee; margin: 2em 0 1.3em 0;">
-      <h3 style="margin-bottom:0.6em;color:var(--main-color);font-size:1.3em;">Areas of Expertise</h3>
-      <div class="specializations" role="list" style="margin-bottom:1.5em;">
-        <p role="listitem">Roblox Modeling</p>
-        <p role="listitem">Roblox Scripting</p>
-        <p role="listitem">Roblox Building</p>
-        <p role="listitem">Game Asset Creation</p>
-        <p role="listitem">Portfolio Websites</p>
-      </div>
-      <h3 style="margin-bottom:0.6em;color:var(--main-color);font-size:1.3em;">What I Do</h3>
-      <ul style="margin-bottom:1.5em;">
+    </section>
+
+    <!-- Areas of Expertise -->
+    <section aria-labelledby="expertiseTitle">
+      <h2 id="expertiseTitle">Areas of Expertise</h2>
+      <ul class="specializations" role="list" style="margin-bottom:0;">
+        <li role="listitem">Roblox Modeling</li>
+        <li role="listitem">Roblox Scripting</li>
+        <li role="listitem">Roblox Building</li>
+        <li role="listitem">Game Asset Creation</li>
+        <li role="listitem">Portfolio Websites</li>
+      </ul>
+    </section>
+
+    <!-- What I Do -->
+    <section aria-labelledby="servicesTitle" class="services-section">
+      <h2 id="servicesTitle">What I Do</h2>
+      <ul>
         <li>Game asset creation (Roblox, Unity, Unreal)</li>
         <li>Character and creature modeling</li>
         <li>Architectural visualization</li>
         <li>Product rendering for brands</li>
-        <li>Logo animations or intros</li>
-        <li>NFT or concept art rendering</li>
+        <li>Logo animations and intros</li>
+        <li>NFT and concept art rendering</li>
       </ul>
-      <h3 style="margin-bottom:0.6em;color:var(--main-color);font-size:1.3em;">🧩 Selli Assets</h3>
-      <p>Create reusable 3D assets and earn semi-passive income by selling on marketplaces.</p>
-      <strong>What I sell:</strong>
+    </section>
+
+    <!-- Selli Assets -->
+    <section aria-labelledby="selliTitle">
+      <h2 id="selliTitle">Selli Assets</h2>
+      <p>
+        I create reusable 3D assets for marketplaces, providing fellow creators with resources while generating semi-passive income.
+      </p>
+      <strong>Available asset types:</strong>
       <ul>
         <li>Game assets (low/high-poly models, rigs, textures)</li>
-        <li>Scene kits or environment packs</li>
-        <li>Shader/material bundles</li>
+        <li>Scene kits and environment packs</li>
+        <li>Shader and material bundles</li>
         <li>Animation packs</li>
       </ul>
     </section>
   </div>
-  
+
   <div class="contact-review-container">
     <section class="contact-section" aria-labelledby="contactTitle">
       <h2 id="contactTitle">Contact</h2>
