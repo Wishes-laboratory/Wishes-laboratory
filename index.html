@@ -398,6 +398,52 @@
     body.dark .services-section h3 {
       color: #ce93d8;
     }
+    /* Donations section styling */
+    .donations-section {
+      max-width: 700px;
+      margin: 2rem auto 2.5rem auto;
+      background: rgba(255,255,255,0.96);
+      border-radius: 1.5rem;
+      box-shadow: 0 2px 12px var(--star-shadow);
+      padding: 2rem 2.5rem;
+      text-align: center;
+    }
+    .donations-section h2 {
+      color: var(--main-color);
+      margin-top: 0;
+    }
+    .tip-options {
+      margin-top: 1.2rem;
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .tip-options a {
+      text-decoration: none;
+    }
+    .tip-btn {
+      padding: 0.7rem 1.7rem;
+      border-radius: 8px;
+      border: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin: 0.3rem 0;
+      background: var(--main-color);
+      color: #fff;
+      transition: background 0.2s;
+      box-shadow: 0 1px 3px var(--star-shadow);
+      display: flex;
+      align-items: center;
+      gap: 0.6em;
+    }
+    .tip-btn.patreon { background: #f96854; }
+    .tip-btn.patreon:hover { background: #c24532; }
+    .tip-btn[disabled] {
+      opacity: 0.6;
+      cursor: default;
+    }
     @media (max-width: 1200px) {
       .main-sections-container {
         flex-direction: column;
@@ -418,7 +464,7 @@
         display: flex;
         justify-content: flex-end;
       }
-      .main-sections-container, .services-section, section {
+      .main-sections-container, .services-section, section, .donations-section {
         padding: 1.2rem 0.8rem;
       }
     }
@@ -483,6 +529,23 @@
       </ul>
     </section>
   </div>
+  
+  <!-- Donations & Tips Section -->
+  <section class="donations-section" aria-labelledby="donationsTitle">
+    <h2 id="donationsTitle">Donations &amp; Tips</h2>
+    <p>If you've enjoyed my work or found my resources helpful, consider leaving a tip or supporting me! Your generosity helps me keep creating and sharing more with the community. Thank you! 💜</p>
+    <div class="tip-options">
+      <a href="https://patreon.com/WishuponaStar1?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink" target="_blank" rel="noopener noreferrer">
+        <button class="tip-btn patreon" aria-label="Support me on Patreon"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/patreon.svg" alt="Patreon" style="height:1.4em;vertical-align:middle;">Patreon</button>
+      </a>
+      <!-- Example for more methods:
+      <a href="YOUR_PAYPAL_LINK" target="_blank" rel="noopener noreferrer">
+        <button class="tip-btn" style="background:#00457C;"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/paypal.svg" alt="PayPal" style="height:1.3em;vertical-align:middle;">PayPal</button>
+      </a>
+      -->
+      <!-- Add more tip/donation options here if you want! -->
+    </div>
+  </section>
   
   <div class="contact-review-container">
     <section class="contact-section" aria-labelledby="contactTitle">
