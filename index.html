@@ -234,14 +234,15 @@
       justify-content: center;
       margin-bottom: 2rem;
     }
-    .contact-section, .review-section {
+    .contact-section, .review-section, .socials-section {
       flex: 1 1 320px;
       background: rgba(255,255,255,0.97);
       border-radius: 1rem;
       box-shadow: 0 2px 8px var(--star-shadow);
       padding: 1.5rem;
+      margin-bottom: 0;
     }
-    body.dark .contact-section, body.dark .review-section {
+    body.dark .contact-section, body.dark .review-section, body.dark .socials-section {
       background: #311b92;
     }
     form input, form textarea {
@@ -517,6 +518,22 @@
       opacity: 0.6;
       cursor: default;
     }
+    /* Socials section specific */
+    .socials-section ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 0.5em;
+    }
+    .socials-section li {
+      margin-bottom: 0.7em;
+    }
+    .socials-section a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .socials-section a:hover {
+      text-decoration: underline;
+    }
     @media (max-width: 1200px) {
       .main-sections-container {
         flex-direction: column;
@@ -539,6 +556,10 @@
       }
       .main-sections-container, .services-section, section, .donations-section {
         padding: 1.2rem 0.8rem;
+      }
+      .contact-review-container {
+        flex-direction: column;
+        gap: 1.2rem;
       }
     }
   </style>
@@ -659,21 +680,28 @@
   </div>
 
   <div class="contact-review-container">
+    <!-- Socials Section (separate from Contact Form) -->
+    <section aria-labelledby="socialsTitle" class="socials-section">
+      <h2 id="socialsTitle">Socials</h2>
+      <ul>
+        <li>
+          <a href="https://x.com/3d_modeler_Wish" target="_blank" rel="noopener noreferrer">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" alt="Twitter/X" style="height:1.2em;width:1.2em;vertical-align:middle;margin-right:0.4em;">
+            <strong>Twitter/X:</strong> @3d_modeler_Wish
+          </a>
+        </li>
+        <li>
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/gmail.svg" alt="Gmail" style="height:1.2em;width:1.2em;vertical-align:middle;margin-right:0.4em;">
+          <strong>Gmail:</strong> <a href="mailto:therealuponastarwish@gmail.com">therealuponastarwish@gmail.com</a>
+        </li>
+        <li>
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" alt="Discord" style="height:1.2em;width:1.2em;vertical-align:middle;margin-right:0.4em;">
+          <strong>Discord:</strong> <span style="font-family:monospace;">no_nameiscool1_45977</span>
+        </li>
+      </ul>
+    </section>
     <section class="contact-section" aria-labelledby="contactTitle">
       <h2 id="contactTitle">Contact</h2>
-      <div style="margin-bottom: 1.3rem;">
-        <a href="https://x.com/3d_modeler_Wish" target="_blank" rel="noopener noreferrer" style="margin-right: 1.1rem;">
-          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" alt="Twitter/X" style="height:1.2em;width:1.2em;vertical-align:middle;margin-right:0.4em;">@3d_modeler_Wish
-        </a><br>
-        <span style="display:inline-block;margin-top:0.4em;">
-          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/gmail.svg" alt="Gmail" style="height:1.2em;width:1.2em;vertical-align:middle;margin-right:0.4em;">
-          <a href="mailto:therealuponastarwish@gmail.com">therealuponastarwish@gmail.com</a>
-        </span><br>
-        <span style="display:inline-block;margin-top:0.4em;">
-          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" alt="Discord" style="height:1.2em;width:1.2em;vertical-align:middle;margin-right:0.4em;">
-          <span style="font-family:monospace;">no_nameiscool1_45977</span>
-        </span>
-      </div>
       <form id="contactForm" aria-describedby="contactInfo" autocomplete="off">
         <label for="contactName">Name</label>
         <input type="text" id="contactName" name="contactName" required autocomplete="name" />
@@ -684,7 +712,6 @@
         <button type="submit">Send Message</button>
       </form>
     </section>
-
     <section class="review-section" aria-labelledby="reviewTitle">
       <h2 id="reviewTitle">Client Reviews</h2>
       <button id="openReviewModal2" aria-haspopup="dialog" aria-controls="reviewModal">Write a Review</button>
